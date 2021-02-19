@@ -32,6 +32,12 @@ export class MyInterface extends CGFinterface {
         //Checkbox element for Parallelogram
         this.gui.add(this.scene, 'showParallelogram').name('Show Parallelo');
 
+        //Checkbox element for TriangleSmall
+        this.gui.add(this.scene, 'showTriangleSmall').name('Triangle Small');
+
+        //Checkbox element for TriangleBig
+        this.gui.add(this.scene, 'showTriangleBig').name('Triangle Big');
+
         return true;
     }
 }

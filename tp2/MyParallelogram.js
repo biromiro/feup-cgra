@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 
 /**
  * My Parallelogram
@@ -6,20 +6,20 @@ import {CGFobject} from '../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MyParallelogram extends CGFobject {
-    constructor(scene){
+    constructor(scene) {
         super(scene);
         this.initBuffers();
     }
 
-    initBuffers(){
+    initBuffers() {
         this.vertices = [
             0, 0, 0,  //0
             2, 0, 0,  //1
             3, 1, 0,  //2
             1, 1, 0,  //3
-            
+
         ];
-        
+
         this.indices = [
             0, 1, 2,
             2, 3, 0,

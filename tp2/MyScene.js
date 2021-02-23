@@ -15,7 +15,7 @@ export class MyScene extends CGFscene {
   }
   init(application) {
     super.init(application);
-    
+
     this.initCameras();
     this.initLights();
 
@@ -30,10 +30,12 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
-    this.triangle = new MyTriangle(this);
+    this.triangleBigL = new MyTriangleBig(this);
+    this.triangleBigR = new MyTriangleBig(this);
     this.parallelogram = new MyParallelogram(this);
-    this.triangleSmall = new MyTriangleSmall(this);
-    this.triangleBig = new MyTriangleBig(this); 
+    this.triangleSmallT = new MyTriangleSmall(this);
+    this.triangleSmallB = new MyTriangleSmall(this);
+    this.triangle = new MyTriangle(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -41,8 +43,11 @@ export class MyScene extends CGFscene {
     this.showTriangle = true;
     this.showDiamond = true;
     this.showParallelogram = true;
-    this.showTriangleBig = true;
-    this.showTriangleSmall = true;
+    this.showTriangleBigL = true;
+    this.showTriangleBigR = true;
+    this.showTriangleSmallT = true;
+    this.showTriangleSmallB = true;
+
   }
 
   initLights() {
@@ -68,6 +73,7 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
 
   display() {
     // ---- BEGIN Background, camera and axis setup
@@ -104,19 +110,137 @@ export class MyScene extends CGFscene {
       1.0,
     ];
 
+    const toRadians = (angle) => {
+      return Math.PI * 2 * angle / 360;
+    };
+
+
+    const rotateZAxis = (angle) => {
+      return [
+        Math.cos(toRadians(angle)), Math.sin(toRadians(angle)), 0, 0,
+        -Math.sin(toRadians(angle)), Math.cos(toRadians(angle)), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+      ];
+    };
+
+    const translate = (x, y, z) => {
+      return [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        x, y, z, 1
+      ];
+    };
+
+    const scale = (x, y, z) => {
+      return [
+        x, 0, 0, 0,
+        0, y, 0, 0,
+        0, 0, z, 0,
+        0, 0, 0, 1
+      ];
+    };
+
     this.multMatrix(sca);
 
     // ---- BEGIN Primitive drawing section
 
+    //main square
+
+    this.pushMatrix();
+
+    this.multMatrix(scale(Math.sqrt(2) / 2, Math.sqrt(2) / 2, Math.sqrt(2) / 2));
+
+    this.multMatrix(rotateZAxis(45));
+
     if (this.showDiamond) this.diamond.display();
-    
-    if (this.showTriangle) this.triangle.display();
+
+    this.popMatrix();
+
+    //big triangle left
+
+    this.pushMatrix();
+
+    this.multMatrix(translate(-0.5, 1, 0));
+
+    this.multMatrix(scale(3 / 4, 3 / 4, 3 / 4));
+
+    this.multMatrix(rotateZAxis(90));
+
+    if (this.showTriangleBigL) this.triangleBigL.display();
+
+    this.popMatrix();
+
+    //big triangle right
+
+    this.pushMatrix();
+
+    this.multMatrix(translate(0.5, -1, 0));
+
+    this.multMatrix(scale(3 / 4, 3 / 4, 3 / 4));
+
+    this.multMatrix(rotateZAxis(-90));
+
+    if (this.showTriangleBigR) this.triangleBigR.display();
+
+    this.popMatrix();
+
+    //small triangle top
+
+    this.pushMatrix();
+
+    this.multMatrix(translate(0.5, 1, 0));
+
+    this.multMatrix(rotateZAxis(45));
+
+    this.multMatrix(scale(Math.sqrt(2) / 2, Math.sqrt(2) / 2, Math.sqrt(2) / 2));
+
+    if (this.showTriangleSmallT) this.triangleSmallT.display();
+
+    this.popMatrix();
+
+    //small triangle bottom
+
+    this.pushMatrix();
+
+    this.multMatrix(translate(-0.5, -1, 0));
+
+    this.multMatrix(rotateZAxis(-135));
+
+    this.multMatrix(scale(Math.sqrt(2) / 2, Math.sqrt(2) / 2, Math.sqrt(2) / 2));
+
+    if (this.showTriangleSmallB) this.triangleSmallB.display();
+
+    this.popMatrix();
+
+    //parallelogram
+
+    this.pushMatrix();
+
+    this.multMatrix(translate(0, -0.5, 0));
+
+    this.multMatrix(scale(Math.sqrt(2) / 2, -1 * Math.sqrt(2) / 2, 1));
+
+    this.multMatrix(rotateZAxis(135));
 
     if (this.showParallelogram) this.parallelogram.display();
 
-    if (this.showTriangleSmall) this.triangleSmall.display();
+    this.popMatrix();
 
-    if (this.showTriangleBig) this.triangleBig.display();
+    //triangle 
+
+    this.pushMatrix();
+
+    this.multMatrix(translate(1, 0.5, 0));
+
+    this.multMatrix(rotateZAxis(-135));
+
+    this.multMatrix(scale(Math.sqrt(2) / 2, Math.sqrt(2) / 2, Math.sqrt(2) / 2));
+
+    if (this.showTriangle) this.triangle.display();
+
+    this.popMatrix();
 
     // ---- END Primitive drawing section
 

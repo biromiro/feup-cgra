@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
  * MyDiamond
  * @constructor
@@ -9,7 +9,7 @@ export class MyDiamond extends CGFobject {
 		super(scene);
 		this.initBuffers();
 	}
-	
+
 	initBuffers() {
 		this.vertices = [
 			-1, 0, 0,	//0
@@ -31,4 +31,3 @@ export class MyDiamond extends CGFobject {
 		this.initGLBuffers();
 	}
 }
-

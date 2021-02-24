@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
  * MyTriangle
  * @constructor
@@ -9,18 +9,19 @@ export class MyTriangle extends CGFobject {
 		super(scene);
 		this.initBuffers();
 	}
-	
+
 	initBuffers() {
 		this.vertices = [
-			-1,  1,  0,	//0
-            -1, -1,  0,	//1
-             1, -1,  0,	//2
+			-1, 1, 0,	//0
+			-1, -1, 0,	//1
+			1, -1, 0,	//2
 
 		];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
 			0, 1, 2,
+			2, 1, 0
 		];
 
 		//The defined indices (and corresponding vertices)

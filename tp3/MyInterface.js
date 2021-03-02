@@ -28,6 +28,8 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'objectComplexity', 0.01, 1.0).onChange(this.scene.updateObjectComplexity.bind(this.scene));
 
         this.gui.add(this.scene, 'selectedMaterial', this.scene.materialIDs).name('Selected Material');
+        
+        this.gui.add(this.scene, 'globalAmbientLightIntensity', 0, 1).onChange(this.scene.updateGlobalAmbientLightIntensity.bind(this.scene));
 
         // a folder for grouping parameters for one of the lights
         var f0 = this.gui.addFolder('Light 0 ');

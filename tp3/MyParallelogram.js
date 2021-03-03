@@ -18,17 +18,35 @@ export class MyParallelogram extends CGFobject {
             3, 1, 0,  //2
             1, 1, 0,  //3
 
+            0, 0, 0,  //4
+            2, 0, 0,  //5
+            3, 1, 0,  //6
+            1, 1, 0,  //7
+
         ];
 
         this.indices = [
             0, 1, 2,
             2, 3, 0,
-            3, 2, 0,
-            2, 1, 0
+            7, 6, 4,
+            6, 5, 4
+        ];
+
+        this.normals = [
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, -1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1,
+            0, 0, 1
         ];
 
         this.primitiveType = this.scene.gl.TRIANGLES;
 
         this.initGLBuffers();
+        this.initNormalVizBuffers();
+
     }
 }

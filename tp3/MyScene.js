@@ -34,11 +34,11 @@ export class MyScene extends CGFscene {
         this.pyramid = new MyPyramid(this, 3, 1);
         this.tangram = new MyTangram(this);
         this.cube = new MyUnitCube(this);
-        
+
         this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.cube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4};
+        this.objectIDs = { 'Plane': 0, 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4 };
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -71,23 +71,22 @@ export class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
 
-    hexToRgbA(hex)
-    {
+    hexToRgbA(hex) {
         var ret;
         //either we receive a html/css color or a RGB vector
-        if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-            ret=[
-                parseInt(hex.substring(1,3),16).toPrecision()/255.0,
-                parseInt(hex.substring(3,5),16).toPrecision()/255.0,
-                parseInt(hex.substring(5,7),16).toPrecision()/255.0,
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+            ret = [
+                parseInt(hex.substring(1, 3), 16).toPrecision() / 255.0,
+                parseInt(hex.substring(3, 5), 16).toPrecision() / 255.0,
+                parseInt(hex.substring(5, 7), 16).toPrecision() / 255.0,
                 1
             ];
         }
         else
-            ret=[
-                hex[0].toPrecision()/255.0,
-                hex[1].toPrecision()/255.0,
-                hex[2].toPrecision()/255.0,
+            ret = [
+                hex[0].toPrecision() / 255.0,
+                hex[1].toPrecision() / 255.0,
+                hex[2].toPrecision() / 255.0,
                 1
             ];
         return ret;
@@ -101,11 +100,11 @@ export class MyScene extends CGFscene {
 
     };
 
-    updateObjectComplexity(){
+    updateObjectComplexity() {
         this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
     }
 
-    updateGlobalAmbientLightIntensity(){
+    updateGlobalAmbientLightIntensity() {
         this.setGlobalAmbientLight(this.globalAmbientLightIntensity, this.globalAmbientLightIntensity, this.globalAmbientLightIntensity, 1.0);
     }
 
@@ -145,10 +144,19 @@ export class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.material4 = new CGFappearance(this);
+        this.material4.setAmbient(0.1, 0.1, 0.1, .1);
+        this.material4.setDiffuse(0.365, 0.161, 0.024, 1.0);
+        this.material4.setSpecular(0.05, 0, 0.05, 1);
+        this.material4.setShininess(10.0);
+
+        this.materials = [this.material1, this.material2, this.material3, this.customMaterial, this.material4];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = { 'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3, 'Wood': 4 };
+
+
+
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -160,7 +168,7 @@ export class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        
+
         this.lights[0].update();
         this.lights[1].update();
 
@@ -173,13 +181,11 @@ export class MyScene extends CGFscene {
         this.materials[this.selectedMaterial].apply();
 
         this.pushMatrix();
-        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-        
-        if (this.displayNormals)
-            this.objects[this.selectedObject].enableNormalViz();
-        else
-            this.objects[this.selectedObject].disableNormalViz();
-        
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+
+        if (this.displayNormals) this.objects[this.selectedObject].enableNormalViz();
+        else this.objects[this.selectedObject].disableNormalViz();
+
         this.objects[this.selectedObject].display();
         this.popMatrix();
         // ---- END Primitive drawing section

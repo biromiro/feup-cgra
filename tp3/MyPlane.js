@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject } from '../lib/CGF.js';
 /**
 * MyPlane
 * @constructor
@@ -82,9 +82,9 @@ export class MyPlane extends CGFobject {
      * Called when user interacts with GUI to change object's complexity.
      * @param {integer} complexity - changes number of nDivs
      */
-    updateBuffers(complexity){
-        this.nDivs = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 1-10
-        this.patchLength = 1.0 / this. nDivs;
+    updateBuffers(complexity) {
+        this.nDivs = 1 + Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 1-10
+        this.patchLength = 1.0 / this.nDivs;
 
         // reinitialize buffers
         this.initBuffers();

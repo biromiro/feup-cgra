@@ -187,6 +187,8 @@ export class MyScene extends CGFscene {
         else this.objects[this.selectedObject].disableNormalViz();
 
         this.objects[this.selectedObject].display();
+
+        this.materials[this.selectedMaterial].apply();
         this.popMatrix();
         // ---- END Primitive drawing section
     }

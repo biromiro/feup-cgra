@@ -245,6 +245,8 @@ export class MyTangram extends CGFobject {
 
     this.triangle.display();
 
+    this.scene.materials[this.scene.selectedMaterial].apply();
+
     this.scene.popMatrix();
   }
 

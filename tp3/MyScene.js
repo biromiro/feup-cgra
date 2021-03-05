@@ -188,7 +188,6 @@ export class MyScene extends CGFscene {
 
         this.objects[this.selectedObject].display();
 
-        this.materials[this.selectedMaterial].apply();
         this.popMatrix();
         // ---- END Primitive drawing section
     }

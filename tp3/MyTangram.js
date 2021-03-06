@@ -30,49 +30,49 @@ export class MyTangram extends CGFobject {
     this.materialSquare = new CGFappearance(this.scene);
     this.materialSquare.setAmbient(...this.scene.hexToRgbA('#00ff00'));
     this.materialSquare.setDiffuse(...this.scene.hexToRgbA('#00ff00'));
-    this.materialSquare.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialSquare.setShininess(10.0);
 
     // '#ff9b00'
     this.materialTriangleBigL = new CGFappearance(this.scene);
     this.materialTriangleBigL.setAmbient(...this.scene.hexToRgbA('#ff9b00'));
     this.materialTriangleBigL.setDiffuse(...this.scene.hexToRgbA('#ff9b00'));
-    this.materialTriangleBigL.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialTriangleBigL.setShininess(10.0);
 
     // '#009bff'
     this.materialTriangleBigR = new CGFappearance(this.scene);
     this.materialTriangleBigR.setAmbient(...this.scene.hexToRgbA('#009bff'));
     this.materialTriangleBigR.setDiffuse(...this.scene.hexToRgbA('#009bff'));
-    this.materialTriangleBigR.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialTriangleBigR.setShininess(10.0);
 
     // '#ff1b1b'
     this.materialTriangleSmallT = new CGFappearance(this.scene);
     this.materialTriangleSmallT.setAmbient(...this.scene.hexToRgbA('#ff1b1b'));
     this.materialTriangleSmallT.setDiffuse(...this.scene.hexToRgbA('#ff1b1b'));
-    this.materialTriangleSmallT.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialTriangleSmallT.setShininess(10.0);
 
     // '#9650be'
     this.materialTriangleSmallB = new CGFappearance(this.scene);
     this.materialTriangleSmallB.setAmbient(...this.scene.hexToRgbA('#9650be'));
     this.materialTriangleSmallB.setDiffuse(...this.scene.hexToRgbA('#9650be'));
-    this.materialTriangleSmallB.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialTriangleSmallB.setShininess(10.0);
 
     // '#ffff00'
     this.materialParallelogram = new CGFappearance(this.scene);
     this.materialParallelogram.setAmbient(...this.scene.hexToRgbA('#ffff00'));
     this.materialParallelogram.setDiffuse(...this.scene.hexToRgbA('#ffff00'));
-    this.materialParallelogram.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialParallelogram.setShininess(10.0);
 
     // '#ff9bcf'
     this.materialTriangle = new CGFappearance(this.scene);
     this.materialTriangle.setAmbient(...this.scene.hexToRgbA('#ff9bcf'));
     this.materialTriangle.setDiffuse(...this.scene.hexToRgbA('#ff9bcf'));
-    this.materialTriangle.setSpecular(0.8, 0.8, 0.8);
+    this.materialSquare.setSpecular(0.95, 0.95, 0.95);
     this.materialTriangle.setShininess(10.0);
 
   }

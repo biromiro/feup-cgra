@@ -58,6 +58,8 @@ export class MyScene extends CGFscene {
         this.textureIds = { 'Board': 0, 'Floor': 1, 'Window': 2 };
         this.wrappingS = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
         this.wrappingT = { 'Repeat': 0, 'Clamp to edge': 1, 'Mirrored repeat': 2 };
+        
+        this.showQuad = true;
 
       }
 
@@ -115,16 +117,16 @@ export class MyScene extends CGFscene {
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
 
         // ---- BEGIN Primitive drawing section
-
-        this.quadMaterial.apply();
+        if(this.showQuad)
+            this.quadMaterial.apply();
 
         // Default texture filtering in WebCGF is LINEAR. 
         // Uncomment next line for NEAREST when magnifying, or 
         // add a checkbox in the GUI to alternate in real time
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-
-        this.quad.display();
+        if(this.showQuad)
+            this.quad.display();
 
         // ---- END Primitive drawing section
     }

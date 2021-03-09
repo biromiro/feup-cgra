@@ -21,9 +21,9 @@ export class MyTangram extends CGFobject {
     this.triangleSmallT = new MyTriangleSmall(scene);
     this.triangleSmallB = new MyTriangleSmall(scene);
     this.triangle = new MyTriangle(scene);
-    this.initTangramMaterials();
+    //this.initTangramMaterials();
   }
-
+/*
   initTangramMaterials() {
 
     // '#00ff00'
@@ -76,6 +76,7 @@ export class MyTangram extends CGFobject {
     this.materialTriangle.setShininess(10.0);
 
   }
+  */
 
 
 
@@ -134,6 +135,8 @@ export class MyTangram extends CGFobject {
       ]
     };
 
+    this.scene.tangramMaterial.apply();
+
 
     //main square
 
@@ -159,7 +162,7 @@ export class MyTangram extends CGFobject {
 
     this.scene.multMatrix(rotateZAxis(90));
 
-    this.materialTriangleBigL.apply();
+    //this.materialTriangleBigL.apply();
 
     this.triangleBigL.display();
 
@@ -175,7 +178,7 @@ export class MyTangram extends CGFobject {
 
     this.scene.multMatrix(rotateZAxis(-90));
 
-    this.materialTriangleBigR.apply();
+    //this.materialTriangleBigR.apply();
 
     this.triangleBigR.display();
 
@@ -191,7 +194,7 @@ export class MyTangram extends CGFobject {
 
     this.scene.multMatrix(scale(Math.sqrt(2) / 2, -Math.sqrt(2) / 2, Math.sqrt(2) / 2));
 
-    this.materialTriangleSmallT.apply();
+    //this.materialTriangleSmallT.apply();
 
     this.triangleSmallT.display();
 
@@ -207,7 +210,7 @@ export class MyTangram extends CGFobject {
 
     this.scene.multMatrix(scale(Math.sqrt(2) / 2, -Math.sqrt(2) / 2, Math.sqrt(2) / 2));
 
-    this.materialTriangleSmallB.apply();
+    //this.materialTriangleSmallB.apply();
 
     this.triangleSmallB.display();
 
@@ -223,7 +226,7 @@ export class MyTangram extends CGFobject {
 
     this.scene.multMatrix(rotateZAxis(135));
 
-    this.materialParallelogram.apply();
+    //this.materialParallelogram.apply();
 
     this.parallelogram.display();
 
@@ -241,11 +244,11 @@ export class MyTangram extends CGFobject {
 
     this.scene.multMatrix(scale(Math.sqrt(2) / 2, Math.sqrt(2) / 2, Math.sqrt(2) / 2));
 
-    this.materialTriangle.apply();
+    //this.materialTriangle.apply();
 
     this.triangle.display();
 
-    this.scene.materials[this.scene.selectedMaterial].apply();
+    //this.scene.materials[this.scene.selectedMaterial].apply();
 
     this.scene.popMatrix();
   }

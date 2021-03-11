@@ -5,12 +5,12 @@ import { CGFobject } from '../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MyTriangleBig extends CGFobject {
-	constructor(scene) {
+	constructor(scene, blue) {
 		super(scene);
-		this.initBuffers();
+		this.initBuffers(blue);
 	}
 
-	initBuffers() {
+	initBuffers(blue) {
 		this.vertices = [
 			2, 0, 0,	//0
 			0, 2, 0,	//1
@@ -34,7 +34,18 @@ export class MyTriangleBig extends CGFobject {
 			0, 0, 1,
 			0, 0, 1
 		];
-
+		if(blue == 0){
+		this.texCoords = [
+			1.00, 0.00, 
+			0.50, 0.50,
+			1.00, 1.00,
+			
+			1.00, 0.00, 
+			0.50, 0.50,
+			1.00, 1.00,
+		];
+	}
+		else{
 		this.texCoords = [
 			0.00, 0.00, 
 			0.50, 0.50,
@@ -43,8 +54,7 @@ export class MyTriangleBig extends CGFobject {
 			0.00, 0.00, 
 			0.50, 0.50,
 			1.00, 0.00,
-		];
-
+		];}
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
 		this.primitiveType = this.scene.gl.TRIANGLES;

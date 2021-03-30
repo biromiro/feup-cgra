@@ -16,11 +16,8 @@ void main() {
 
   vTextureCoord = aTextureCoord;
 
-  vec2 factor = vec2(0.0, (timeFactor / 100.0)) + vTextureCoord;
-
-  if (factor.y > 1.0) {
-    factor.y -= 1.0;
-  }
+  vec2 factor =
+      vec2((timeFactor / 100.0), (timeFactor / 100.0)) + vTextureCoord;
 
   offset.z = texture2D(uSampler2, factor).b * 0.08;
 

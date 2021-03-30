@@ -73,7 +73,7 @@ export class ShaderScene extends CGFscene {
 
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
 		this.appearance.setTexture(this.texture);
-		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+		this.appearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
         this.waterTex = new CGFtexture(this, "textures/waterTex.jpg");
@@ -208,7 +208,7 @@ export class ShaderScene extends CGFscene {
 			// Dividing the time by 100 "slows down" the variation (i.e. in 100 ms timeFactor increases 1 unit).
 			// Doing the modulus (%) by 100 makes the timeFactor loop between 0 and 99
 			// ( so the loop period of timeFactor is 100 times 100 ms = 10s ; the actual animation loop depends on how timeFactor is used in the shader )
-			this.testShaders[this.selectedExampleShader].setUniformsValues({ timeFactor: t / 100 % 100 });
+			this.testShaders[this.selectedExampleShader].setUniformsValues({ timeFactor: t / 100 % 25600 });
 	}
 
 	// main display function
@@ -234,8 +234,13 @@ export class ShaderScene extends CGFscene {
 		// aplly main appearance (including texture in default texture unit 0)
 		this.appearance.apply();
 
-        if(this.selectedExampleShader == 12) this.appearance.setTexture(this.waterTex);
-        else this.appearance.setTexture(this.texture);
+        if(this.selectedExampleShader == 12){
+            this.appearance.setTexture(this.waterTex);
+            this.appearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
+        } else {
+            this.appearance.setTexture(this.texture);
+            this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+        } 
 
         // activate selected shader
 		this.setActiveShader(this.testShaders[this.selectedExampleShader]);
@@ -243,8 +248,9 @@ export class ShaderScene extends CGFscene {
 
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
-        this.waterTex.bind(2);
         this.waterMap.bind(3);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.MIRRORED_REPEAT);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.MIRRORED_REPEAT);
 
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)

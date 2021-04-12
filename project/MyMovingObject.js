@@ -107,6 +107,18 @@ export class MyMovingObject extends CGFobject {
     this.initNormalVizBuffers()
   }
 
+  display(){
+    this.scene.pushMatrix()
+    this.scene.translate(this.scene.movingObject.x, 0, this.scene.movingObject.z)
+    this.scene.rotate(this.scene.movingObject.orientationAngle, 0, 1, 0)
+    this.scene.rotate(Math.PI / 2, 1, 0, 0)
+
+    this.scene.translate(0, -0.5, 0)
+
+    super.display()
+    this.scene.popMatrix()
+  }
+
   update() {
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.z += this.velocity * Math.cos(this.orientationAngle)

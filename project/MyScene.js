@@ -144,15 +144,8 @@ export class MyScene extends CGFscene {
     //This sphere does not have defined texture coordinates
     //this.incompleteSphere.display();
 
-    this.pushMatrix()
-    this.translate(this.movingObject.x, 0, this.movingObject.z)
-    this.rotate(this.movingObject.orientationAngle, 0, 1, 0)
-    this.rotate(Math.PI / 2, 1, 0, 0)
-
-    this.translate(0, -0.5, 0)
-
     this.movingObject.display()
-    this.popMatrix()
+    
     this.checkKeys()
 
     // ---- END Primitive drawing section

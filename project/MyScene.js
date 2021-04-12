@@ -1,7 +1,7 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from '../lib/CGF.js'
-import { MyMovingObject } from './MyMovingObject.js'
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
 import { MyPyramid } from './MyPyramid.js'
 import { MySphere } from './MySphere.js'
+import { MyCubeMap } from './MyCubeMap.js'
 
 /**
  * MyScene
@@ -32,6 +32,36 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this)
     this.incompleteSphere = new MySphere(this, 16, 8)
     this.movingObject = new MyPyramid(this, 3, 0, 0, [0, 0, 0])
+
+    let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
+    new CGFtexture(this, "images/demo_cubemap/front.png"),
+    new CGFtexture(this, "images/demo_cubemap/left.png"),
+    new CGFtexture(this, "images/demo_cubemap/back.png"),
+    new CGFtexture(this, "images/demo_cubemap/right.png"),
+    new CGFtexture(this, "images/demo_cubemap/bottom.png")
+    ]
+
+    let test_cubemap = [new CGFtexture(this, "images/test_cubemap/py.png"),
+    new CGFtexture(this, "images/test_cubemap/pz.png"),
+    new CGFtexture(this, "images/test_cubemap/px.png"),
+    new CGFtexture(this, "images/test_cubemap/nz.png"),
+    new CGFtexture(this, "images/test_cubemap/nx.png"),
+    new CGFtexture(this, "images/test_cubemap/ny.png"),
+    ]
+
+    this.currentCubeMapTextureID = -1
+
+    this.cubeMapTextureIDs = {
+      Test : 0, 
+      Demo : 1
+    }
+
+    this.cubeMapTexture = [
+      test_cubemap, 
+      demo_cubemap
+    ]
+
+    this.cubeMap = new MyCubeMap(this)
 
     this.defaultAppearance = new CGFappearance(this)
     this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0)
@@ -82,6 +112,10 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
     this.movingObject.update()
+  }
+
+  updateAppliedTexture() {
+    this.cubeMap.setTexture(...this.cubeMapTexture[this.currentCubeMapTextureID])
   }
 
   checkKeys() {
@@ -135,6 +169,7 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix()
 
     this.defaultAppearance.apply()
+
     // Draw axis
     if (this.displayAxis) this.axis.display()
 
@@ -146,7 +181,10 @@ export class MyScene extends CGFscene {
     //this.incompleteSphere.display();
 
     this.movingObject.display()
-    
+    this.pushMatrix()
+    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2])
+    this.cubeMap.display()
+    this.popMatrix()
     this.checkKeys()
 
     // ---- END Primitive drawing section

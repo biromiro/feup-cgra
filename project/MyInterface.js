@@ -21,6 +21,17 @@ export class MyInterface extends CGFinterface {
     //Checkbox element in GUI
     this.gui.add(this.scene, 'displayAxis').name('Display Axis')
 
+    let f0 = this.gui.addFolder('Moving Object')
+
+    f0.add(this.scene.movingObject, 'velocityOffset', 0, 0.01).name('Velocity Offset')
+    f0.add(this.scene.movingObject, 'rotationOffset', 0, 0.03).name('Rotation Offset')
+    f0.add(this.scene.movingObject, 'maxVelocity', 0, 1.5).name('Max Velocity')
+    f0.add(this.scene.movingObject, 'friction', 0, 0.02).name('Friction')
+
+    this.gui.add(this.scene, 'currentCubeMapTextureID', this.scene.cubeMapTextureIDs)
+    .name('Background')
+    .onChange(this.scene.updateAppliedTexture.bind(this.scene))
+
     this.initKeys()
 
     return true

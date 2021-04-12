@@ -3,8 +3,9 @@ import { CGFobject } from '../lib/CGF.js'
  * MyMovingObject
  * @constructor
  * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- * @param stacks - number of divisions along the Y axis
+ * @orientationAngle - Object facing torwards angle
+ * @velocity - Initial velocity
+ * @position - Current object position
  */
 export class MyMovingObject extends CGFobject {
   constructor(scene, orientationAngle, velocity, position) {
@@ -20,6 +21,10 @@ export class MyMovingObject extends CGFobject {
     this.initialCoordinates = position
     console.log(`x = ${this.x}, z = ${this.z}`)
     this.velocity = velocity
+    this.setControllabeParameters()
+  }
+  
+  setControllabeParameters(){
     this.velocityOffset = 0.001
     this.rotationOffset = 0.01
     this.maxVelocity = 0.5
@@ -64,5 +69,6 @@ export class MyMovingObject extends CGFobject {
     this.y = this.initialy
     this.z = this.initialz
     this.orientationAngle = 0
+    this.setControllabeParameters()
   }
 }

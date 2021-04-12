@@ -1,4 +1,3 @@
-import { CGFobject } from '../lib/CGF.js'
 import { MyMovingObject } from './MyMovingObject.js'
 /**
  * MyPyramid

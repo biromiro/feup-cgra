@@ -49,16 +49,34 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/test_cubemap/ny.png"),
     ]
 
+    let goldengate = [new CGFtexture(this, "images/goldengate/posy.jpg"),
+    new CGFtexture(this, "images/goldengate/posz.jpg"),
+    new CGFtexture(this, "images/goldengate/negx.jpg"),
+    new CGFtexture(this, "images/goldengate/negz.jpg"),
+    new CGFtexture(this, "images/goldengate/posx.jpg"),
+    new CGFtexture(this, "images/goldengate/negy.jpg")]
+
+    let skybox = [new CGFtexture(this, "images/skybox/top.png"),
+    new CGFtexture(this, "images/skybox/front.png"),
+    new CGFtexture(this, "images/skybox/left.png"),
+    new CGFtexture(this, "images/skybox/back.png"),
+    new CGFtexture(this, "images/skybox/right.png"),
+    new CGFtexture(this, "images/skybox/bottom.png")]
+
     this.currentCubeMapTextureID = -1
 
     this.cubeMapTextureIDs = {
-      Test : 0, 
-      Demo : 1
+      Directions : 0, 
+      Sky : 1,
+      GoldenGate : 2,
+      SkyBox: 3
     }
 
     this.cubeMapTexture = [
       test_cubemap, 
-      demo_cubemap
+      demo_cubemap,
+      goldengate,
+      skybox
     ]
 
     this.cubeMap = new MyCubeMap(this)

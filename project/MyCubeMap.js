@@ -16,10 +16,10 @@ export class MyCubeMap extends CGFobject {
   
     //------Cube Material
     this.cubeMaterial = new CGFappearance(scene)
-    this.cubeMaterial.setAmbient(0.1, 0.1, 0.1, 1)
-    this.cubeMaterial.setDiffuse(0.9, 0.9, 0.9, 1)
-    this.cubeMaterial.setSpecular(0.1, 0.1, 0.1, 1)
-    this.cubeMaterial.setShininess(10.0)
+    this.cubeMaterial.setAmbient(0.0, 0.0, 0.0, 1)
+    this.cubeMaterial.setDiffuse(0.0, 0.0, 0.0, 1)
+    this.cubeMaterial.setSpecular(0.0, 0.0, 0.0, 1)
+    this.cubeMaterial.setEmission(1, 1, 1, 1)
     //------
   }
 
@@ -36,7 +36,7 @@ export class MyCubeMap extends CGFobject {
 
     this.scene.pushMatrix()
 
-    this.scene.scale(100, 100, 100)
+    this.scene.scale(500, 500, 500)
 
     this.cubeMaterial.apply()
 

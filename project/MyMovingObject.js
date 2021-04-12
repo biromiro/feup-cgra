@@ -24,6 +24,7 @@ export class MyMovingObject extends CGFobject {
     this.velocityOffset = 0.001
     this.rotationOffset = 0.01
     this.maxVelocity = 0.5
+    this.friction = 0.005
     this.initBuffers()
   }
 
@@ -120,6 +121,7 @@ export class MyMovingObject extends CGFobject {
   }
 
   update() {
+    this.velocity -= this.velocity*this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.z += this.velocity * Math.cos(this.orientationAngle)
     console.log(`x = ${this.x}, z = ${this.z}, velocity = ${this.velocity}`)

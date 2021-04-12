@@ -1,4 +1,4 @@
-import { CGFobject } from '../lib/CGF.js'
+import { CGFobject, CGFappearance } from '../lib/CGF.js'
 /**
  * MyMovingObject
  * @constructor
@@ -22,6 +22,12 @@ export class MyMovingObject extends CGFobject {
     console.log(`x = ${this.x}, z = ${this.z}`)
     this.velocity = velocity
     this.setControllabeParameters()
+
+    this.movingObjectAppearance = new CGFappearance(scene)
+    this.movingObjectAppearance.setAmbient(0.3, 0.3, 0.3, 1)
+    this.movingObjectAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
+    this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+    this.movingObjectAppearance.setShininess(120)
   }
   
   setControllabeParameters(){
@@ -32,7 +38,11 @@ export class MyMovingObject extends CGFobject {
   }
 
   display(){
+    
     this.scene.pushMatrix()
+    
+    this.movingObjectAppearance.apply()
+    
     this.scene.translate(this.scene.movingObject.x, 0, this.scene.movingObject.z)
     this.scene.rotate(this.scene.movingObject.orientationAngle, 0, 1, 0)
     this.scene.rotate(Math.PI / 2, 1, 0, 0)
@@ -40,6 +50,8 @@ export class MyMovingObject extends CGFobject {
     this.scene.translate(0, -0.5, 0)
 
     super.display()
+
+    this.scene.defaultAppearance.apply()
     this.scene.popMatrix()
   }
 

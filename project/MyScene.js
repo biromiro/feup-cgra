@@ -31,7 +31,7 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this)
-    this.incompleteSphere = new MySphere(this, 16, 8)
+    this.sphere = new MySphere(this, 16, 8)
     this.movingObject = new MyPyramid(this, 3, 0, 0, [0, 0, 0])
     this.cylinder = new MyCylinder(this, 16)
 
@@ -90,17 +90,7 @@ export class MyScene extends CGFscene {
     this.defaultAppearance.setEmission(0, 0, 0, 1)
     this.defaultAppearance.setShininess(120)
 
-    this.sphereAppearance = new CGFappearance(this)
-    this.sphereAppearance.setAmbient(0.3, 0.3, 0.3, 1)
-    this.sphereAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
-    this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.sphereAppearance.setShininess(120)
-
-    this.movingObjectAppearance = new CGFappearance(this)
-    this.movingObjectAppearance.setAmbient(0.3, 0.3, 0.3, 1)
-    this.movingObjectAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
-    this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.movingObjectAppearance.setShininess(120)
+    
 
     //Objects connected to MyInterface
     this.displayAxis = true
@@ -194,8 +184,7 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display()
 
-    //this.sphereAppearance.apply();
-    this.movingObjectAppearance.apply()
+    
     // ---- BEGIN Primitive drawing section
 
     //This sphere does not have defined texture coordinates
@@ -208,12 +197,12 @@ export class MyScene extends CGFscene {
     this.cubeMap.display()
     this.popMatrix()
 
-    this.cylinder.cylinderAppearance.apply()
-
     this.cylinder.display()
 
-    if (this.displayNormals) this.cylinder.enableNormalViz();
-        else this.cylinder.disableNormalViz();
+    this.sphere.display()
+
+    if (this.displayNormals) this.sphere.enableNormalViz();
+        else this.sphere.disableNormalViz();
 
     this.checkKeys()
 

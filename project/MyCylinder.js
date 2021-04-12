@@ -86,6 +86,12 @@ export class MyCylinder extends CGFobject {
         this.initBuffers();
         this.initNormalVizBuffers();
     }
+
+    display(){
+        this.cylinderAppearance.apply()
+        super.display();
+        this.scene.defaultAppearance.apply()
+    }
 }
 
 

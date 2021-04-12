@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import { CGFobject, CGFtexture, CGFappearance } from '../lib/CGF.js';
 
 export class MySphere extends CGFobject {
   /**
@@ -11,6 +11,17 @@ export class MySphere extends CGFobject {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
+
+    this.sphereAppearance = new CGFappearance(scene)
+    this.sphereAppearance.setAmbient(0, 0, 0, 1)
+    this.sphereAppearance.setDiffuse(0, 0, 0, 1)
+    this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+    this.sphereAppearance.setEmission(1,1,1,1)
+
+    
+    let earthTex = new CGFtexture(scene, "images/earth.jpg")
+
+    this.sphereAppearance.setTexture(earthTex)
 
     this.initBuffers();
   }
@@ -69,7 +80,8 @@ export class MySphere extends CGFobject {
         //--- Texture Coordinates
         // To be done... 
         // May need some additional code also in the beginning of the function.
-        
+
+        this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs)        
       }
       phi += phiInc;
     }
@@ -77,5 +89,11 @@ export class MySphere extends CGFobject {
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
+  }
+
+  display(){
+    this.sphereAppearance.apply()
+    super.display()
+    this.scene.defaultAppearance.apply()
   }
 }

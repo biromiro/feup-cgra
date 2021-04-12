@@ -31,9 +31,15 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this)
+
     this.sphere = new MySphere(this, 16, 8)
+    this.displaySphere = false
+
     this.movingObject = new MyPyramid(this, 3, 0, 0, [0, 0, 0])
+    this.displayMovingObject = false
+
     this.cylinder = new MyCylinder(this, 16)
+    this.displayCylinder = false
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -187,22 +193,28 @@ export class MyScene extends CGFscene {
     
     // ---- BEGIN Primitive drawing section
 
-    //This sphere does not have defined texture coordinates
-    //this.incompleteSphere.display();
+    this.pushMatrix();
+    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+    this.cubeMap.display();
+    this.popMatrix();
 
-    this.movingObject.display()
 
-    this.pushMatrix()
-    this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2])
-    this.cubeMap.display()
-    this.popMatrix()
+    if(this.displayMovingObject) this.movingObject.display();
 
-    this.cylinder.display()
+    if(this.displayCylinder) this.cylinder.display();
 
-    this.sphere.display()
+    if(this.displaySphere) this.sphere.display();
 
-    if (this.displayNormals) this.sphere.enableNormalViz();
-        else this.sphere.disableNormalViz();
+    if (this.displayNormals){
+      this.movingObject.enableNormalViz();
+      this.cylinder.enableNormalViz();
+      this.sphere.enableNormalViz();
+    }
+    else {
+      this.movingObject.disableNormalViz();
+      this.cylinder.disableNormalViz();
+      this.sphere.disableNormalViz();
+    }
 
     this.checkKeys()
 

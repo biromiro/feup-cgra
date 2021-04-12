@@ -21,6 +21,7 @@ export class MyMovingObject extends CGFobject {
     this.initialCoordinates = position
     console.log(`x = ${this.x}, z = ${this.z}`)
     this.velocity = velocity
+    this.scaleFactor = 1
     this.setControllabeParameters()
 
     this.movingObjectAppearance = new CGFappearance(scene)
@@ -40,14 +41,16 @@ export class MyMovingObject extends CGFobject {
   display(){
     
     this.scene.pushMatrix()
-    
+
     this.movingObjectAppearance.apply()
-    
+  
     this.scene.translate(this.scene.movingObject.x, 0, this.scene.movingObject.z)
     this.scene.rotate(this.scene.movingObject.orientationAngle, 0, 1, 0)
     this.scene.rotate(Math.PI / 2, 1, 0, 0)
 
     this.scene.translate(0, -0.5, 0)
+
+    this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)
 
     super.display()
 

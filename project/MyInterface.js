@@ -18,12 +18,20 @@ export class MyInterface extends CGFinterface {
 
     var obj = this
 
+    let displays = this.gui.addFolder('Displays')
+
     //Checkbox element in GUI
-    this.gui.add(this.scene, 'displayAxis').name('Display Axis')
-    this.gui.add(this.scene, 'displayNormals').name("Display normals");
+    displays.add(this.scene, 'displayAxis').name('Display Axis')
+    displays.add(this.scene, 'displayNormals').name("Display normals");
+
+    //Objects to display
+    displays.add(this.scene, 'displayMovingObject').name("Display Moving Object");
+    displays.add(this.scene, 'displayCylinder').name("Display Cylinder");
+    displays.add(this.scene, 'displaySphere').name("Display Sphere");
 
     let f0 = this.gui.addFolder('Moving Object')
 
+    f0.add(this.scene.movingObject, 'scaleFactor', 0.5, 3).name("Scale Factor")
     f0.add(this.scene.movingObject, 'velocityOffset', 0, 0.01).name('Velocity Offset')
     f0.add(this.scene.movingObject, 'rotationOffset', 0, 0.03).name('Rotation Offset')
     f0.add(this.scene.movingObject, 'maxVelocity', 0, 1.5).name('Max Velocity')

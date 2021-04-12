@@ -20,6 +20,7 @@ export class MyInterface extends CGFinterface {
 
     //Checkbox element in GUI
     this.gui.add(this.scene, 'displayAxis').name('Display Axis')
+    this.gui.add(this.scene, 'displayNormals').name("Display normals");
 
     let f0 = this.gui.addFolder('Moving Object')
 

@@ -8,9 +8,7 @@ import { MyQuad } from './MyQuad.js'
  */
 
 export class MyCubeMap extends CGFobject {
-  constructor(
-    scene,
-  ) {
+  constructor(scene) {
     super(scene)
     this.quad = new MyQuad(scene)
   

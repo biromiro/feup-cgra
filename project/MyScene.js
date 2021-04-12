@@ -2,6 +2,7 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/
 import { MyPyramid } from './MyPyramid.js'
 import { MySphere } from './MySphere.js'
 import { MyCubeMap } from './MyCubeMap.js'
+import { MyCylinder } from './MyCylinder.js'
 
 /**
  * MyScene
@@ -32,6 +33,7 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this)
     this.incompleteSphere = new MySphere(this, 16, 8)
     this.movingObject = new MyPyramid(this, 3, 0, 0, [0, 0, 0])
+    this.cylinder = new MyCylinder(this, 16)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -102,6 +104,7 @@ export class MyScene extends CGFscene {
 
     //Objects connected to MyInterface
     this.displayAxis = true
+    this.displayNormals = false;
   }
   initLights() {
     this.lights[0].setPosition(15, 2, 5, 1)
@@ -199,10 +202,19 @@ export class MyScene extends CGFscene {
     //this.incompleteSphere.display();
 
     this.movingObject.display()
+
     this.pushMatrix()
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2])
     this.cubeMap.display()
     this.popMatrix()
+
+    this.cylinder.cylinderAppearance.apply()
+
+    this.cylinder.display()
+
+    if (this.displayNormals) this.cylinder.enableNormalViz();
+        else this.cylinder.disableNormalViz();
+
     this.checkKeys()
 
     // ---- END Primitive drawing section

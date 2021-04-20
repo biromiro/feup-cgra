@@ -1,14 +1,16 @@
-import { MyMovingObject } from './MyMovingObject.js'
+import { MyMovingObject } from '../MyMovingObject.js'
+import { MySphere } from '../../primitives/MySphere.js'
+
 /**
- * MyPyramid
+ * MyFish
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices - number of divisions around the Y axis
  */
-export class MyPyramid extends MyMovingObject {
-  constructor(scene, slices, orientationAngle, velocity, position) {
+export class MyFish extends MyMovingObject {
+  constructor(scene, orientationAngle, velocity, position) {
     super(scene, orientationAngle, velocity, position)
-    this.slices = slices
+    
     this.initBuffers()
   }
 
@@ -39,10 +41,6 @@ export class MyPyramid extends MyMovingObject {
           this.vertices.push(ca, 0, -sa)
           this.vertices.push(caa, 0, -saa)
         }
-
-        console.log(
-          `{Iteration ${i}: Vertices -> [0,${j},0],[${ca},0,${-sa}],[${caa},0,${-saa}]}\n`
-        )
 
         let normal
 

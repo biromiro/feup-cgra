@@ -1,8 +1,10 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
-import { MyPyramid } from './MyPyramid.js'
-import { MySphere } from './MySphere.js'
-import { MyCubeMap } from './MyCubeMap.js'
-import { MyCylinder } from './MyCylinder.js'
+import { MyPyramid } from './primitives/MyPyramid.js'
+import { MySphere } from './primitives/MySphere.js'
+import { MyCubeMap } from './objects/MyCubeMap.js'
+import { MyCylinder } from './primitives/MyCylinder.js'
+import { MyMovingObject } from './objects/MyMovingObject.js'
+import { MyFish } from './objects/MyFish/MyFish.js'
 
 /**
  * MyScene
@@ -35,8 +37,16 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 16, 8)
     this.displaySphere = false
 
-    this.movingObject = new MyPyramid(this, 3, 0, 0, [0, 0, 0])
+    this.movingObjectAppearance = new CGFappearance(this)
+    this.movingObjectAppearance.setAmbient(0.3, 0.3, 0.3, 1)
+    this.movingObjectAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
+    this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+    this.movingObjectAppearance.setShininess(120)
+    
+    this.movingObject = new MyMovingObject(this, this.movingObjectAppearance, new MyPyramid(this, 3), 0, 0, [0, 0, 0])
     this.displayMovingObject = false
+    
+
 
     this.cylinder = new MyCylinder(this, 16)
     this.displayCylinder = false
@@ -206,12 +216,10 @@ export class MyScene extends CGFscene {
     if(this.displaySphere) this.sphere.display();
 
     if (this.displayNormals){
-      this.movingObject.enableNormalViz();
       this.cylinder.enableNormalViz();
       this.sphere.enableNormalViz();
     }
     else {
-      this.movingObject.disableNormalViz();
       this.cylinder.disableNormalViz();
       this.sphere.disableNormalViz();
     }

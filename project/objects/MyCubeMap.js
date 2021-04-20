@@ -1,5 +1,5 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../lib/CGF.js'
-import { MyQuad } from './MyQuad.js'
+import { CGFobject, CGFappearance } from '../../lib/CGF.js'
+import { MyQuad } from '../primitives/MyQuad.js'
 
 /**
  * MyUnitQuadCube

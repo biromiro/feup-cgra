@@ -1,4 +1,5 @@
-import { CGFobject, CGFappearance } from '../lib/CGF.js'
+import { CGFobject, CGFappearance } from '../../lib/CGF.js'
+
 /**
  * MyMovingObject
  * @constructor
@@ -7,28 +8,22 @@ import { CGFobject, CGFappearance } from '../lib/CGF.js'
  * @velocity - Initial velocity
  * @position - Current object position
  */
-export class MyMovingObject extends CGFobject {
-  constructor(scene, orientationAngle, velocity, position) {
-    super(scene)
+export class MyMovingObject{
+  constructor(scene, objAppearence, object, orientationAngle, velocity, position) {
     this.orientationAngle = orientationAngle
     this.x = position[0]
     this.initialx = position[0]
     this.y = position[1]
-    this.initialy = position[0]
+    this.initialy = position[1]
     this.z = position[2]
-    this.initialz = position[0]
-    this.coordinates = position
-    this.initialCoordinates = position
-    console.log(`x = ${this.x}, z = ${this.z}`)
+    this.initialz = position[2]
     this.velocity = velocity
     this.scaleFactor = 1
     this.setControllabeParameters()
-
-    this.movingObjectAppearance = new CGFappearance(scene)
-    this.movingObjectAppearance.setAmbient(0.3, 0.3, 0.3, 1)
-    this.movingObjectAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
-    this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.movingObjectAppearance.setShininess(120)
+    
+    this.scene = scene
+    this.appearance = objAppearence
+    this.object = object
   }
   
   setControllabeParameters(){
@@ -42,27 +37,27 @@ export class MyMovingObject extends CGFobject {
     
     this.scene.pushMatrix()
 
-    this.movingObjectAppearance.apply()
+    this.appearance.apply()
   
-    this.scene.translate(this.scene.movingObject.x, 0, this.scene.movingObject.z)
-    this.scene.rotate(this.scene.movingObject.orientationAngle, 0, 1, 0)
+    this.scene.translate(this.x, 0, this.z)
+    this.scene.rotate(this.orientationAngle, 0, 1, 0)
     this.scene.rotate(Math.PI / 2, 1, 0, 0)
 
     this.scene.translate(0, -0.5, 0)
 
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)
 
-    super.display()
+    this.object.display()
 
     this.scene.defaultAppearance.apply()
     this.scene.popMatrix()
   }
 
   update() {
+    console.log(`hello, x = ${this.x}, z = ${this.z}`)
     this.velocity -= this.velocity*this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.z += this.velocity * Math.cos(this.orientationAngle)
-    console.log(`x = ${this.x}, z = ${this.z}, velocity = ${this.velocity}`)
   }
 
   turn(val) {

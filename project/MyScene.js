@@ -18,7 +18,7 @@ export class MyScene extends CGFscene {
     super.init(application)
     this.initCameras()
     this.initLights()
-
+    
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0)
 
@@ -125,8 +125,9 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
   }
   initLights() {
-    this.lights[0].setPosition(15, 2, 5, 1)
+    this.lights[0].setPosition(15, 5, 2, 1)
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0)
+    this.lights[0].setVisible(true)
     this.lights[0].enable()
     this.lights[0].update()
   }
@@ -207,14 +208,15 @@ export class MyScene extends CGFscene {
     // Apply transformations corresponding to the camera position relative to the origin
     this.applyViewMatrix()
 
-    this.defaultAppearance.apply()
+    this.setDefaultAppearance()
+    this.lights[0].update()
 
     // Draw axis
     if (this.displayAxis) this.axis.display()
 
     
     // ---- BEGIN Primitive drawing section
-
+    
     this.pushMatrix();
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();

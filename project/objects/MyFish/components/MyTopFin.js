@@ -1,14 +1,14 @@
 import { CGFobject } from '../../../../lib/CGF.js';
-import { MySphere } from '../../../primitives/MySphere.js'
+import { MyTriangle } from '../../../primitives/MyTriangle.js'
 
-export class MyRightEye extends CGFobject {
+export class MyTopFin extends CGFobject {
   /**
    * @method constructor
    * @param  {CGFscene} scene - MyScene object
    */
   constructor(scene, appearence) {
     super(scene);
-    this.eye = new MySphere(scene, appearence, 8, 4)
+    this.fin = new MyTriangle(scene, appearence)
     this.appearence = appearence
   }
 
@@ -17,11 +17,13 @@ export class MyRightEye extends CGFobject {
 
     this.scene.pushMatrix()
 
-    this.scene.translate(0.25,  0.3, 0.45)
+    this.scene.translate(0,1.1,-0.2)
 
-    this.scene.scale(0.1, 0.1, 0.1)
+    this.scene.rotate(Math.PI/2, 0, 0, 1)
 
-    this.eye.display()
+    this.scene.rotate(-Math.PI/2, 0, 1, 0)
+
+    this.fin.display()
 
     this.scene.popMatrix()
 

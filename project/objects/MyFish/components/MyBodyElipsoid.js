@@ -12,17 +12,15 @@ export class MyBodyElipsoid extends CGFobject {
     this.appearence = appearence
   }
     
-  display(){
-    this.appearence.apply()
-    
+  display(){    
     this.scene.pushMatrix()
 
-    this.scene.scale(0.4, 0.7, 0.9)
+    this.scene.rotate(-Math.PI/2, 1, 0, 0)
+
+    this.scene.scale(0.4, 0.9, 0.7)
 
     this.body.display()
     
     this.scene.popMatrix()
-    
-    this.scene.defaultAppearance.apply()
   }
 }

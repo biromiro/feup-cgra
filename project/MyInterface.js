@@ -38,8 +38,8 @@ export class MyInterface extends CGFinterface {
     f0.add(this.scene.movingObject, 'friction', 0, 0.02).name('Friction')
 
     this.gui.add(this.scene, 'currentCubeMapTextureID', this.scene.cubeMapTextureIDs)
-    .name('Background')
-    .onChange(this.scene.updateAppliedTexture.bind(this.scene))
+      .name('Background')
+      .onChange(this.scene.updateAppliedTexture.bind(this.scene))
 
     this.initKeys()
 
@@ -51,7 +51,7 @@ export class MyInterface extends CGFinterface {
     this.scene.gui = this
 
     // disable the processKeyboard function
-    this.processKeyboard = function () {}
+    this.processKeyboard = function () { }
 
     // create a named array to store which keys are being pressed
     this.activeKeys = {}

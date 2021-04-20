@@ -7,21 +7,11 @@ export class MySphere extends CGFobject {
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
-  constructor(scene, slices, stacks) {
+  constructor(scene, appearance, slices, stacks) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
-
-    this.sphereAppearance = new CGFappearance(scene)
-    this.sphereAppearance.setAmbient(0, 0, 0, 1)
-    this.sphereAppearance.setDiffuse(0, 0, 0, 1)
-    this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.sphereAppearance.setEmission(1,1,1,1)
-
-    
-    let earthTex = new CGFtexture(scene, "images/earth.jpg")
-
-    this.sphereAppearance.setTexture(earthTex)
+    this.appearance = appearance
 
     this.initBuffers();
   }
@@ -92,7 +82,7 @@ export class MySphere extends CGFobject {
   }
 
   display(){
-    this.sphereAppearance.apply()
+    this.appearance.apply()
     super.display()
     this.scene.defaultAppearance.apply()
   }

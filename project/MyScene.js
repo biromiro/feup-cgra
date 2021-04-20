@@ -34,7 +34,20 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this)
 
-    this.sphere = new MySphere(this, 16, 8)
+    
+    this.sphereAppearance = new CGFappearance(this)
+    this.sphereAppearance.setAmbient(0, 0, 0, 1)
+    this.sphereAppearance.setDiffuse(0, 0, 0, 1)
+    this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+    this.sphereAppearance.setEmission(1,1,1,1)
+
+    
+    let earthTex = new CGFtexture(this, "images/earth.jpg")
+
+    this.sphereAppearance.setTexture(earthTex)
+
+
+    this.sphere = new MySphere(this, this.sphereAppearance, 16, 8)
     this.displaySphere = false
 
     this.movingObjectAppearance = new CGFappearance(this)
@@ -43,11 +56,10 @@ export class MyScene extends CGFscene {
     this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
     this.movingObjectAppearance.setShininess(120)
     
-    this.movingObject = new MyMovingObject(this, this.movingObjectAppearance, new MyPyramid(this, 3), 0, 0, [0, 0, 0])
+    this.movingObject = new MyMovingObject(this, new MyPyramid(this, 3), 0, 0, [0, 0, 0])
+    this.fish = new MyFish(this, this.movingObjectAppearance)
     this.displayMovingObject = false
     
-
-
     this.cylinder = new MyCylinder(this, 16)
     this.displayCylinder = false
 
@@ -209,11 +221,13 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
-    if(this.displayMovingObject) this.movingObject.display();
+    if(this.displayMovingObject) this.movingObject.display()
 
-    if(this.displayCylinder) this.cylinder.display();
+    if(this.displayCylinder) this.cylinder.display()
 
-    if(this.displaySphere) this.sphere.display();
+    if(this.displaySphere) this.sphere.display()
+
+    this.fish.display()
 
     if (this.displayNormals){
       this.cylinder.enableNormalViz();

@@ -9,7 +9,7 @@ import { CGFobject, CGFappearance } from '../../lib/CGF.js'
  * @position - Current object position
  */
 export class MyMovingObject{
-  constructor(scene, objAppearence, object, orientationAngle, velocity, position) {
+  constructor(scene, object, orientationAngle, velocity, position) {
     this.orientationAngle = orientationAngle
     this.x = position[0]
     this.initialx = position[0]
@@ -22,7 +22,6 @@ export class MyMovingObject{
     this.setControllabeParameters()
     
     this.scene = scene
-    this.appearance = objAppearence
     this.object = object
   }
   
@@ -36,14 +35,9 @@ export class MyMovingObject{
   display(){
     
     this.scene.pushMatrix()
-
-    this.appearance.apply()
   
     this.scene.translate(this.x, 0, this.z)
     this.scene.rotate(this.orientationAngle, 0, 1, 0)
-    this.scene.rotate(Math.PI / 2, 1, 0, 0)
-
-    this.scene.translate(0, -0.5, 0)
 
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)
 
@@ -62,7 +56,7 @@ export class MyMovingObject{
 
   turn(val) {
     val *= this.rotationOffset
-    this.orientationAngle -= val
+    this.orientationAngle += val
   }
 
   accelerate(val) {

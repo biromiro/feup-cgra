@@ -91,4 +91,16 @@ export class MyPyramid extends CGFobject{
     this.initBuffers()
     this.initNormalVizBuffers()
   }
+
+  display(){
+    this.scene.pushMatrix()
+
+    this.scene.rotate(Math.PI / 2, 1, 0, 0)
+
+    this.scene.translate(0, -0.5, 0)
+
+    super.display()
+
+    this.scene.popMatrix()
+  }
 }

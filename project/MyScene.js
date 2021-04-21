@@ -125,7 +125,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
   }
   initLights() {
-    this.lights[0].setPosition(15, 5, 2, 1)
+    this.lights[0].setPosition(15, 5, 3, 1)
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0)
     this.lights[0].setVisible(true)
     this.lights[0].enable()
@@ -152,6 +152,7 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
     this.movingObject.update()
+    this.fish.update()
   }
 
   updateAppliedTexture() {

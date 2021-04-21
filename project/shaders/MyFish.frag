@@ -17,6 +17,7 @@ struct lightProperties {
     bool enabled;                   
 };
 
+varying highp vec3 vLighting;
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler;
 uniform vec4 fishColor;
@@ -29,9 +30,9 @@ void main() {
     vec4 color = texture2D(uSampler, vTextureCoord);
 
 	if(vTextureCoord.t > 0.6){
-		gl_FragColor =  fishColor * uLight[0].diffuse;
+		gl_FragColor = vec4(fishColor.rgb * vLighting, color.a);
 	}
     else{
-		gl_FragColor =  color;
+		gl_FragColor = vec4(color.rgb * vLighting, color.a);
     }
 }

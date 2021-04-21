@@ -34,3 +34,4 @@ export class MyLeftFin extends CGFobject {
     this.scene.defaultAppearance.apply()
   }
 }
+

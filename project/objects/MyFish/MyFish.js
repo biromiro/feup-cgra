@@ -26,16 +26,21 @@ export class MyFish extends CGFobject {
     this.setFins()
 
     this.shader = new CGFshader(this.scene.gl, "./shaders/MyFish.vert", "./shaders/MyFish.frag")
-    this.shader.setUniformsValues({fishColor: this.fishColor})
+    console.log(`position = ${this.scene.lights[0].position}`)
+    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position})
+  }
+
+  update(){
+    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position})
   }
 
   setBody(){
 
     this.bodyAppearance = new CGFappearance(this.scene);
-		this.bodyAppearance.setAmbient(this.fishColor);
-		this.bodyAppearance.setDiffuse(this.fishColor);
-		this.bodyAppearance.setSpecular(this.fishColor);
-		this.bodyAppearance.setShininess(120);
+		this.bodyAppearance.setAmbient(0,0,0,1);
+		this.bodyAppearance.setDiffuse(1,1,1,1);
+		this.bodyAppearance.setSpecular(0,0,0,0);
+    this.bodyAppearance.setShininess(10)
 
     this.texture = new CGFtexture(this.scene, "./images/fish_tex.jpg")
     this.bodyAppearance.setTexture(this.texture);
@@ -47,14 +52,20 @@ export class MyFish extends CGFobject {
 
   setEyes(){
 
-    this.eyeAppearance = new CGFappearance(this.scene)
-		this.eyeAppearance.setAmbient(0,0,0,1);
-		this.eyeAppearance.setDiffuse(1,1,1,1);
-		this.eyeAppearance.setSpecular(0,0,0,0);
-    this.eyeAppearance.setShininess(10)
+    this.eyeBlackAppearance = new CGFappearance(this.scene)
+		this.eyeBlackAppearance.setAmbient(0,0,0,1);
+		this.eyeBlackAppearance.setDiffuse(0,0,0,1);
+		this.eyeBlackAppearance.setSpecular(0,0,0,0);
+    this.eyeBlackAppearance.setShininess(10)
 
-    this.rightEye = new MyRightEye(this.scene, this.eyeAppearance)
-    this.leftEye = new MyLeftEye(this.scene, this.eyeAppearance)
+    this.eyeWhiteAppearance = new CGFappearance(this.scene)
+		this.eyeWhiteAppearance.setAmbient(0,0,0,1);
+		this.eyeWhiteAppearance.setDiffuse(1,1,1,1);
+		this.eyeWhiteAppearance.setSpecular(0,0,0,0);
+    this.eyeWhiteAppearance.setShininess(10)
+
+    this.rightEye = new MyRightEye(this.scene, this.eyeWhiteAppearance, this.eyeBlackAppearance)
+    this.leftEye = new MyLeftEye(this.scene, this.eyeWhiteAppearance, this.eyeBlackAppearance)
   }
 
   setFins(){

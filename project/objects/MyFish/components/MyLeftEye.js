@@ -6,20 +6,35 @@ export class MyLeftEye extends CGFobject {
    * @method constructor
    * @param  {CGFscene} scene - MyScene object
    */
-  constructor(scene, appearence) {
+  constructor(scene, appearenceWhite, appearenceBlack) {
     super(scene);
-    this.eye = new MySphere(scene, appearence, 8, 4)
-    this.appearence = appearence
+    this.eye = new MySphere(scene, appearenceWhite, 8, 4)
+    this.eyeBall = new MySphere(scene, appearenceBlack, 16, 8)
+    this.appearenceWhite = appearenceWhite
+    this.appearenceBlack = appearenceBlack
   }
 
   display() {
-    this.appearence.apply()
 
     this.scene.pushMatrix()
 
     this.scene.translate(-0.25, 0.3, 0.45)
 
     this.scene.scale(0.1, 0.1, 0.1)
+    
+    this.scene.pushMatrix()
+
+    this.scene.scale(0.5, 0.5, 0.5)
+
+    this.scene.translate(-1.1, 0.5, 0.5)
+
+    this.appearenceBlack.apply()
+
+    this.eyeBall.display()
+
+    this.scene.popMatrix()
+
+    this.appearenceWhite.apply()
 
     this.eye.display()
 

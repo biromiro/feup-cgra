@@ -10,6 +10,7 @@ export class MyTailFin extends CGFobject {
     super(scene);
     this.tail = new MyTriangle(scene, appearence)
     this.appearence = appearence
+    this.angle = 0
   }
 
   display() {
@@ -17,7 +18,11 @@ export class MyTailFin extends CGFobject {
 
     this.scene.pushMatrix()
 
-    this.scene.translate(0,-0.65,-1.3)
+    this.scene.translate(0, 0,-0.9)
+
+    this.scene.rotate(this.angle, 0, 1, 0)
+
+    this.scene.translate(0, -0.65, -0.7)
 
     this.scene.rotate(-Math.PI/2 + Math.PI/4,1,0,0)
 
@@ -25,7 +30,6 @@ export class MyTailFin extends CGFobject {
     this.scene.rotate(Math.PI/2,0,0,1)
 
 
-    //this.scene.rotate(-Math.PI, 0, 1, 0)
 
 
     this.tail.display()

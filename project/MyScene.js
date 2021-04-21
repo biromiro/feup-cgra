@@ -152,7 +152,7 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
     this.movingObject.update()
-    this.fish.update()
+    this.fish.update(t)
   }
 
   updateAppliedTexture() {

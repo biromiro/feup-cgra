@@ -28,10 +28,27 @@ export class MyFish extends CGFobject {
     this.shader = new CGFshader(this.scene.gl, "./shaders/MyFish.vert", "./shaders/MyFish.frag")
     console.log(`position = ${this.scene.lights[0].position}`)
     this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position})
+
+    this.tailAngle = 0;
+    this.finAngle = 0;
+    
   }
 
-  update(){
+  update(t){
     this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position})
+    this.updateTailAngle(t)
+    this.updateFinAngle(t)
+  }
+
+  updateTailAngle(t){
+    let newAngle = 20*Math.PI*Math.sin(0.0015*t)/180
+    this.tailFin.angle = newAngle
+  }
+
+  updateFinAngle(t){
+    let newAngle = 15*Math.PI*Math.sin(0.01*t)/180
+    this.leftFin.angle = newAngle
+    this.rightFin.angle = newAngle
   }
 
   setBody(){

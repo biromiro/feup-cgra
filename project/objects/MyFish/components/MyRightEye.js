@@ -8,7 +8,7 @@ export class MyRightEye extends CGFobject {
    */
   constructor(scene, appearenceWhite, appearenceBlack) {
     super(scene);
-    this.eye = new MySphere(scene, appearenceWhite, 8, 4)
+    this.eye = new MySphere(scene, appearenceWhite, 16, 8)
     this.eyeBall = new MySphere(scene, appearenceBlack, 16, 8)
     this.appearenceWhite = appearenceWhite
     this.appearenceBlack = appearenceBlack

@@ -10,6 +10,7 @@ export class MyRightFin extends CGFobject {
     super(scene);
     this.fin = new MyTriangle(scene, appearence)
     this.appearence = appearence
+    this.angle = 0
   }
 
   display() {
@@ -19,11 +20,11 @@ export class MyRightFin extends CGFobject {
 
     this.scene.translate(1,0,0)
 
-    this.scene.translate(-0.65,0,0.2)
+    this.scene.translate(-0.61,0,0.2)
 
     this.scene.scale(0.5,0.5,0.5)
 
-    this.scene.rotate(-Math.PI/2 + Math.PI/8, 0, 0, 1)
+    this.scene.rotate(-Math.PI/2 + Math.PI/8 - this.angle, 0, 0, 1)
 
     this.scene.rotate(Math.PI/2, 0, 1, 0)
 

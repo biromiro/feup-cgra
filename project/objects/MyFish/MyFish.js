@@ -108,7 +108,7 @@ export class MyFish extends CGFobject {
     
     this.body.display()
 
-    this.scene.setActiveShader(this.scene.defaultShader)
+    this.scene.setActiveShaderSimple(this.scene.defaultShader)
 
     this.tailFin.display()
     this.topFin.display()

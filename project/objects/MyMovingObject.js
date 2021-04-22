@@ -23,7 +23,6 @@ export class MyMovingObject{
     
     this.scene = scene
     this.object = object
-    this.tMatrix = this.scene.getMatrix()
   }
   
   setControllabeParameters(){
@@ -42,8 +41,6 @@ export class MyMovingObject{
 
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)
 
-    this.tMatrix = this.scene.getMatrix()
-
     this.object.display()
 
     this.scene.defaultAppearance.apply()
@@ -54,7 +51,7 @@ export class MyMovingObject{
     this.velocity -= this.velocity*this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.z += this.velocity * Math.cos(this.orientationAngle)
-    this.object.update(t, this.tMatrix)
+    this.object.update(t)
   }
 
   turn(val) {

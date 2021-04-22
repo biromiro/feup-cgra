@@ -2,37 +2,52 @@
 precision highp float;
 #endif
 
-struct lightProperties {
-    vec4 position;                  
-    vec4 ambient;                   
-    vec4 diffuse;                   
-    vec4 specular;                  
-    vec4 half_vector;
-    vec3 spot_direction;            
-    float spot_exponent;            
-    float spot_cutoff;              
-    float constant_attenuation;     
-    float linear_attenuation;       
-    float quadratic_attenuation;    
-    bool enabled;                   
-};
-
-varying highp vec3 vLighting;
+varying highp vec3 vNormal;
+varying highp vec3 vEyeVec;
 varying vec2 vTextureCoord;
+varying vec3 vLightDirection;
+
+
 uniform sampler2D uSampler;
+uniform mat4 uMVMatrix;
+
 uniform vec4 fishColor;
 
-#define NUMBER_OF_LIGHTS 8
-uniform lightProperties uLight[NUMBER_OF_LIGHTS];
-
 void main() {
+
+    // Normalize light to calculate lambertTerm
+	vec3 L = normalize(vLightDirection.xyz);
+
+    // Transformed normal position
+	vec3 N = normalize(vNormal);
+
+    // Lambert's cosine law
+	float lambertTerm = dot(N, L);
+
+    vec4 Ia = vec4(0.1, 0.1, 0.1, 1.0);
+
+    vec4 Id = vec4(0.0, 0.0, 0.0, 1.0);
+
+    vec4 Is = vec4(0.0, 0.0, 0.0, 1.0);
+
+    if (lambertTerm > 0.0) {
+        Id = vec4(1.0) * lambertTerm;
+
+        vec3 E = normalize(vEyeVec);
+        vec3 R = reflect(L, N);
+        float specular = pow( max( dot(R, E), 0.0 ), 10.0);
+
+        Is = vec4(1.0) * specular;
+    }
+
+	vec4 vLighting = Ia + Id + Is;
 
     vec4 color = texture2D(uSampler, vTextureCoord);
 
 	if(vTextureCoord.t > 0.6){
-		gl_FragColor = vec4(fishColor.rgb * vLighting, color.a);
+		gl_FragColor = vec4(fishColor.rgb * vLighting.rgb, color.a);
 	}
     else{
-		gl_FragColor = vec4(color.rgb * vLighting, color.a);
+		gl_FragColor = vec4(color.rgb * vLighting.rgb, color.a);
     }
 }

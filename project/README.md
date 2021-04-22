@@ -2,9 +2,8 @@
 
 ## Group T04G08
 
-## Project Notes
+## Screenshots
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+### 1 - MyFish
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
+![Screenshot 1](screenshots/proj-t4g08-1.png)

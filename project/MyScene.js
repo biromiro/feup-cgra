@@ -210,7 +210,7 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix()
 
     this.setDefaultAppearance()
-    this.lights[0].update()
+    //this.lights[0].update()
 
     // Draw axis
     if (this.displayAxis) this.axis.display()

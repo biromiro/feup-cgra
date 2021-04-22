@@ -5,22 +5,22 @@
     uniform mat4 uNMatrix;
     uniform mat4 uMVMatrix;
     uniform mat4 uPMatrix;
-	uniform vec4 lightPosition;
 
     varying highp vec2 vTextureCoord;
-    varying highp vec3 vLighting;
+    varying highp vec3 vNormal;
+	varying highp vec3 vEyeVec;
+	varying highp vec3 vLightDirection;
+
+	uniform vec4 lightPos;
 
     void main(void) {
-      gl_Position = uPMatrix * uMVMatrix * aVertexPosition;
-      vTextureCoord = aTextureCoord;
-	
-      // Apply lighting effect
 	  vec4 vertex = uMVMatrix * aVertexPosition;
-      highp vec3 directionalLightColor = vec3(1, 1, 1);
-      highp vec3 directionalVector = normalize(lightPosition.xyz);
+      gl_Position = uPMatrix * vertex;
+      vTextureCoord = aTextureCoord;
 
-      highp vec3 transformedNormal = normalize(mat3(uMVMatrix) * aVertexNormal);
+	  vEyeVec = -vec3(vertex.xyz);
+	
+      vNormal = vec3(uNMatrix * vec4(aVertexNormal, 1.0));
 
-      highp float directional = max(dot(normalize(aVertexNormal), directionalVector), 0.0);
-      vLighting = directionalLightColor * directional;
+	  vLightDirection = normalize(lightPos.xyz - vertex.xyz);
     }

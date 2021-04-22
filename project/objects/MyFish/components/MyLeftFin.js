@@ -34,5 +34,13 @@ export class MyLeftFin extends CGFobject {
 
     this.scene.defaultAppearance.apply()
   }
+
+  enableNormalViz(){
+    this.fin.enableNormalViz()
+  }
+
+  disableNormalViz(){
+    this.fin.disableNormalViz()
+  }
 }
 

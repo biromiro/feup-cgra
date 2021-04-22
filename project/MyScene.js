@@ -56,8 +56,8 @@ export class MyScene extends CGFscene {
     this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
     this.movingObjectAppearance.setShininess(120)
     
-    this.movingObject = new MyMovingObject(this, new MyPyramid(this, 3), 0, 0, [0, 0, 0])
     this.fish = new MyFish(this, this.movingObjectAppearance)
+    this.movingObject = new MyMovingObject(this, this.fish, 0, 0, [0, 0, 0])
     this.displayMovingObject = false
     
     this.cylinder = new MyCylinder(this, 16)
@@ -125,7 +125,7 @@ export class MyScene extends CGFscene {
     this.displayNormals = false;
   }
   initLights() {
-    this.lights[0].setPosition(15, 5, 3, 1)
+    this.lights[0].setPosition(5, 1, 3, 1)
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0)
     this.lights[0].setVisible(true)
     this.lights[0].enable()
@@ -151,8 +151,8 @@ export class MyScene extends CGFscene {
 
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
-    this.movingObject.update()
-    this.fish.update(t)
+    this.movingObject.update(t)
+    //this.fish.update(t)
   }
 
   updateAppliedTexture() {
@@ -230,15 +230,17 @@ export class MyScene extends CGFscene {
 
     if(this.displaySphere) this.sphere.display()
 
-    this.fish.display()
+    //this.fish.display()
 
     if (this.displayNormals){
-      this.cylinder.enableNormalViz();
-      this.sphere.enableNormalViz();
+      this.cylinder.enableNormalViz()
+      this.sphere.enableNormalViz()
+      this.movingObject.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
       this.sphere.disableNormalViz();
+      this.movingObject.disableNormalViz()
     }
 
     this.checkKeys()

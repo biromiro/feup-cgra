@@ -43,4 +43,14 @@ export class MyRightEye extends CGFobject {
 
     this.scene.defaultAppearance.apply()
   }
+
+  enableNormalViz(){
+    this.eye.enableNormalViz()
+    this.eyeBall.enableNormalViz()
+  }
+
+  disableNormalViz(){
+    this.eye.disableNormalViz()
+    this.eyeBall.disableNormalViz()
+  }
 }

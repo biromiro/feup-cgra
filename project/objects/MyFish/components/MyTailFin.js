@@ -38,4 +38,12 @@ export class MyTailFin extends CGFobject {
 
     this.scene.defaultAppearance.apply()
   }
+
+  enableNormalViz(){
+    this.tail.enableNormalViz()
+  }
+
+  disableNormalViz(){
+    this.tail.disableNormalViz()
+  }
 }

@@ -23,4 +23,12 @@ export class MyBodyElipsoid extends CGFobject {
     
     this.scene.popMatrix()
   }
+
+  enableNormalViz(){
+    this.body.enableNormalViz()
+  }
+
+  disableNormalViz(){
+    this.body.disableNormalViz()
+  }
 }

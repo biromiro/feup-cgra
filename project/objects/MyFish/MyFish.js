@@ -26,16 +26,13 @@ export class MyFish extends CGFobject {
     this.setFins()
 
     this.shader = new CGFshader(this.scene.gl, "./shaders/MyFish.vert", "./shaders/MyFish.frag")
-    console.log(`position = ${this.scene.lights[0].position}`)
-    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position})
-
+    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
     this.tailAngle = 0;
     this.finAngle = 0;
-    
   }
 
   update(t){
-    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position})
+    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
     this.updateTailAngle(t)
     this.updateFinAngle(t)
   }
@@ -108,7 +105,7 @@ export class MyFish extends CGFobject {
     this.scene.scale(0.5,0.5,0.5)
 
     this.scene.setActiveShader(this.shader)
-
+    
     this.body.display()
 
     this.scene.setActiveShader(this.scene.defaultShader)
@@ -123,8 +120,25 @@ export class MyFish extends CGFobject {
     this.leftEye.display()
  
     this.scene.popMatrix();
+  }
 
+  enableNormalViz(){
+    this.body.enableNormalViz()
+    this.tailFin.enableNormalViz()
+    this.topFin.enableNormalViz()
+    this.rightFin.enableNormalViz()
+    this.leftFin.enableNormalViz()
+    this.rightEye.enableNormalViz()
+    this.leftEye.enableNormalViz()
+  }
 
-
+  disableNormalViz(){
+    this.body.disableNormalViz()
+    this.tailFin.disableNormalViz()
+    this.topFin.disableNormalViz()
+    this.rightFin.disableNormalViz()
+    this.leftFin.disableNormalViz()
+    this.rightEye.disableNormalViz()
+    this.leftEye.disableNormalViz()
   }
 }

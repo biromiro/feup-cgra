@@ -23,6 +23,7 @@ export class MyMovingObject{
     
     this.scene = scene
     this.object = object
+    this.tMatrix = this.scene.getMatrix()
   }
   
   setControllabeParameters(){
@@ -41,17 +42,19 @@ export class MyMovingObject{
 
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)
 
+    this.tMatrix = this.scene.getMatrix()
+
     this.object.display()
 
     this.scene.defaultAppearance.apply()
     this.scene.popMatrix()
   }
 
-  update() {
-    console.log(`hello, x = ${this.x}, z = ${this.z}`)
+  update(t) {
     this.velocity -= this.velocity*this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.z += this.velocity * Math.cos(this.orientationAngle)
+    this.object.update(t, this.tMatrix)
   }
 
   turn(val) {
@@ -74,5 +77,13 @@ export class MyMovingObject{
     this.z = this.initialz
     this.orientationAngle = 0
     this.setControllabeParameters()
+  }
+
+  enableNormalViz(){
+    this.object.enableNormalViz()
+  }
+
+  disableNormalViz(){
+    this.object.disableNormalViz()
   }
 }

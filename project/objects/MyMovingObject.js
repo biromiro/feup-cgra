@@ -36,7 +36,7 @@ export class MyMovingObject{
     
     this.scene.pushMatrix()
   
-    this.scene.translate(this.x, 0, this.z)
+    this.scene.translate(this.x, this.y, this.z)
     this.scene.rotate(this.orientationAngle, 0, 1, 0)
 
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)

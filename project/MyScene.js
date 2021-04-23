@@ -5,6 +5,9 @@ import { MyCubeMap } from './objects/MyCubeMap.js'
 import { MyCylinder } from './primitives/MyCylinder.js'
 import { MyMovingObject } from './objects/MyMovingObject.js'
 import { MyFish } from './objects/MyFish/MyFish.js'
+import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
+import { MyNest } from './objects/MySeaFloor/MyNest.js'
+import { MyRightFin } from './objects/MyFish/components/MyRightFin.js'
 
 /**
  * MyScene
@@ -57,11 +60,15 @@ export class MyScene extends CGFscene {
     this.movingObjectAppearance.setShininess(120)
     
     this.fish = new MyFish(this, this.movingObjectAppearance)
-    this.movingObject = new MyMovingObject(this, this.fish, 0, 0, [0, 0, 0])
+    this.movingObject = new MyMovingObject(this, this.fish, 0, 0, [0, 3, 0])
     this.displayMovingObject = false
     
     this.cylinder = new MyCylinder(this, 16)
     this.displayCylinder = false
+
+    this.seaFloor = new MySeaFloor(this, 20, 50, 1)
+
+    this.ring = new MyNest(this, 32, 3, 1, [-5,-5])
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -133,11 +140,11 @@ export class MyScene extends CGFscene {
   }
   initCameras() {
     this.camera = new CGFcamera(
-      0.4,
+      1.0,
       0.1,
       500,
-      vec3.fromValues(15, 15, 15),
-      vec3.fromValues(0, 0, 0)
+      vec3.fromValues(2, 2, 2),
+      vec3.fromValues(0, 2, 0)
     )
   }
 
@@ -230,17 +237,21 @@ export class MyScene extends CGFscene {
 
     if(this.displaySphere) this.sphere.display()
 
-    //this.fish.display()
+    this.seaFloor.display()
+
+    this.ring.display()
 
     if (this.displayNormals){
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
       this.movingObject.enableNormalViz()
+      this.ring.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
       this.sphere.disableNormalViz();
       this.movingObject.disableNormalViz()
+      this.ring.disableNormalViz()
     }
 
     this.checkKeys()

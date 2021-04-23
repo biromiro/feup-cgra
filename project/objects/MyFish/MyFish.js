@@ -15,10 +15,9 @@ import { MyLeftFin } from './components/MyLeftFin.js'
  * @param slices - number of divisions around the Y axis
  */
 export class MyFish extends CGFobject {
-  constructor(scene, appearance) {
+  constructor(scene) {
     super(scene)
 
-    this.appearance = appearance
     this.fishColor = [0.25,0.416,0.592, 1.0]
 
     this.setBody()
@@ -38,12 +37,12 @@ export class MyFish extends CGFobject {
   }
 
   updateTailAngle(t){
-    let newAngle = 20*Math.PI*Math.sin(0.0015*t)/180
+    let newAngle = 20*Math.PI*Math.sin(0.01*t)/180
     this.tailFin.angle = newAngle
   }
 
   updateFinAngle(t){
-    let newAngle = 15*Math.PI*Math.sin(0.01*t)/180
+    let newAngle = 15*Math.PI*Math.sin(0.0015*t)/180
     this.leftFin.angle = newAngle
     this.rightFin.angle = newAngle
   }

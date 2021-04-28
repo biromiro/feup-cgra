@@ -35,6 +35,7 @@ export class MyFish extends CGFobject {
     this.updateTailAngle(t)
     this.updateFinAngle(t)
   }
+  
 
   updateTailAngle(t){
     let newAngle = 20*Math.PI*Math.sin(0.01*t)/180

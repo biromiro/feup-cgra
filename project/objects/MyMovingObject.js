@@ -1,5 +1,3 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js'
-
 /**
  * MyMovingObject
  * @constructor
@@ -51,7 +49,9 @@ export class MyMovingObject{
     this.velocity -= this.velocity*this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.z += this.velocity * Math.cos(this.orientationAngle)
-    this.object.update(t)
+    if(this.object.update != undefined){
+      this.object.update(t)
+    }
   }
 
   turn(val) {

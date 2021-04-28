@@ -1,5 +1,4 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
-import { MyPyramid } from './primitives/MyPyramid.js'
 import { MySphere } from './primitives/MySphere.js'
 import { MyCubeMap } from './objects/MyCubeMap.js'
 import { MyCylinder } from './primitives/MyCylinder.js'
@@ -7,7 +6,7 @@ import { MyMovingObject } from './objects/MyMovingObject.js'
 import { MyFish } from './objects/MyFish/MyFish.js'
 import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
-import { MyRightFin } from './objects/MyFish/components/MyRightFin.js'
+import { MyWaterSurface } from './objects/MyWaterSurface.js'
 
 /**
  * MyScene
@@ -21,7 +20,7 @@ export class MyScene extends CGFscene {
     super.init(application)
     this.initCameras()
     this.initLights()
-    
+
     //Background color
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0)
 
@@ -37,14 +36,14 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this)
 
-    
+
     this.sphereAppearance = new CGFappearance(this)
     this.sphereAppearance.setAmbient(0, 0, 0, 1)
     this.sphereAppearance.setDiffuse(0, 0, 0, 1)
     this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.sphereAppearance.setEmission(1,1,1,1)
+    this.sphereAppearance.setEmission(1, 1, 1, 1)
 
-    
+
     let earthTex = new CGFtexture(this, "images/earth.jpg")
 
     this.sphereAppearance.setTexture(earthTex)
@@ -58,17 +57,19 @@ export class MyScene extends CGFscene {
     this.movingObjectAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
     this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
     this.movingObjectAppearance.setShininess(120)
-    
+
     this.fish = new MyFish(this, this.movingObjectAppearance)
     this.movingObject = new MyMovingObject(this, this.fish, 0, 0, [0, 3, 0])
     this.displayMovingObject = false
-    
+
     this.cylinder = new MyCylinder(this, 16)
     this.displayCylinder = false
 
     this.seaFloor = new MySeaFloor(this, 20, 50, 1)
 
-    this.ring = new MyNest(this, 32, 3, 1, [-5,-5])
+    this.ring = new MyNest(this, 32, 3, 1, [-5, -5])
+
+    //this.watersurface = new MyWaterSurface(this, 20, 50, 50)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -103,14 +104,14 @@ export class MyScene extends CGFscene {
     this.currentCubeMapTextureID = -1
 
     this.cubeMapTextureIDs = {
-      Directions : 0, 
-      Sky : 1,
-      GoldenGate : 2,
+      Directions: 0,
+      Sky: 1,
+      GoldenGate: 2,
       SkyBox: 3
     }
 
     this.cubeMapTexture = [
-      test_cubemap, 
+      test_cubemap,
       demo_cubemap,
       goldengate,
       skybox
@@ -125,7 +126,7 @@ export class MyScene extends CGFscene {
     this.defaultAppearance.setEmission(0, 0, 0, 1)
     this.defaultAppearance.setShininess(120)
 
-    
+
 
     //Objects connected to MyInterface
     this.displayAxis = true
@@ -222,26 +223,28 @@ export class MyScene extends CGFscene {
     // Draw axis
     if (this.displayAxis) this.axis.display()
 
-    
+
     // ---- BEGIN Primitive drawing section
-    
+
     this.pushMatrix();
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();
     this.popMatrix();
 
 
-    if(this.displayMovingObject) this.movingObject.display()
+    if (this.displayMovingObject) this.movingObject.display()
 
-    if(this.displayCylinder) this.cylinder.display()
+    if (this.displayCylinder) this.cylinder.display()
 
-    if(this.displaySphere) this.sphere.display()
+    if (this.displaySphere) this.sphere.display()
 
     this.seaFloor.display()
 
     this.ring.display()
 
-    if (this.displayNormals){
+    //this.watersurface.display();
+
+    if (this.displayNormals) {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
       this.movingObject.enableNormalViz()

@@ -1,4 +1,4 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 /**
 * MyPyramid
 * @constructor
@@ -6,7 +6,7 @@ import { CGFobject, CGFtexture, CGFappearance } from '../../lib/CGF.js';
  * @param slices - number of divisions around the Y axis
  * @param stacks - number of divisions along the Y axis
 */
-export class MyHalfRing extends CGFobject {
+export class MyRing extends CGFobject {
     constructor(scene, slices, radius, innerRadius) {
         super(scene);
         this.slices = slices;
@@ -40,7 +40,7 @@ export class MyHalfRing extends CGFobject {
                 const y = (this.radius + this.innerRadius * Math.cos(outerAng)) * Math.sin(ang);
                 const z = this.innerRadius * Math.sin(outerAng);
 
-                console.log(`${x},${y},${z}`);
+                //console.log(`${x},${y},${z}`);
 
                 this.vertices.push(x, y, z);
                 /*let normal = [

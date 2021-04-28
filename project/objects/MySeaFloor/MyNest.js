@@ -1,5 +1,5 @@
 import { CGFappearance, CGFobject, CGFshader, CGFtexture } from '../../../lib/CGF.js'
-import { MyHalfRing } from '../../primitives/MyRing.js';
+import { MyRing } from '../../primitives/MyRing.js';
 
 
 /**
@@ -12,7 +12,7 @@ import { MyHalfRing } from '../../primitives/MyRing.js';
     constructor(scene, slices, radius, innerRadius, position) {
       super(scene)
   
-      this.ring = new MyHalfRing(this.scene, slices, radius > 5 ? 5 : radius, innerRadius);
+      this.ring = new MyRing(this.scene, slices, radius > 5 ? 5 : radius, innerRadius);
   
       this.createTextures()
 

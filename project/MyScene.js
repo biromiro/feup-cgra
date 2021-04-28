@@ -69,7 +69,7 @@ export class MyScene extends CGFscene {
 
     this.ring = new MyNest(this, 32, 3, 1, [-5, -5])
 
-    //this.watersurface = new MyWaterSurface(this, 20, 50, 50)
+    this.watersurface = new MyWaterSurface(this, 50)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -242,7 +242,7 @@ export class MyScene extends CGFscene {
 
     this.ring.display()
 
-    //this.watersurface.display();
+    this.watersurface.display();
 
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()

@@ -9,20 +9,20 @@ import { MyQuad } from '../primitives/MyQuad.js';
  * @param slices - number of divisions around the Y axis
  */
  export class MyWaterSurface extends CGFobject {
-    constructor(scene, nrDivs, size, maxHeight) {
+    constructor(scene, size) {
       super(scene)
   
       this.quad = new MyQuad(scene);
   
       this.createTextures()
-
-      //this.shader = new CGFshader(this.scene.gl, "./shaders/MyWaterSurface.vert", "./shaders/MyWaterSurface.frag")
-      //this.shader.setUniformsValues({uSampler2: 1, maxHeight: maxHeight})
+      this.size = size
+      this.shader = new CGFshader(this.scene.gl, "./shaders/MyWaterSurface.vert", "./shaders/MyWaterSurface.frag")
+      this.shader.setUniformsValues({uSampler2: 1})
     }
 
     createTextures(){
         this.appearance = new CGFappearance(this.scene);
-		this.appearance.setAmbient(0,0,0,1);
+		this.appearance.setAmbient(1,1,1,1);
 		this.appearance.setDiffuse(1,1,1,1);
 		this.appearance.setSpecular(0,0,0,0);
         this.appearance.setShininess(10)
@@ -37,16 +37,21 @@ import { MyQuad } from '../primitives/MyQuad.js';
     display(){
         this.scene.pushMatrix();
 
-        this.scene.rotate(-Math.PI, 0, 0, 1)
-        //this.distortionMap.bind(1);
+        this.appearance.apply()
+
+        this.scene.translate(0, 10, 0)
+
+        this.scene.scale(this.size, this.size, this.size)
+
+        this.scene.rotate(-Math.PI/2, 1, 0, 0)
+        this.distortionMap.bind(1);
         //this.scene.setActiveShader(this.shader)
         
-        this.appearance.apply()
         this.quad.display()
-        this.scene.defaultAppearance.apply()
+        //this.scene.setActiveShaderSimple(this.scene.defaultShader)
+        
         this.scene.popMatrix();
         
-
-        //this.scene.setActiveShaderSimple(this.scene.defaultShader)
+        //this.scene.defaultAppearance.apply()
     }
 }

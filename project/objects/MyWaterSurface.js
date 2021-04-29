@@ -22,7 +22,7 @@ import { MyQuad } from '../primitives/MyQuad.js';
 
     createTextures(){
         this.appearance = new CGFappearance(this.scene);
-		this.appearance.setAmbient(1,1,1,1);
+		this.appearance.setAmbient(0.7,0.7,0.7,1);
 		this.appearance.setDiffuse(1,1,1,1);
 		this.appearance.setSpecular(0,0,0,0);
         this.appearance.setShininess(10)
@@ -32,26 +32,24 @@ import { MyQuad } from '../primitives/MyQuad.js';
         this.appearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 
         this.distortionMap = new CGFtexture(this.scene, "./images/distortionmap.png")
+        
     }
 
     display(){
-        this.scene.pushMatrix();
-
-        this.appearance.apply()
-
+        this.scene.pushMatrix()
         this.scene.translate(0, 10, 0)
-
         this.scene.scale(this.size, this.size, this.size)
-
         this.scene.rotate(-Math.PI/2, 1, 0, 0)
-        this.distortionMap.bind(1);
-        //this.scene.setActiveShader(this.shader)
         
+        this.distortionMap.bind(1)
+        this.scene.setActiveShader(this.shader)
+
+        
+        this.appearance.apply()        
         this.quad.display()
-        //this.scene.setActiveShaderSimple(this.scene.defaultShader)
-        
+        this.scene.defaultAppearance.apply()
+
         this.scene.popMatrix();
-        
-        //this.scene.defaultAppearance.apply()
+        this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 }

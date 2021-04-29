@@ -29,7 +29,7 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE)
     this.gl.depthFunc(this.gl.LEQUAL)
 
-    this.setUpdatePeriod(20)
+    this.setUpdatePeriod(60)
 
     this.enableTextures(true)
 
@@ -69,7 +69,7 @@ export class MyScene extends CGFscene {
 
     this.ring = new MyNest(this, 32, 3, 1, [-5, -5])
 
-    //this.watersurface = new MyWaterSurface(this, 20, 50, 50)
+    this.watersurface = new MyWaterSurface(this, 50)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -160,11 +160,13 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
     this.movingObject.update(t)
+    this.watersurface.shader.setUniformsValues({timeFactor: t / 100 % 25600})
     //this.fish.update(t)
   }
 
   updateAppliedTexture() {
     this.cubeMap.setTexture(...this.cubeMapTexture[this.currentCubeMapTextureID])
+    
   }
 
   checkKeys() {
@@ -242,7 +244,7 @@ export class MyScene extends CGFscene {
 
     this.ring.display()
 
-    //this.watersurface.display();
+    this.watersurface.display();
 
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()

@@ -18,7 +18,7 @@ export class MyFish extends CGFobject {
   constructor(scene) {
     super(scene)
 
-    this.fishColor = [0.25,0.416,0.592, 1.0]
+    this.fishColor = [255/255,69/255,0/255, 1.0]
 
     this.setBody()
     this.setEyes()
@@ -26,6 +26,9 @@ export class MyFish extends CGFobject {
 
     this.shader = new CGFshader(this.scene.gl, "./shaders/MyFish.vert", "./shaders/MyFish.frag")
     this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
+    
+    //this.eyeShader = new CGFshader(this.scene.gl, "./shaders/")
+    
     this.tailAngle = 0;
     this.finAngle = 0;
   }
@@ -56,7 +59,7 @@ export class MyFish extends CGFobject {
 		this.bodyAppearance.setSpecular(0,0,0,0);
     this.bodyAppearance.setShininess(10)
 
-    this.texture = new CGFtexture(this.scene, "./images/fish_tex.jpg")
+    this.texture = new CGFtexture(this.scene, "./images/fish_tex_4.jpg")
     this.bodyAppearance.setTexture(this.texture);
     this.bodyAppearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 
@@ -65,21 +68,18 @@ export class MyFish extends CGFobject {
   }
 
   setEyes(){
+    this.eyeAppearance = new CGFappearance(this.scene)
+		this.eyeAppearance.setAmbient(0,0,0,1);
+		this.eyeAppearance.setDiffuse(1,1,1,1);
+		this.eyeAppearance.setSpecular(0,0,0,0);
+    this.eyeAppearance.setShininess(10)
 
-    this.eyeBlackAppearance = new CGFappearance(this.scene)
-		this.eyeBlackAppearance.setAmbient(0,0,0,1);
-		this.eyeBlackAppearance.setDiffuse(0,0,0,1);
-		this.eyeBlackAppearance.setSpecular(0,0,0,0);
-    this.eyeBlackAppearance.setShininess(10)
+    this.eyeTexture = new CGFtexture(this.scene, "./images/fisheye.jpg")
+    this.eyeAppearance.setTexture(this.eyeTexture);
+    this.eyeAppearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 
-    this.eyeWhiteAppearance = new CGFappearance(this.scene)
-		this.eyeWhiteAppearance.setAmbient(0,0,0,1);
-		this.eyeWhiteAppearance.setDiffuse(1,1,1,1);
-		this.eyeWhiteAppearance.setSpecular(0,0,0,0);
-    this.eyeWhiteAppearance.setShininess(10)
-
-    this.rightEye = new MyRightEye(this.scene, this.eyeWhiteAppearance, this.eyeBlackAppearance)
-    this.leftEye = new MyLeftEye(this.scene, this.eyeWhiteAppearance, this.eyeBlackAppearance)
+    this.rightEye = new MyRightEye(this.scene, this.eyeAppearance)
+    this.leftEye = new MyLeftEye(this.scene, this.eyeAppearance)
   }
 
   setFins(){
@@ -115,6 +115,7 @@ export class MyFish extends CGFobject {
     this.rightFin.display()
     this.leftFin.display()
 
+    //this.
 
     this.rightEye.display()
     this.leftEye.display()

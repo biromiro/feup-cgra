@@ -6,12 +6,10 @@ export class MyRightEye extends CGFobject {
    * @method constructor
    * @param  {CGFscene} scene - MyScene object
    */
-  constructor(scene, appearenceWhite, appearenceBlack) {
+  constructor(scene, appearance) {
     super(scene);
-    this.eye = new MySphere(scene, appearenceWhite, 16, 8)
-    this.eyeBall = new MySphere(scene, appearenceBlack, 16, 8)
-    this.appearenceWhite = appearenceWhite
-    this.appearenceBlack = appearenceBlack
+    this.eye = new MySphere(scene, appearance, 16, 8)
+    this.appearance = appearance
   }
 
 
@@ -22,20 +20,12 @@ export class MyRightEye extends CGFobject {
     this.scene.translate(0.25, 0.3, 0.45)
 
     this.scene.scale(0.1, 0.1, 0.1)
-    
-    this.scene.pushMatrix()
 
-    this.scene.scale(0.5, 0.5, 0.5)
+    //this.scene.rotate(-Math.PI, 1, 0, 0)
 
-    this.scene.translate(1.1, 0.5, 0.5)
+    this.scene.rotate(Math.PI, 0, 1, 0)
 
-    this.appearenceBlack.apply()
-
-    this.eyeBall.display()
-
-    this.scene.popMatrix()
-
-    this.appearenceWhite.apply()
+    this.appearance.apply()
 
     this.eye.display()
 
@@ -46,11 +36,9 @@ export class MyRightEye extends CGFobject {
 
   enableNormalViz(){
     this.eye.enableNormalViz()
-    this.eyeBall.enableNormalViz()
   }
 
   disableNormalViz(){
     this.eye.disableNormalViz()
-    this.eyeBall.disableNormalViz()
   }
 }

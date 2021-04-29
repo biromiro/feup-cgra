@@ -95,7 +95,7 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/goldengate/negy.jpg")]
 
     let skybox = [new CGFtexture(this, "images/skybox/top.png"),
-    new CGFtexture(this, "images/skybox/front.png"),Add fish eye texture and update fish body textures and colors
+    new CGFtexture(this, "images/skybox/front.png"),
     new CGFtexture(this, "images/skybox/left.png"),
     new CGFtexture(this, "images/skybox/back.png"),
     new CGFtexture(this, "images/skybox/right.png"),

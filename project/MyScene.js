@@ -7,6 +7,7 @@ import { MyFish } from './objects/MyFish/MyFish.js'
 import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
+import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
 
 /**
  * MyScene
@@ -70,6 +71,8 @@ export class MyScene extends CGFscene {
     this.ring = new MyNest(this, 32, 3, 1, [-5, -5])
 
     this.watersurface = new MyWaterSurface(this, 50)
+
+    this.rockSet = new MyRockSet(this, 20)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -255,17 +258,21 @@ export class MyScene extends CGFscene {
 
     this.watersurface.display();
 
+    this.rockSet.display()
+
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
       this.movingObject.enableNormalViz()
       this.ring.enableNormalViz()
+      this.rockSet.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
       this.sphere.disableNormalViz();
       this.movingObject.disableNormalViz()
       this.ring.disableNormalViz()
+      this.rockSet.disableNormalViz()
     }
 
     this.checkKeys()

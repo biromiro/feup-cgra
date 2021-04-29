@@ -13,13 +13,9 @@ uniform float maxHeight;
 
 void main() {
 
-  vec3 offset = vec3(0.0, 0.0, 0.0);
-
   vTextureCoord = aTextureCoord;
 
-  vec2 factor = vTextureCoord;
+  vec3 offset = vec3(0.0, texture2D(uSampler2, vTextureCoord).g, 0.0);
 
-  offset.y = texture2D(uSampler2, factor).b * 2.0;
-
-  gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
+  gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
 }

@@ -66,7 +66,7 @@ export class MyScene extends CGFscene {
     this.cylinder = new MyCylinder(this, 16)
     this.displayCylinder = false
 
-    this.seaFloor = new MySeaFloor(this, 20, 50, 1)
+    this.seaFloor = new MySeaFloor(this, 100, 50, 1)
 
     this.ring = new MyNest(this, 32, 3, 1, [-5, -5])
 

@@ -16,14 +16,14 @@ export class MyPlane extends CGFobject {
 		// nrDivs = 1 if not provided
 		nrDivs = typeof nrDivs !== 'undefined' ? nrDivs : 1;
 		this.nrDivs = nrDivs;
-		this.size = size;
+		this.size = size || 1;
 		this.patchLength = this.size / nrDivs;
 		this.minS = minS || 0;
 		this.maxS = maxS || 1;
 		this.minT = minT || 0;
 		this.maxT = maxT || 1;
-		this.q = (this.maxS - this.minS) / this.patchLength;
-		this.w = (this.maxT - this.minT) / this.patchLength;
+		this.q = (this.maxS - this.minS) / nrDivs * Math.floor(nrDivs/20);
+		this.w = (this.maxT - this.minT) / nrDivs * Math.floor(nrDivs/20);
 		this.initBuffers();
 	}
 	initBuffers() {
@@ -38,6 +38,7 @@ export class MyPlane extends CGFobject {
 				this.vertices.push(xCoord, 0, zCoord);
 				this.normals.push(0, 1, 0);
 				this.texCoords.push(this.minS + i * this.q, this.minT + j * this.w);
+				console.log(`${this.minS + i * this.q}, ${this.minT + j * this.w}`)
 				xCoord += this.patchLength;
 			}
 			zCoord  -= this.patchLength;

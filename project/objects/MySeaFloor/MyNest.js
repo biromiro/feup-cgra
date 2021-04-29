@@ -31,7 +31,7 @@ import { MyRing } from '../../primitives/MyRing.js';
 		this.appearance.setSpecular(0,0,0,0);
         this.appearance.setShininess(10)
 
-        this.texture = new CGFtexture(this.scene, "./images/seashell.jpg")
+        this.texture = new CGFtexture(this.scene, "./images/seashell_2.jpg")
         this.appearance.setTexture(this.texture);
         this.appearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 

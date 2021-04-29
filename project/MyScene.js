@@ -101,20 +101,29 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/skybox/right.png"),
     new CGFtexture(this, "images/skybox/bottom.png")]
 
+    let under_water = [new CGFtexture(this, "images/underwater_cubemap/top.jpg"),
+    new CGFtexture(this, "images/underwater_cubemap/front.jpg"),
+    new CGFtexture(this, "images/underwater_cubemap/left.jpg"),
+    new CGFtexture(this, "images/underwater_cubemap/back.jpg"),
+    new CGFtexture(this, "images/underwater_cubemap/right.jpg"),
+    new CGFtexture(this, "images/underwater_cubemap/bottom.jpg")]
+
     this.currentCubeMapTextureID = -1
 
     this.cubeMapTextureIDs = {
       Directions: 0,
       Sky: 1,
       GoldenGate: 2,
-      SkyBox: 3
+      SkyBox: 3,
+      UnderWater: 4
     }
 
     this.cubeMapTexture = [
       test_cubemap,
       demo_cubemap,
       goldengate,
-      skybox
+      skybox,
+      under_water
     ]
 
     this.cubeMap = new MyCubeMap(this)

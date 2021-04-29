@@ -34,6 +34,8 @@ export class MyCubeMap extends CGFobject {
 
     this.scene.pushMatrix()
 
+    this.scene.translate(0, -170, 0)
+
     this.scene.scale(500, 500, 500)
 
     this.cubeMaterial.apply()

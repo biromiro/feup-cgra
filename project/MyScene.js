@@ -111,14 +111,22 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/underwater_cubemap/right.jpg"),
     new CGFtexture(this, "images/underwater_cubemap/bottom.jpg")]
 
-    this.currentCubeMapTextureID = -1
+    let under_water_2 = [new CGFtexture(this, "images/underwater_cubemap_2/top.png"),
+    new CGFtexture(this, "images/underwater_cubemap_2/front.png"),
+    new CGFtexture(this, "images/underwater_cubemap_2/left.png"),
+    new CGFtexture(this, "images/underwater_cubemap_2/back.png"),
+    new CGFtexture(this, "images/underwater_cubemap_2/right.png"),
+    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png")]
+
+    this.currentCubeMapTextureID = 5
 
     this.cubeMapTextureIDs = {
       Directions: 0,
       Sky: 1,
       GoldenGate: 2,
       SkyBox: 3,
-      UnderWater: 4
+      UnderWater: 4,
+      UnderWater2: 5
     }
 
     this.cubeMapTexture = [
@@ -126,10 +134,12 @@ export class MyScene extends CGFscene {
       demo_cubemap,
       goldengate,
       skybox,
-      under_water
+      under_water,
+      under_water_2
     ]
 
     this.cubeMap = new MyCubeMap(this)
+    this.updateAppliedTexture()
 
     this.defaultAppearance = new CGFappearance(this)
     this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0)
@@ -137,7 +147,6 @@ export class MyScene extends CGFscene {
     this.defaultAppearance.setSpecular(0.2, 0.4, 0.8, 1.0)
     this.defaultAppearance.setEmission(0, 0, 0, 1)
     this.defaultAppearance.setShininess(120)
-
 
 
     //Objects connected to MyInterface

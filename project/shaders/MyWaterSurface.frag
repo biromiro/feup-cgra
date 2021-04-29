@@ -24,7 +24,7 @@ void main() {
 
   vec2 distCoords = vTextureCoord + (vec2(distRS - 0.5, distGT - 0.5) / 5.0);
 
-  gl_FragColor = texture2D(uSampler, distCoords);;
+  gl_FragColor = texture2D(uSampler, distCoords);
   
   
   //gl_FragColor = texture2D(uSampler, vTextureCoord);

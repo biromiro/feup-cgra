@@ -27,7 +27,7 @@ import { MyQuad } from '../primitives/MyQuad.js';
 		this.appearance.setSpecular(0,0,0,0);
         this.appearance.setShininess(10)
 
-        this.texture = new CGFtexture(this.scene, "./images/pier.jpg")
+        this.texture = new CGFtexture(this.scene, "./images/underwater_cubemap_2/top.png")
         this.appearance.setTexture(this.texture);
         this.appearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 

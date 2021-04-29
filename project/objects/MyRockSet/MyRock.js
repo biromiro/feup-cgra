@@ -12,20 +12,10 @@ export class MyRock extends CGFobject {
     this.latDivs = stacks * 2;
     this.longDivs = slices;
     [this.x, this.y, this.z] = pos
-    	
-    this.createAppearance()
 
-    this.initBuffers();
+    this.initBuffers()
 
     this.createDeformation()
-  }
-
-  createAppearance(){
-        this.appearance = new CGFappearance(this.scene);
-		this.appearance.setAmbient(0,0,0,1);
-		this.appearance.setDiffuse(0.1,0.1,0.1,1);
-		this.appearance.setSpecular(0.5,0.5,0.5,1);
-        this.appearance.setShininess(10)
   }
 
   createDeformation(){
@@ -44,6 +34,7 @@ export class MyRock extends CGFobject {
     this.indices = [];
     this.normals = [];
     this.texCoords = [];
+    this.everyVertex = [];
 
     var phi = 0;
     var theta = 0;
@@ -64,7 +55,7 @@ export class MyRock extends CGFobject {
         var x = Math.cos(theta) * sinPhi;
         var y = cosPhi;
         var z = Math.sin(-theta) * sinPhi;
-        this.vertices.push(x, y, z);
+        this.everyVertex.push([x, y, z]);
 
         //--- Indices
         if (latitude < this.latDivs && longitude < this.longDivs) {
@@ -95,24 +86,32 @@ export class MyRock extends CGFobject {
       phi += phiInc;
     }
 
+    for(let k = 0; k < this.everyVertex.length; k++){
+        let [x,y,z] = this.everyVertex[k]
+        let offset = [Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3]
+        x += offset[0]
+        y += offset[1]
+        z += offset[2]
+        this.vertices.push(x, y, z)
+    }
+
+/*
     for(let k = 0; k < this.vertices.length; k+=3){
         let offset = Math.floor(Math.random() * (0.1 + 0.1 + 1) ) - 0.1
         this.vertices[k] += (this.normals[k] * offset) * 0.3
         this.vertices[k+1] += (this.normals[k+1] * offset) * 0.3
         this.vertices[k+2] += (this.normals[k+2] * offset) * 0.3
     }
-
+*/
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   }
 
   display(){
-    this.appearance.apply()
     this.scene.pushMatrix()
     this.scene.translate(this.x, this.y, this.z)
     this.scene.scale(this.xDeform, this.yDeform, this.zDeform)
     super.display()
     this.scene.popMatrix()
-    this.scene.defaultAppearance.apply()
   }
 }

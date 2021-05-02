@@ -8,7 +8,8 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
-import { MyPillar } from './objects/MyPillar.js'
+import { MyPillar } from './objects/MyPillarsSet/MyPillar.js'
+import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 
 /**
  * MyScene
@@ -31,7 +32,7 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE)
     this.gl.depthFunc(this.gl.LEQUAL)
 
-    this.setUpdatePeriod(20)
+    this.setUpdatePeriod(60)
 
     this.enableTextures(true)
 
@@ -85,7 +86,9 @@ export class MyScene extends CGFscene {
 
     this.rockSet = new MyRockSet(this, 20)
 
-    this.pillarBL = new MyPillar(this, 16, [0, 7])
+    this.pillarBL = new MyPillar(this, 16)
+
+    this.pillarSet = new MyPillarSet(this, 16)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -284,6 +287,8 @@ export class MyScene extends CGFscene {
 
     this.pillarBL.display()
 
+    this.pillarSet.display()
+
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
@@ -291,6 +296,7 @@ export class MyScene extends CGFscene {
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarBL.enableNormalViz()
+      this.pillarSet.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
@@ -299,6 +305,7 @@ export class MyScene extends CGFscene {
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarBL.disableNormalViz()
+      this.pillarSet.disableNormalViz()
     }
 
     this.checkKeys()

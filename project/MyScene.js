@@ -8,6 +8,7 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
+import { MyPillar } from './objects/MyPillar.js'
 
 /**
  * MyScene
@@ -71,7 +72,7 @@ export class MyScene extends CGFscene {
     this.cylinderAppearance.setEmission(1, 1, 1, 1)
 
     let cylinderTex = new CGFtexture(this, "images/dababy.jpg")
-    this.cylinderAppearance.setTexture(this.cylinderTex)
+    this.cylinderAppearance.setTexture(cylinderTex)
     
     this.cylinder = new MyCylinder(this, this.cylinderAppearance, 16)
     this.displayCylinder = false
@@ -83,6 +84,8 @@ export class MyScene extends CGFscene {
     this.watersurface = new MyWaterSurface(this, 50)
 
     this.rockSet = new MyRockSet(this, 20)
+
+    this.pillarBL = new MyPillar(this, 16, [0, 7])
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -279,12 +282,15 @@ export class MyScene extends CGFscene {
 
     this.rockSet.display()
 
+    this.pillarBL.display()
+
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
       this.movingObject.enableNormalViz()
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
+      this.pillarBL.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
@@ -292,6 +298,7 @@ export class MyScene extends CGFscene {
       this.movingObject.disableNormalViz()
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
+      this.pillarBL.disableNormalViz()
     }
 
     this.checkKeys()

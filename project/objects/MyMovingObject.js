@@ -9,6 +9,8 @@
 export class MyMovingObject{
   constructor(scene, object, orientationAngle, velocity, position) {
     this.orientationAngle = orientationAngle
+    this.previousOrientationAngle = 0
+
     this.x = position[0]
     this.initialx = position[0]
     this.y = position[1]
@@ -16,9 +18,12 @@ export class MyMovingObject{
     this.z = position[2]
     this.initialz = position[2]
     this.velocity = velocity
+    this.ascendVelocity = 0
     this.scaleFactor = 1
     this.setControllabeParameters()
-    
+    this.rotationLeft = false
+    this.rotationRight = false
+
     this.scene = scene
     this.object = object
   }
@@ -26,8 +31,11 @@ export class MyMovingObject{
   setControllabeParameters(){
     this.velocityOffset = 0.001
     this.rotationOffset = 0.01
-    this.maxVelocity = 0.5
+    this.maxVelocity = 1
     this.friction = 0.005
+    this.ascendVelocityOffset = 0.05
+    this.maxHeight = 5
+    this.minHeight = 0
   }
 
   display(){
@@ -48,13 +56,22 @@ export class MyMovingObject{
   update(t) {
     this.velocity -= this.velocity*this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
+    this.y += this.ascendVelocity
+    this.y = (this.y > this.maxHeight) ? this.maxHeight : (this.y < this.minHeight ? this.minHeight : this.y)
     this.z += this.velocity * Math.cos(this.orientationAngle)
+    if(this.previousOrientationAngle == this.orientationAngle){
+      this.rotationLeft = false
+      this.rotationRight = false
+    }
+    this.previousOrientationAngle = this.orientationAngle
     if(this.object.update != undefined){
       this.object.update(t)
     }
+    this.ascendVelocity = 0
   }
 
   turn(val) {
+    val < 0 ? this.rotationRight = true : this.rotationLeft = true;
     val *= this.rotationOffset
     this.orientationAngle += val
   }
@@ -62,10 +79,16 @@ export class MyMovingObject{
   accelerate(val) {
     val *= this.velocityOffset
     let newVelocity = this.velocity + val
-    if(newVelocity > 0){
-      if(newVelocity < this.maxVelocity) this.velocity += val
-      else this.velocity = maxVelocity
-    } else { this.velocity = 0 }
+    if(newVelocity < this.maxVelocity) this.velocity += val
+    else this.velocity = maxVelocity
+  }
+
+  ascend() {
+    this.ascendVelocity = this.ascendVelocityOffset
+  }
+
+  descend() {
+    this.ascendVelocity = -this.ascendVelocityOffset
   }
 
   reset() {
@@ -82,5 +105,13 @@ export class MyMovingObject{
 
   disableNormalViz(){
     this.object.disableNormalViz()
+  }
+
+  setMaximumHeight(height){
+    this.maxHeight = height
+  }
+
+  setMinimumHeight(height){
+    this.minHeight = height
   }
 }

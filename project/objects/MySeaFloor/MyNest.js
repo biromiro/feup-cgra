@@ -19,7 +19,7 @@ import { MyRing } from '../../primitives/MyRing.js';
       this.x = position[0]
       this.z = position[1]
 
-      this.maxHeight = 1.5
+      this.maxHeight = 1
       this.shader = new CGFshader(this.scene.gl, "./shaders/MySeaFloor.vert", "./shaders/MySeaFloor.frag")
       this.shader.setUniformsValues({uSampler2: 1, maxHeight: this.maxHeight})
     }
@@ -46,7 +46,7 @@ import { MyRing } from '../../primitives/MyRing.js';
 
         this.scene.pushMatrix()
 
-        this.scene.translate(this.x, 0.5, this.z)
+        this.scene.translate(this.x, 0, this.z)
 
         this.scene.rotate(-Math.PI/2, 1, 0, 0)
 

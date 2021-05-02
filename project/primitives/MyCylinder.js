@@ -18,7 +18,7 @@ export class MyCylinder extends CGFobject {
         this.cylinderAppearance.setEmission(1,1,1,1)
 
         
-        let dababyTexture = new CGFtexture(scene, "images/dababy.jpg")
+        let dababyTexture = new CGFtexture(scene, "images/pillar.jpg")
 
         this.cylinderAppearance.setTexture(dababyTexture)
 

@@ -1,4 +1,4 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 /**
 * MyPyramid
 * @constructor
@@ -7,20 +7,10 @@ import { CGFobject, CGFtexture, CGFappearance } from '../../lib/CGF.js';
  * @param stacks - number of divisions along the Y axis
 */
 export class MyCylinder extends CGFobject {
-    constructor(scene, slices) {
+    constructor(scene, appearance, slices) {
         super(scene);
         this.slices = slices;
-
-        this.cylinderAppearance = new CGFappearance(scene)
-        this.cylinderAppearance.setAmbient(0, 0, 0, 1)
-        this.cylinderAppearance.setDiffuse(1, 1, 1, 1)
-        this.cylinderAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-        this.cylinderAppearance.setEmission(1,1,1,1)
-
-        
-        let dababyTexture = new CGFtexture(scene, "images/pillar.jpg")
-
-        this.cylinderAppearance.setTexture(dababyTexture)
+        this.appearance = appearance
 
         this.initBuffers();
     }
@@ -88,7 +78,7 @@ export class MyCylinder extends CGFobject {
     }
 
     display(){
-        this.cylinderAppearance.apply()
+        this.appearance.apply()
         super.display();
         this.scene.defaultAppearance.apply()
     }

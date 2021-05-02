@@ -68,7 +68,7 @@ export class MyScene extends CGFscene {
 
     this.rockSet = new MyRockSet(this, 20)
 
-    this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet)
+    this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),

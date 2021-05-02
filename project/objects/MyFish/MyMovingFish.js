@@ -9,7 +9,7 @@ import { MyFish } from './MyFish.js'
  * @param slices - number of divisions around the Y axis
  */
  export class MyMovingFish extends MyMovingObject {
-    constructor(scene, orientationAngle, velocity, position, rockSet) {
+    constructor(scene, orientationAngle, velocity, position, rockSet, nest) {
 
       let fish = new MyFish(scene, 
                             ()=>{return this.velocity},
@@ -24,10 +24,12 @@ import { MyFish } from './MyFish.js'
 
       this.fish = fish
       this.rockSetToFind = rockSet
+      this.nest = nest
       this.toCollectRock = false 
       this.collectedOrReleased = false
       // needed because of the jitter caused by a key press,
       // making it catch and release in a short amount of time
+      this.pileHeight = 0.1
     }
 
     update(t){
@@ -37,7 +39,10 @@ import { MyFish } from './MyFish.js'
         this.toCollectRock = false
       }
       super.update(t)
-     
+    }
+
+    getDistance(object1, object2){
+      return Math.sqrt(Math.pow(object1.x - object2.x, 2) + Math.pow((object1.y ? object1.y : 0) - (object2.y ? object2.y : 0), 2) + Math.pow(object1.z - object2.z, 2))
     }
 
     collectRock(){
@@ -54,8 +59,7 @@ import { MyFish } from './MyFish.js'
       let minPair = [undefined, Infinity]
 
       this.rockSetToFind.rocks.forEach(rock => {
-        console.log(rock.x, rock.y, rock.z);
-        const distance = Math.sqrt(Math.pow(this.x - rock.x, 2) + Math.pow(this.y - rock.y, 2) + Math.pow(this.z - rock.z, 2))
+        const distance = this.getDistance(this, rock)
         if(minPair[1] > distance) minPair = [rock, distance]
       });
 
@@ -66,15 +70,24 @@ import { MyFish } from './MyFish.js'
 
     reset(){
       const caughtObject = super.getCaughtObject();
-      [caughtObject.x, caughtObject.y, caughtObject.z] = caughtObject.initialPos
+      if(caughtObject)
+        [caughtObject.x, caughtObject.y, caughtObject.z] = caughtObject.initialPos
       super.setCaughtObject(undefined)
       super.reset()
     }
 
     releaseRock(){
-
+      if(this.y > this.minHeight ) return
+      const dist =  this.getDistance(this, this.nest)
+      console.log(dist)
+      if(dist > this.nest.innerRadius) return
+      
+      const caughtObject = super.getCaughtObject();
+      [caughtObject.x, caughtObject.y, caughtObject.z] = [this.nest.x, this.pileHeight, this.nest.z]
+      console.log(`${caughtObject.x}, ${caughtObject.y}, ${caughtObject.z}`)
+      this.pileHeight += this.caughtObject.yDeform
+      super.setCaughtObject(undefined)
     }
-
 
     display(){
       super.display()

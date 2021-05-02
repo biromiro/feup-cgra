@@ -64,14 +64,14 @@ export class MyMovingObject{
       this.rotationLeft = false
       this.rotationRight = false
     }
-    
+
     this.previousOrientationAngle = this.orientationAngle
     if(this.object.update != undefined){
       this.object.update(t)
     }
 
     if(this.caughtObject)
-      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.5, this.z]
+      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.15, this.z]
 
     this.ascendVelocity = 0
   }

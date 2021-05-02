@@ -21,7 +21,7 @@ export class MyRock extends CGFobject {
 
   createDeformation(){
     this.xDeform = Math.max(Math.random()*0.5, 0.1)
-    this.yDeform = 0.2
+    this.yDeform = 0.08
     this.zDeform = this.xDeform
   }
 
@@ -96,14 +96,6 @@ export class MyRock extends CGFobject {
         this.vertices.push(x, y, z)
     }
 
-/*
-    for(let k = 0; k < this.vertices.length; k+=3){
-        let offset = Math.floor(Math.random() * (0.1 + 0.1 + 1) ) - 0.1
-        this.vertices[k] += (this.normals[k] * offset) * 0.3
-        this.vertices[k+1] += (this.normals[k+1] * offset) * 0.3
-        this.vertices[k+2] += (this.normals[k+2] * offset) * 0.3
-    }
-*/
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
   }

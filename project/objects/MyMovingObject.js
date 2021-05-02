@@ -26,6 +26,7 @@ export class MyMovingObject{
 
     this.scene = scene
     this.object = object
+    this.caughtObject = undefined
   }
   
   setControllabeParameters(){
@@ -41,12 +42,11 @@ export class MyMovingObject{
   display(){
     
     this.scene.pushMatrix()
-  
+    
     this.scene.translate(this.x, this.y, this.z)
     this.scene.rotate(this.orientationAngle, 0, 1, 0)
 
     this.scene.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor)
-
     this.object.display()
 
     this.scene.defaultAppearance.apply()
@@ -59,14 +59,20 @@ export class MyMovingObject{
     this.y += this.ascendVelocity
     this.y = (this.y > this.maxHeight) ? this.maxHeight : (this.y < this.minHeight ? this.minHeight : this.y)
     this.z += this.velocity * Math.cos(this.orientationAngle)
+
     if(this.previousOrientationAngle == this.orientationAngle){
       this.rotationLeft = false
       this.rotationRight = false
     }
+    
     this.previousOrientationAngle = this.orientationAngle
     if(this.object.update != undefined){
       this.object.update(t)
     }
+
+    if(this.caughtObject)
+      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.5, this.z]
+
     this.ascendVelocity = 0
   }
 
@@ -114,4 +120,13 @@ export class MyMovingObject{
   setMinimumHeight(height){
     this.minHeight = height
   }
+
+  setCaughtObject(object){
+    this.caughtObject = object
+  }
+
+  getCaughtObject(){
+    return this.caughtObject
+  }
+
 }

@@ -12,6 +12,7 @@ export class MyRock extends CGFobject {
     this.latDivs = stacks * 2;
     this.longDivs = slices;
     [this.x, this.y, this.z] = pos
+    this.initialPos = pos
 
     this.initBuffers()
 

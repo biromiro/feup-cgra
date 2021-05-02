@@ -55,7 +55,6 @@ export class MyScene extends CGFscene {
     this.displaySphere = false
 
     
-    this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0])
     this.displayMovingObject = false
 
     this.cylinder = new MyCylinder(this, 16)
@@ -68,6 +67,8 @@ export class MyScene extends CGFscene {
     this.watersurface = new MyWaterSurface(this, 50)
 
     this.rockSet = new MyRockSet(this, 20)
+
+    this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -222,6 +223,13 @@ export class MyScene extends CGFscene {
     if (this.gui.isKeyPressed('KeyL')){
       keysPressed = true;
       this.movingObject.descend()
+    }
+
+    if (this.gui.isKeyPressed('KeyC')){
+      keysPressed = true;
+      this.movingObject.collectRock()
+    } else {
+      this.movingObject.collectRockReleaseKey()
     }
   }
 

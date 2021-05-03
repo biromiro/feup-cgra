@@ -16,16 +16,8 @@ void main() {
 
   float distRS = texture2D(uSampler2, factor).r;  // Distortion in S
   float distGT = texture2D(uSampler2, factor).g;  // Distortion in T
-  
-/*
-  float distRS = texture2D(uSampler2, vTextureCoord).r;  // Distortion in S
-  float distGT = texture2D(uSampler2, vTextureCoord).g;  // Distortion in T
-  */
 
   vec2 distCoords = vTextureCoord + (vec2(distRS - 0.5, distGT - 0.5) / 5.0);
 
   gl_FragColor = texture2D(uSampler, distCoords);
-  
-  
-  //gl_FragColor = texture2D(uSampler, vTextureCoord);
 }

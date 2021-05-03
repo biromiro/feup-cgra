@@ -8,6 +8,7 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
+import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
 
 /**
  * MyScene
@@ -53,14 +54,7 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, this.sphereAppearance, 16, 8)
     this.displaySphere = false
 
-    this.movingObjectAppearance = new CGFappearance(this)
-    this.movingObjectAppearance.setAmbient(0.3, 0.3, 0.3, 1)
-    this.movingObjectAppearance.setDiffuse(0.7, 0.7, 0.7, 1)
-    this.movingObjectAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.movingObjectAppearance.setShininess(120)
-
-    this.fish = new MyFish(this, this.movingObjectAppearance)
-    this.movingObject = new MyMovingObject(this, this.fish, 0, 0, [0, 3, 0])
+    
     this.displayMovingObject = false
 
     this.cylinder = new MyCylinder(this, 16)
@@ -73,6 +67,8 @@ export class MyScene extends CGFscene {
     this.watersurface = new MyWaterSurface(this, 50)
 
     this.rockSet = new MyRockSet(this, 20)
+
+    this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -182,7 +178,6 @@ export class MyScene extends CGFscene {
   update(t) {
     this.movingObject.update(t)
     this.watersurface.shader.setUniformsValues({timeFactor: t / 100 % 25600})
-    //this.fish.update(t)
   }
 
   updateAppliedTexture() {
@@ -191,42 +186,51 @@ export class MyScene extends CGFscene {
   }
 
   checkKeys() {
-    let text = 'Keys pressed: '
     let keysPressed = false
 
     //Check for key codes e.g. in https://keycode.info/
 
     if (this.gui.isKeyPressed('KeyW')) {
-      text += ' W '
       keysPressed = true
       this.movingObject.accelerate(1)
     }
 
     if (this.gui.isKeyPressed('KeyS')) {
-      text += ' S '
       keysPressed = true
       this.movingObject.accelerate(-1)
     }
 
     if (this.gui.isKeyPressed('KeyA')) {
-      text += ' A '
       keysPressed = true;
       this.movingObject.turn(1)
     }
 
     if (this.gui.isKeyPressed('KeyD')) {
-      text += ' D '
       keysPressed = true;
       this.movingObject.turn(-1)
     }
 
     if (this.gui.isKeyPressed('KeyR')) {
-      text += ' R '
       keysPressed = true;
       this.movingObject.reset()
     }
 
-    if (keysPressed) console.log(text)
+    if (this.gui.isKeyPressed('KeyP')){
+      keysPressed = true;
+      this.movingObject.ascend()
+    }
+
+    if (this.gui.isKeyPressed('KeyL')){
+      keysPressed = true;
+      this.movingObject.descend()
+    }
+
+    if (this.gui.isKeyPressed('KeyC')){
+      keysPressed = true;
+      this.movingObject.collectRock()
+    } else {
+      this.movingObject.collectRockReleaseKey()
+    }
   }
 
   display() {

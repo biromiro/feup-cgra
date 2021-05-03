@@ -16,6 +16,8 @@ import { MyRing } from '../../primitives/MyRing.js';
   
       this.createTextures()
 
+      this.innerRadius = innerRadius;
+
       this.x = position[0]
       this.z = position[1]
 
@@ -43,19 +45,13 @@ import { MyRing } from '../../primitives/MyRing.js';
         this.scene.setActiveShader(this.shader)
     
         this.appearance.apply()
-
         this.scene.pushMatrix()
-
         this.scene.translate(this.x, 0, this.z)
-
         this.scene.rotate(-Math.PI/2, 1, 0, 0)
 
         this.ring.display()
-
         this.scene.popMatrix()
-
         this.scene.defaultAppearance.apply()
-
         this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 }

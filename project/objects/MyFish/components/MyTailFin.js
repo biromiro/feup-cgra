@@ -26,11 +26,7 @@ export class MyTailFin extends CGFobject {
 
     this.scene.rotate(-Math.PI/2 + Math.PI/4,1,0,0)
 
-
     this.scene.rotate(Math.PI/2,0,0,1)
-
-
-
 
     this.tail.display()
 

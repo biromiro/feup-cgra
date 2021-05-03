@@ -45,6 +45,12 @@ import { MyRock } from './MyRock.js'
   
     }
 
+    update(t){
+        this.rocks.forEach(rock => {
+            rock.update(t)
+        });
+    }
+
     display(){
         this.bumpMap.bind(1);
         this.scene.setActiveShader(this.shader)

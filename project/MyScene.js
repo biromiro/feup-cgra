@@ -33,7 +33,7 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE)
     this.gl.depthFunc(this.gl.LEQUAL)
 
-    this.setUpdatePeriod(60)
+    this.setUpdatePeriod(20)
 
     this.enableTextures(true)
 

@@ -80,9 +80,7 @@ import { MyFish } from './MyFish.js'
     releaseRock(){
       if(this.y > this.minHeight ) return
       const dist =  this.getDistance(this, this.nest)
-      console.log(dist, this.nest.radius)
-      if(dist > this.nest.radius) return
-      console.log("hello")
+      if(dist > (this.nest.radius > 5 ? this.nest.radius : 5)) return
       const caughtObject = super.getCaughtObject();
       caughtObject.setParabolicThrow([this.nest.x, this.pileHeight, this.nest.z])
       this.pileHeight += this.caughtObject.yDeform

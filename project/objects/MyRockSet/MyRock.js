@@ -26,14 +26,13 @@ export class MyRock extends CGFobject {
    /**
    * @method initBuffers
    * Initializes the sphere buffers
-   * TODO: DEFINE TEXTURE COORDINATES
    */
     initBuffers() {
       this.vertices = [];
       this.indices = [];
       this.normals = [];
       this.texCoords = [];
-      this.everyVertex = [];
+      this.firstVertex = [];
   
       var phi = 0;
       var theta = 0;
@@ -48,14 +47,13 @@ export class MyRock extends CGFobject {
   
         // in each stack, build all the slices around, starting on longitude 0
         theta = 0;
-        for (let longitude = 0; longitude <= this.longDivs; longitude++) {
+        for (let longitude = 0; longitude < this.longDivs; longitude++) {
   
           //--- Vertices coordinates
-          var x = Math.cos(theta) * sinPhi;
-          var y = cosPhi;
-          var z = Math.sin(-theta) * sinPhi;
-          this.everyVertex.push([x, y, z]);
-  
+          let x = Math.cos(theta) * sinPhi;
+          let y = cosPhi;
+          let z = Math.sin(-theta) * sinPhi;
+
           //--- Indices
           if (latitude < this.latDivs && longitude < this.longDivs) {
             var current = latitude * latVertices + longitude;
@@ -75,23 +73,25 @@ export class MyRock extends CGFobject {
           // therefore, the value of the normal is equal to the position vectro
           this.normals.push(x, y, z);
           theta += thetaInc;
-  
+          
+          let offset = (Math.random() * 0.2 - 0.2)
+          x += offset*x;
+          y += offset*y;
+          z += offset*z;
+          this.vertices.push(x, y, z)
+          if(longitude == 0) this.firstVertex = [x,y,z]
+
           //--- Texture Coordinates
           // To be done... 
           // May need some additional code also in the beginning of the function.
   
           this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs)        
         }
+
+        const [x,y,z] = this.firstVertex
+        this.vertices.push(x,y,z)
+        this.normals.push(x,y,z)
         phi += phiInc;
-      }
-  
-      for(let k = 0; k < this.everyVertex.length; k++){
-          let [x,y,z] = this.everyVertex[k]
-          let offset = [Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3]
-          x += offset[0]
-          y += offset[1]
-          z += offset[2]
-          this.vertices.push(x, y, z)
       }
   
       this.primitiveType = this.scene.gl.TRIANGLES;
@@ -99,9 +99,9 @@ export class MyRock extends CGFobject {
     }
 
   createDeformation(){
-    this.xDeform = Math.max(Math.random()*0.5, 0.1)
+    this.xDeform = Math.max(Math.random()*0.2, 0.1)
     this.yDeform = 0.08
-    this.zDeform = this.xDeform
+    this.zDeform = Math.max(Math.random()*0.2, 0.1)
   }
 
   update(){

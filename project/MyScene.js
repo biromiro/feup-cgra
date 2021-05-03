@@ -86,7 +86,7 @@ export class MyScene extends CGFscene {
 
     this.rockSet = new MyRockSet(this, 20)
 
-    this.pillarSet = new MyPillarSet(this, 8)
+    this.pillarSet = new MyPillarSet(this, 5)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),

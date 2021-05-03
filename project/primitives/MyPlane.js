@@ -38,7 +38,6 @@ export class MyPlane extends CGFobject {
 				this.vertices.push(xCoord, 0, zCoord);
 				this.normals.push(0, 1, 0);
 				this.texCoords.push(this.minS + i * this.q, this.minT + j * this.w);
-				console.log(`${this.minS + i * this.q}, ${this.minT + j * this.w}`)
 				xCoord += this.patchLength;
 			}
 			zCoord  -= this.patchLength;

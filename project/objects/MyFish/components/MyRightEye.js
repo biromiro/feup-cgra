@@ -21,8 +21,6 @@ export class MyRightEye extends CGFobject {
 
     this.scene.scale(0.1, 0.1, 0.1)
 
-    //this.scene.rotate(-Math.PI, 1, 0, 0)
-
     this.scene.rotate(Math.PI, 0, 1, 0)
 
     this.appearance.apply()

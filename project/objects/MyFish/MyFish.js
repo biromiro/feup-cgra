@@ -15,7 +15,7 @@ import { MyLeftFin } from './components/MyLeftFin.js'
  * @param slices - number of divisions around the Y axis
  */
 export class MyFish extends CGFobject {
-  constructor(scene) {
+  constructor(scene, movingVelocity, rotationRight, rotationLeft) {
     super(scene)
 
     this.fishColor = [255/255,69/255,0/255, 1.0]
@@ -27,28 +27,48 @@ export class MyFish extends CGFobject {
     this.shader = new CGFshader(this.scene.gl, "./shaders/MyFish.vert", "./shaders/MyFish.frag")
     this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
     
-    //this.eyeShader = new CGFshader(this.scene.gl, "./shaders/")
-    
-    this.tailAngle = 0;
-    this.finAngle = 0;
+    this.tailAngle = 0
+    this.finAngle = 0
+    this.previousAngleTail = 0
+    this.previousAngleFin = 0
+    this.stableAngleFin = 0
+    this.stableAngleTail = 0
+    this.currentVel = 0
+
+    this.getVelocity = typeof movingVelocity !== 'undefined' ? movingVelocity : () => {return 1;} //set default to 1 since a fish can still not be a moving fish
+    this.isRotatinRight = typeof rotationRight !== 'undefined' ? rotationRight : () => {return false;}
+    this.isRotatingLeft = typeof rotationLeft !== 'undefined' ? rotationLeft : () => {return false;}
   }
 
   update(t){
     this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
+
     this.updateTailAngle(t)
     this.updateFinAngle(t)
   }
   
+  getAngle(finBool, amplitude, offset, t){
+    if(this.currentVel != this.getVelocity()){
+      if (finBool) this.stableAngleFin = this.previousAngleFin
+      else this.stableAngleTail = this.previousAngleTail
+      this.currentVel = this.getVelocity()
+    }
+    let prevAngle = finBool ? this.stableAngleFin : this.stableAngleTail
+    return finBool 
+          ? amplitude * Math.PI * Math.sin(offset *(t + prevAngle)) / 180
+          : amplitude * Math.PI * Math.sin(offset * (1 + this.getVelocity()/10000000)*(t + prevAngle)) / 180
+  }
+
 
   updateTailAngle(t){
-    let newAngle = 20*Math.PI*Math.sin(0.01*t)/180
-    this.tailFin.angle = newAngle
+    this.previousAngleTail = this.getAngle(false, 20, 0.0015, t)
+    this.tailFin.angle = this.previousAngleTail
   }
 
   updateFinAngle(t){
-    let newAngle = 15*Math.PI*Math.sin(0.0015*t)/180
-    this.leftFin.angle = newAngle
-    this.rightFin.angle = newAngle
+    this.previousAngleFin = this.getAngle(true, 15, 0.015, t)
+    if(!this.isRotatingLeft()) this.leftFin.angle = this.previousAngleFin
+    if(!this.isRotatinRight()) this.rightFin.angle = this.previousAngleFin
   }
 
   setBody(){
@@ -114,8 +134,6 @@ export class MyFish extends CGFobject {
     this.topFin.display()
     this.rightFin.display()
     this.leftFin.display()
-
-    //this.
 
     this.rightEye.display()
     this.leftEye.display()

@@ -40,27 +40,7 @@ export class MyRing extends CGFobject {
                 const y = (this.radius + this.innerRadius * Math.cos(outerAng)) * Math.sin(ang);
                 const z = this.innerRadius * Math.sin(outerAng);
 
-                //console.log(`${x},${y},${z}`);
-
                 this.vertices.push(x, y, z);
-                /*let normal = [
-                    Math.cos(ang) * Math.sin(outerAng), 
-                    Math.sin(ang) * Math.sin(outerAng), 
-                    Math.cos(outerAng)
-                ]
-
-                let nsize = Math.sqrt(
-                    normal[0] * normal[0] +
-                    normal[1] * normal[1] +
-                    normal[2] * normal[2]
-                );
-
-                normal[0] /= nsize;
-                normal[1] /= nsize;
-                normal[2] /= nsize;
-    
-                // push normal once for each vertex of this triangle
-                this.normals.push(...normal);*/
 
                 this.texCoords.push(t);
                 this.texCoords.push(s);

@@ -86,9 +86,7 @@ export class MyScene extends CGFscene {
 
     this.rockSet = new MyRockSet(this, 20)
 
-    this.pillarBL = new MyPillar(this, 16)
-
-    this.pillarSet = new MyPillarSet(this, 16)
+    this.pillarSet = new MyPillarSet(this, 8)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -285,8 +283,6 @@ export class MyScene extends CGFscene {
 
     this.rockSet.display()
 
-    this.pillarBL.display()
-
     this.pillarSet.display()
 
     if (this.displayNormals) {
@@ -295,7 +291,6 @@ export class MyScene extends CGFscene {
       this.movingObject.enableNormalViz()
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
-      this.pillarBL.enableNormalViz()
       this.pillarSet.enableNormalViz()
     }
     else {
@@ -304,7 +299,6 @@ export class MyScene extends CGFscene {
       this.movingObject.disableNormalViz()
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
-      this.pillarBL.disableNormalViz()
       this.pillarSet.disableNormalViz()
     }
 

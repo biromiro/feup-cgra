@@ -16,7 +16,7 @@ import { MyRing } from '../../primitives/MyRing.js';
   
       this.createTextures()
 
-      this.innerRadius = innerRadius;
+      this.radius = radius;
 
       this.x = position[0]
       this.z = position[1]

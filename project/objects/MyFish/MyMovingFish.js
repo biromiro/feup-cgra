@@ -38,6 +38,7 @@ import { MyFish } from './MyFish.js'
         this.collectedOrReleased = true
         this.toCollectRock = false
       }
+      this.rockSetToFind.update(t)
       super.update(t)
     }
 
@@ -79,13 +80,13 @@ import { MyFish } from './MyFish.js'
     releaseRock(){
       if(this.y > this.minHeight ) return
       const dist =  this.getDistance(this, this.nest)
-      console.log(dist)
-      if(dist > this.nest.innerRadius) return
-      
+      console.log(dist, this.nest.radius)
+      if(dist > this.nest.radius) return
+      console.log("hello")
       const caughtObject = super.getCaughtObject();
-      [caughtObject.x, caughtObject.y, caughtObject.z] = [this.nest.x, this.pileHeight, this.nest.z]
-      console.log(`${caughtObject.x}, ${caughtObject.y}, ${caughtObject.z}`)
+      caughtObject.setParabolicThrow([this.nest.x, this.pileHeight, this.nest.z])
       this.pileHeight += this.caughtObject.yDeform
+      
       super.setCaughtObject(undefined)
     }
 

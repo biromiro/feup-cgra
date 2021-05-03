@@ -17,7 +17,86 @@ export class MyRock extends CGFobject {
     this.initBuffers()
 
     this.createDeformation()
+    this.inParabolicThrow = false
+    this.throwAngle = Math.PI/3
+    this.time = undefined
+    this.increase = 1
   }
+
+   /**
+   * @method initBuffers
+   * Initializes the sphere buffers
+   * TODO: DEFINE TEXTURE COORDINATES
+   */
+    initBuffers() {
+      this.vertices = [];
+      this.indices = [];
+      this.normals = [];
+      this.texCoords = [];
+      this.everyVertex = [];
+  
+      var phi = 0;
+      var theta = 0;
+      var phiInc = Math.PI / this.latDivs;
+      var thetaInc = (2 * Math.PI) / this.longDivs;
+      var latVertices = this.longDivs + 1;
+  
+      // build an all-around stack at a time, starting on "north pole" and proceeding "south"
+      for (let latitude = 0; latitude <= this.latDivs; latitude++) {
+        var sinPhi = Math.sin(phi);
+        var cosPhi = Math.cos(phi);
+  
+        // in each stack, build all the slices around, starting on longitude 0
+        theta = 0;
+        for (let longitude = 0; longitude <= this.longDivs; longitude++) {
+  
+          //--- Vertices coordinates
+          var x = Math.cos(theta) * sinPhi;
+          var y = cosPhi;
+          var z = Math.sin(-theta) * sinPhi;
+          this.everyVertex.push([x, y, z]);
+  
+          //--- Indices
+          if (latitude < this.latDivs && longitude < this.longDivs) {
+            var current = latitude * latVertices + longitude;
+            var next = current + latVertices;
+            // pushing two triangles using indices from this round (current, current+1)
+            // and the ones directly south (next, next+1)
+            // (i.e. one full round of slices ahead)
+            
+            this.indices.push( current + 1, current, next);
+            this.indices.push( current + 1, next, next +1);
+          }
+  
+          //--- Normals
+          // at each vertex, the direction of the normal is equal to 
+          // the vector from the center of the sphere to the vertex.
+          // in a sphere of radius equal to one, the vector length is one.
+          // therefore, the value of the normal is equal to the position vectro
+          this.normals.push(x, y, z);
+          theta += thetaInc;
+  
+          //--- Texture Coordinates
+          // To be done... 
+          // May need some additional code also in the beginning of the function.
+  
+          this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs)        
+        }
+        phi += phiInc;
+      }
+  
+      for(let k = 0; k < this.everyVertex.length; k++){
+          let [x,y,z] = this.everyVertex[k]
+          let offset = [Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3]
+          x += offset[0]
+          y += offset[1]
+          z += offset[2]
+          this.vertices.push(x, y, z)
+      }
+  
+      this.primitiveType = this.scene.gl.TRIANGLES;
+      this.initGLBuffers();
+    }
 
   createDeformation(){
     this.xDeform = Math.max(Math.random()*0.5, 0.1)
@@ -25,79 +104,29 @@ export class MyRock extends CGFobject {
     this.zDeform = this.xDeform
   }
 
-  /**
-   * @method initBuffers
-   * Initializes the sphere buffers
-   * TODO: DEFINE TEXTURE COORDINATES
-   */
-  initBuffers() {
-    this.vertices = [];
-    this.indices = [];
-    this.normals = [];
-    this.texCoords = [];
-    this.everyVertex = [];
-
-    var phi = 0;
-    var theta = 0;
-    var phiInc = Math.PI / this.latDivs;
-    var thetaInc = (2 * Math.PI) / this.longDivs;
-    var latVertices = this.longDivs + 1;
-
-    // build an all-around stack at a time, starting on "north pole" and proceeding "south"
-    for (let latitude = 0; latitude <= this.latDivs; latitude++) {
-      var sinPhi = Math.sin(phi);
-      var cosPhi = Math.cos(phi);
-
-      // in each stack, build all the slices around, starting on longitude 0
-      theta = 0;
-      for (let longitude = 0; longitude <= this.longDivs; longitude++) {
-
-        //--- Vertices coordinates
-        var x = Math.cos(theta) * sinPhi;
-        var y = cosPhi;
-        var z = Math.sin(-theta) * sinPhi;
-        this.everyVertex.push([x, y, z]);
-
-        //--- Indices
-        if (latitude < this.latDivs && longitude < this.longDivs) {
-          var current = latitude * latVertices + longitude;
-          var next = current + latVertices;
-          // pushing two triangles using indices from this round (current, current+1)
-          // and the ones directly south (next, next+1)
-          // (i.e. one full round of slices ahead)
-          
-          this.indices.push( current + 1, current, next);
-          this.indices.push( current + 1, next, next +1);
-        }
-
-        //--- Normals
-        // at each vertex, the direction of the normal is equal to 
-        // the vector from the center of the sphere to the vertex.
-        // in a sphere of radius equal to one, the vector length is one.
-        // therefore, the value of the normal is equal to the position vectro
-        this.normals.push(x, y, z);
-        theta += thetaInc;
-
-        //--- Texture Coordinates
-        // To be done... 
-        // May need some additional code also in the beginning of the function.
-
-        this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs)        
+  update(){
+    if(this.inParabolicThrow){
+      if(this.time == undefined) this.time = 0
+      else this.time += this.increase
+      this.x = this.calculateBezierValue(this.startPos[0], this.controlPos[0], this.endPos[0], this.time/33)
+      this.y = this.calculateBezierValue(this.startPos[1], this.controlPos[1], this.endPos[1], this.time/33)
+      this.z = this.calculateBezierValue(this.startPos[2], this.controlPos[2], this.endPos[2], this.time/33)
+      if(this.time == 33){
+        this.inParabolicThrow = false
+        this.time = undefined
       }
-      phi += phiInc;
     }
+  }
 
-    for(let k = 0; k < this.everyVertex.length; k++){
-        let [x,y,z] = this.everyVertex[k]
-        let offset = [Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3, Math.random() * 0.3 - 0.3]
-        x += offset[0]
-        y += offset[1]
-        z += offset[2]
-        this.vertices.push(x, y, z)
-    }
+  setParabolicThrow(endPos){
+    this.inParabolicThrow = true;
+    this.startPos = [this.x, this.y, this.z]
+    this.endPos = endPos
+    this.controlPos = [(this.startPos[0] + this.endPos[0])/2, this.startPos[1] + this.endPos[1] + 1, (this.startPos[2] + this.endPos[2])/2]
+  }
 
-    this.primitiveType = this.scene.gl.TRIANGLES;
-    this.initGLBuffers();
+  calculateBezierValue(p0, p1, p2, t){
+    return Math.pow(1-t, 2) * p0 + 2* (1-t) * t * p1 + Math.pow(t, 2) * p2;
   }
 
   display(){

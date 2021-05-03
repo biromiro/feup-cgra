@@ -8,6 +8,8 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
+import { MyPillar } from './objects/MyPillarsSet/MyPillar.js'
+import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
 
 /**
@@ -31,7 +33,7 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.CULL_FACE)
     this.gl.depthFunc(this.gl.LEQUAL)
 
-    this.setUpdatePeriod(20)
+    this.setUpdatePeriod(60)
 
     this.enableTextures(true)
 
@@ -57,7 +59,17 @@ export class MyScene extends CGFscene {
     
     this.displayMovingObject = false
 
-    this.cylinder = new MyCylinder(this, 16)
+    
+    this.cylinderAppearance = new CGFappearance(this)
+    this.cylinderAppearance.setAmbient(0, 0, 0, 1)
+    this.cylinderAppearance.setDiffuse(0, 0, 0, 1)
+    this.cylinderAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+    this.cylinderAppearance.setEmission(1, 1, 1, 1)
+
+    let cylinderTex = new CGFtexture(this, "images/dababy.jpg")
+    this.cylinderAppearance.setTexture(cylinderTex)
+    
+    this.cylinder = new MyCylinder(this, this.cylinderAppearance, 16)
     this.displayCylinder = false
 
     this.seaFloor = new MySeaFloor(this, 100, 50, 1)
@@ -68,6 +80,8 @@ export class MyScene extends CGFscene {
 
     this.rockSet = new MyRockSet(this, 20)
 
+    this.pillarSet = new MyPillarSet(this, 5)
+    
     this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
@@ -262,7 +276,7 @@ export class MyScene extends CGFscene {
     if (this.displayMovingObject) this.movingObject.display()
 
     if (this.displayCylinder) this.cylinder.display()
-
+  
     if (this.displaySphere) this.sphere.display()
 
     this.seaFloor.display()
@@ -273,12 +287,15 @@ export class MyScene extends CGFscene {
 
     this.rockSet.display()
 
+    this.pillarSet.display()
+
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
       this.movingObject.enableNormalViz()
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
+      this.pillarSet.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
@@ -286,6 +303,7 @@ export class MyScene extends CGFscene {
       this.movingObject.disableNormalViz()
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
+      this.pillarSet.disableNormalViz()
     }
 
     this.checkKeys()

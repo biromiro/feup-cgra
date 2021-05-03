@@ -54,4 +54,12 @@ import { MyRing } from '../../primitives/MyRing.js';
         this.scene.defaultAppearance.apply()
         this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
+    
+    enableNormalViz(){
+        this.ring.enableNormalViz()
+    }
+
+    disableNormalViz(){
+        this.ring.disableNormalViz()
+    }
 }

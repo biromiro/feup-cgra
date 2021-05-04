@@ -11,7 +11,8 @@ import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
 import { MyPillar } from './objects/MyPillarsSet/MyPillar.js'
 import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
-
+import { MyPyramidtoAlgae } from './primitives/MyPyramidtoAlgae.js'
+ 
 /**
  * MyScene
  * @constructor
@@ -83,6 +84,8 @@ export class MyScene extends CGFscene {
     this.pillarSet = new MyPillarSet(this, 5)
     
     this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
+
+    this.pyramid = new MyPyramidtoAlgae(this, 4, 8)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -283,11 +286,13 @@ export class MyScene extends CGFscene {
 
     this.ring.display()
 
-    this.watersurface.display();
+    this.watersurface.display()
 
     this.rockSet.display()
 
     this.pillarSet.display()
+
+    this.pyramid.display()
 
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()
@@ -296,6 +301,7 @@ export class MyScene extends CGFscene {
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarSet.enableNormalViz()
+      this.pyramid.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
@@ -304,6 +310,7 @@ export class MyScene extends CGFscene {
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarSet.disableNormalViz()
+      this.pyramid.disableNormalViz()
     }
 
     this.checkKeys()

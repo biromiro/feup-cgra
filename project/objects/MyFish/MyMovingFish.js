@@ -19,7 +19,7 @@ import { MyFish } from './MyFish.js'
       super(scene, fish, orientationAngle, velocity, position)
 
       super.setMaximumHeight(9.5)
-      super.setMinimumHeight(0.5)
+      super.setMinimumHeight(1)
       super.scaleFactor = 0.5
 
       this.fish = fish
@@ -29,7 +29,7 @@ import { MyFish } from './MyFish.js'
       this.collectedOrReleased = false
       // needed because of the jitter caused by a key press,
       // making it catch and release in a short amount of time
-      this.pileHeight = 0.1
+      this.pileHeight = 0.5
     }
 
     update(t){
@@ -82,8 +82,8 @@ import { MyFish } from './MyFish.js'
       const dist =  this.getDistance(this, this.nest)
       if(dist > (this.nest.radius > 5 ? this.nest.radius : 5)) return
       const caughtObject = super.getCaughtObject();
-      caughtObject.setParabolicThrow([this.nest.x, this.pileHeight, this.nest.z])
-      this.pileHeight += this.caughtObject.yDeform
+      caughtObject.setParabolicThrow([this.nest.x, this.pileHeight + this.caughtObject.yDeform, this.nest.z])
+      this.pileHeight += this.caughtObject.yDeform*2
       
       super.setCaughtObject(undefined)
     }

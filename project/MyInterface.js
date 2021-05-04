@@ -25,17 +25,16 @@ export class MyInterface extends CGFinterface {
     displays.add(this.scene, 'displayNormals').name("Display normals");
 
     //Objects to display
-    displays.add(this.scene, 'displayMovingObject').name("Display Moving Object");
     displays.add(this.scene, 'displayCylinder').name("Display Cylinder");
     displays.add(this.scene, 'displaySphere').name("Display Sphere");
 
     let f0 = this.gui.addFolder('Moving Object')
 
-    f0.add(this.scene.movingObject, 'scaleFactor', 0.5, 3).name("Scale Factor")
-    f0.add(this.scene.movingObject, 'velocityOffset', 0, 0.01).name('Velocity Offset')
-    f0.add(this.scene.movingObject, 'rotationOffset', 0, 0.03).name('Rotation Offset')
-    f0.add(this.scene.movingObject, 'maxVelocity', 0, 1.5).name('Max Velocity')
-    f0.add(this.scene.movingObject, 'friction', 0, 0.02).name('Friction')
+    f0.add(this.scene.movingFish, 'scaleFactor', 0.5, 3).name("Scale Factor")
+    f0.add(this.scene.movingFish, 'velocityOffset', 0, 0.01).name('Velocity Offset')
+    f0.add(this.scene.movingFish, 'rotationOffset', 0, 0.03).name('Rotation Offset')
+    f0.add(this.scene.movingFish, 'maxVelocity', 0, 1.5).name('Max Velocity')
+    f0.add(this.scene.movingFish, 'friction', 0, 0.02).name('Friction')
 
     this.gui.add(this.scene, 'currentCubeMapTextureID', this.scene.cubeMapTextureIDs)
       .name('Background')

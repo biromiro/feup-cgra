@@ -14,7 +14,7 @@ import { MyRock } from './MyRock.js'
       this.createRocks(num)
      
       this.createTextures()
-      this.shader = new CGFshader(this.scene.gl, "./shaders/MySeaFloor.vert", "./shaders/MySeaFloor.frag")
+      this.shader = new CGFshader(this.scene.gl, "./shaders/MyRock.vert", "./shaders/MySeaFloor.frag")
       this.shader.setUniformsValues({uSampler2: 1})
     }
 
@@ -39,7 +39,7 @@ import { MyRock } from './MyRock.js'
             let x = Math.floor(Math.random() * (25 - (-25) + 1) ) -25;
             let z = Math.floor(Math.random() * (25 - (-25) + 1) ) -25;
 
-            let newRock = new MyRock(this.scene, 16, 16, [x, 0.05, z])
+            let newRock = new MyRock(this.scene, 16, 16, [x, 0.5, z])
             this.rocks.push(newRock)
         }
   

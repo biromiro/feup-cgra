@@ -4,8 +4,9 @@ import { CGFobject } from '../../lib/CGF.js'
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices - number of divisions around the Y axis
+ * @param stacks - number of divisions along the XOZ plane
  */
-export class MyPyramidtoAlgae extends CGFobject {
+export class MyStackedPyramid extends CGFobject {
   constructor(scene, slices, stacks) {
     super(scene)
     this.slices = slices
@@ -24,12 +25,15 @@ export class MyPyramidtoAlgae extends CGFobject {
 
     for (let ang = 0; ang <= this.slices; ang++) {
 
-      let sin = -Math.sin(ang * alphaAng)
+      let sin = Math.sin(ang * alphaAng)
       let cos = Math.cos(ang * alphaAng)
-      let nsin = -Math.sin((ang + 1) * alphaAng)
+      let nsin = Math.sin((ang + 1) * alphaAng)
       let ncos = Math.cos((ang + 1) * alphaAng)
 
-      let normal = [nsin - sin, cos * nsin - sin * ncos, ncos - cos]
+      let normal = [nsin - sin, -(cos * nsin - sin * ncos), ncos - cos]
+
+      sin = -sin
+      nsin = -nsin
 
       // normalization
       let nsize = Math.sqrt(
@@ -52,8 +56,7 @@ export class MyPyramidtoAlgae extends CGFobject {
         
         this.normals.push(...normal)
         this.normals.push(...normal)
-        this.normals.push(0,0,0)
-        
+        this.normals.push(...normal)
         
       }
 
@@ -67,10 +70,10 @@ export class MyPyramidtoAlgae extends CGFobject {
         let vertexNr = this.vertices.length / 3
 
         this.indices.push(vertexNr - 1, vertexNr - 2, vertexNr - 3)
-      
+        
         this.normals.push(...normal)
         this.normals.push(...normal)
-        this.normals.push(0,0,0)
+        this.normals.push(...normal)
 
       }
 
@@ -97,7 +100,7 @@ export class MyPyramidtoAlgae extends CGFobject {
 
     this.scene.translate(0, 2, 0)
 
-    //this.scene.rotate(Math.PI, 1, 0, 0)
+    this.scene.rotate(Math.PI, 1, 0, 0)
 
     this.scene.translate(0, -0.5, 0)
 

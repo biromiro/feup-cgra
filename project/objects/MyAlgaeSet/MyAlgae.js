@@ -1,47 +1,62 @@
 import { CGFappearance, CGFobject, CGFshader, CGFtexture } from '../../../lib/CGF.js'
-import { MyCylinder } from '../../primitives/MyCylinder.js';
+import { MyStackedPyramid } from '../../primitives/MyStackedPyramid.js';
 
 
 /**
- * MyPillar
+ * MyAlgae
  * @constructor
  * @param scene - Reference to MyScene object
  * @param slices - number of divisions around the Y axis
  */
-export class MyPillar extends CGFobject {
-    constructor(scene, slices) {
+export class MyAlgae extends CGFobject {
+    constructor(scene, slices, stacks) {
         super(scene)
 
+        this.height = Math.random() * (1.5 - 0.5) + 0.5
         this.createTextures()
 
-        this.cylinder = new MyCylinder(scene, this.cylinderAppearance, slices);
+        this.algae = new MyAlgae(scene, this.algaeAppearance, slices);
     }
 
     createTextures() {
-        this.cylinderAppearance = new CGFappearance(this.scene)
-        this.cylinderAppearance.setAmbient(0, 0, 0, 1)
-        this.cylinderAppearance.setDiffuse(0, 0, 0, 1)
-        this.cylinderAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-        this.cylinderAppearance.setEmission(1, 1, 1, 1)
-        this.cylinderTex = new CGFtexture(this.scene, "images/pillar.jpg")
-        this.cylinderAppearance.setTexture(this.cylinderTex)
+        this.algaeAppearance = new CGFappearance(this.scene)
+
+        if (this.height > 1.25){
+            this.algaeAppearance.setAmbient(0, 0, 0, 1)
+            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
+            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+            this.algaeAppearance.setEmission(1, 1, 1, 1)
+        }
+        else if (this.height > 1.0){
+            this.algaeAppearance.setAmbient(0, 0, 0, 1)
+            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
+            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+            his.cylinderAppearance.setEmission(1, 1, 1, 1)
+        }
+        else if(this.height > 0.75) {
+            this.algaeAppearance.setAmbient(0, 0, 0, 1)
+            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
+            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+            this.algaeAppearance.setEmission(1, 1, 1, 1)
+        }
+        else{
+            this.algaeAppearance.setAmbient(0, 0, 0, 1)
+            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
+            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+            this.algaeAppearance.setEmission(1, 1, 1, 1)
+        }
     }
 
     display() {
         this.scene.pushMatrix()
+
+        this.algaeAppearance.apply()
+
         
-        this.cylinderAppearance.apply()
+        
+        this.scene.scale()
 
-        this.scene.translate(0, -0.5, 0)
-
-        this.cylinder.display()
-
-        for(let i = 0; i < 10; i++){
-            this.scene.translate(0, 1, 0)
-            this.cylinder.display()
-        }
-
-        this.cylinder.display()
+        this.algae.display()
 
         this.scene.defaultAppearance.apply()
 
@@ -49,10 +64,10 @@ export class MyPillar extends CGFobject {
     }
 
     enableNormalViz() {
-        this.cylinder.enableNormalViz()
+        this.algae.enableNormalViz()
     }
 
     disableNormalViz() {
-        this.cylinder.disableNormalViz()
+        this.algae.disableNormalViz()
     }
 }

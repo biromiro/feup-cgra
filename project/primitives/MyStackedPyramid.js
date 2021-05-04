@@ -49,28 +49,28 @@ export class MyStackedPyramid extends CGFobject {
         this.vertices.push(cos * ((height * heightVar) / 2), (height * heightVar), sin * ((height * heightVar) / 2))
         this.vertices.push(cos * (((height + 1) * heightVar) / 2), ((height + 1) * heightVar), sin * (((height + 1) * heightVar) / 2))
         this.vertices.push(ncos * (((height + 1) * heightVar) / 2), ((height + 1) * heightVar), nsin * (((height + 1) * heightVar) / 2))
-        
+
         let vertexNr = this.vertices.length / 3
-        
+
         this.indices.push(vertexNr - 1, vertexNr - 2, vertexNr - 3)
-        
+
         this.normals.push(...normal)
         this.normals.push(...normal)
         this.normals.push(...normal)
-        
+
       }
 
-      
+
       for (let height = 1; height <= this.stacks; height++) {
         this.vertices.push(ncos * (((height + 1) * heightVar) / 2), ((height + 1) * heightVar), nsin * (((height + 1) * heightVar) / 2))
         this.vertices.push(ncos * ((height * heightVar) / 2), (height * heightVar), nsin * ((height * heightVar) / 2))
         this.vertices.push(cos * ((height * heightVar) / 2), (height * heightVar), sin * ((height * heightVar) / 2))
-        
+
 
         let vertexNr = this.vertices.length / 3
 
         this.indices.push(vertexNr - 1, vertexNr - 2, vertexNr - 3)
-        
+
         this.normals.push(...normal)
         this.normals.push(...normal)
         this.normals.push(...normal)
@@ -98,11 +98,9 @@ export class MyStackedPyramid extends CGFobject {
   display() {
     this.scene.pushMatrix()
 
-    this.scene.translate(0, 2, 0)
-
     this.scene.rotate(Math.PI, 1, 0, 0)
 
-    this.scene.translate(0, -0.5, 0)
+    this.scene.translate(0, -1, 0)
 
     super.display()
 

@@ -85,7 +85,7 @@ export class MyScene extends CGFscene {
     
     this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
-    this.pyramid = new MyStackedPyramid(this, 4, 8)
+    this.pyramid = new MyStackedPyramid(this, 12, 12)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),

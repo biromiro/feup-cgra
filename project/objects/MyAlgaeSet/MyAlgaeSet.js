@@ -1,4 +1,4 @@
-import { MyPillar } from './MyPillar.js';
+import { MyAlgae } from './MyAlgae.js';
 
 
 /**
@@ -6,7 +6,7 @@ import { MyPillar } from './MyPillar.js';
  * @constructor
  * @param scene - Reference to MyScene object
  */
- export class MyPillarSet {
+ export class MyAlgaeSet {
     constructor(scene, slices) {
       this.pillar = new MyPillar(scene, slices)
       this.scene = scene

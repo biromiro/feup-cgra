@@ -1,4 +1,4 @@
-import {CGFobject} from '../lib/CGF.js';
+import {CGFobject} from '../../lib/CGF.js';
 /**
 * MyPlane
 * @constructor
@@ -10,12 +10,13 @@ import {CGFobject} from '../lib/CGF.js';
  * @param maxT - maximum texture coordinate in T
 */
 export class MyPlane extends CGFobject {
-	constructor(scene, nrDivs, minS, maxS, minT, maxT) {
+	constructor(scene, nrDivs, size, minS, maxS, minT, maxT) {
 		super(scene);
 		// nrDivs = 1 if not provided
 		nrDivs = typeof nrDivs !== 'undefined' ? nrDivs : 1;
 		this.nrDivs = nrDivs;
-		this.patchLength = 1.0 / nrDivs;
+		this.size = size;
+		this.patchLength = this.size / nrDivs;
 		this.minS = minS || 0;
 		this.maxS = maxS || 1;
 		this.minT = minT || 0;
@@ -29,16 +30,16 @@ export class MyPlane extends CGFobject {
 		this.vertices = [];
 		this.normals = [];
 		this.texCoords = [];
-		var yCoord = 0.5;
+		var zCoord = this.size / 2;
 		for (var j = 0; j <= this.nrDivs; j++) {
-			var xCoord = -0.5;
+			var xCoord = -this.size / 2;
 			for (var i = 0; i <= this.nrDivs; i++) {
-				this.vertices.push(xCoord, yCoord, 0);
-				this.normals.push(0, 0, 1);
+				this.vertices.push(xCoord, 0, zCoord);
+				this.normals.push(0, 1, 0);
 				this.texCoords.push(this.minS + i * this.q, this.minT + j * this.w);
 				xCoord += this.patchLength;
 			}
-			yCoord -= this.patchLength;
+			zCoord  -= this.patchLength;
 		}
 		// Generating indices
 		this.indices = [];
@@ -46,8 +47,8 @@ export class MyPlane extends CGFobject {
 		var ind = 0;
 		for (var j = 0; j < this.nrDivs; j++) {
 			for (var i = 0; i <= this.nrDivs; i++) {
-				this.indices.push(ind);
 				this.indices.push(ind + this.nrDivs + 1);
+				this.indices.push(ind);
 				ind++;
 			}
 			if (j + 1 < this.nrDivs) {
@@ -69,5 +70,3 @@ export class MyPlane extends CGFobject {
 	};
 
 }
-
-

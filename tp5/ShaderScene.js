@@ -54,7 +54,7 @@ export class ShaderScene extends CGFscene {
 
 		this.objects=[
 			new Teapot(this),
-			new MyPlane(this, 50)
+			new MyPlane(this, 50, 2)
 		];
 
 		// Object interface variables

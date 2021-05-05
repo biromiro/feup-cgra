@@ -1,4 +1,4 @@
-import { CGFappearance, CGFobject, CGFshader, CGFtexture } from '../../../lib/CGF.js'
+import { CGFappearance, CGFobject, CGFshader } from '../../../lib/CGF.js'
 import { MyStackedPyramid } from '../../primitives/MyStackedPyramid.js';
 
 
@@ -9,42 +9,63 @@ import { MyStackedPyramid } from '../../primitives/MyStackedPyramid.js';
  * @param slices - number of divisions around the Y axis
  */
 export class MyAlgae extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, max, min) {
         super(scene)
 
-        this.height = Math.random() * (1.5 - 0.5) + 0.5
+        this.algae = new MyStackedPyramid(scene, 4, 8);
+        this.algaeVec = []
+        this.populateAlgae(Math.ceil(Math.random() * (max - min)) + min)
         this.createTextures()
 
-        this.algae = new MyAlgae(scene, this.algaeAppearance, slices);
+
+    }
+
+    getHeight = () => Math.random() * (1.5 - 0.5) + 0.5
+
+    populateAlgae(algaeNr) {
+        for (let i = 0; i < algaeNr; i++) {
+            this.algaeVec.push(this.getHeight())
+        }
     }
 
     createTextures() {
-        this.algaeAppearance = new CGFappearance(this.scene)
+        this.smallAlgaeAppearance = new CGFappearance(this.scene)
+        this.smallAlgaeAppearance.setAmbient(0, 0, 0, 1)
+        this.smallAlgaeAppearance.setDiffuse(0, 0, 0, 1)
+        this.smallAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.smallAlgaeAppearance.setEmission(1, 1, 1, 1)
 
-        if (this.height > 1.25){
-            this.algaeAppearance.setAmbient(0, 0, 0, 1)
-            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
-            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-            this.algaeAppearance.setEmission(1, 1, 1, 1)
-        }
-        else if (this.height > 1.0){
-            this.algaeAppearance.setAmbient(0, 0, 0, 1)
-            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
-            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-            his.cylinderAppearance.setEmission(1, 1, 1, 1)
-        }
-        else if(this.height > 0.75) {
-            this.algaeAppearance.setAmbient(0, 0, 0, 1)
-            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
-            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-            this.algaeAppearance.setEmission(1, 1, 1, 1)
-        }
-        else{
-            this.algaeAppearance.setAmbient(0, 0, 0, 1)
-            this.algaeAppearance.setDiffuse(0, 0, 0, 1)
-            this.algaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-            this.algaeAppearance.setEmission(1, 1, 1, 1)
-        }
+
+        this.mediumAlgaeAppearance = new CGFappearance(this.scene)
+        this.mediumAlgaeAppearance.setAmbient(0, 0, 0, 1)
+        this.mediumAlgaeAppearance.setDiffuse(0, 0, 0, 1)
+        this.mediumAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.mediumAlgaeAppearance.setEmission(1, 1, 1, 1)
+        
+        this.bigAlgaeAppearance = new CGFappearance(this.scene)
+        this.bigAlgaeAppearance.setAmbient(0, 0, 0, 1)
+        this.bigAlgaeAppearance.setDiffuse(0, 0, 0, 1)
+        this.bigAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.bigAlgaeAppearance.setEmission(1, 1, 1, 1)
+
+        this.biggerAlgaeAppearance = new CGFappearance(this.scene)
+        this.biggerAlgaeAppearance.setAmbient(0, 0, 0, 1)
+        this.biggerAlgaeAppearance.setDiffuse(0, 0, 0, 1)
+        this.biggerAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.biggerAlgaeAppearance.setEmission(1, 1, 1, 1)
+        /*
+                if (this.height > 1.25) {
+                   
+                }
+                else if (this.height > 1.0) {
+                   
+                }
+                else if (this.height > 0.75) {
+                   
+                else {
+        
+                }
+                */
     }
 
     display() {
@@ -52,8 +73,8 @@ export class MyAlgae extends CGFobject {
 
         this.algaeAppearance.apply()
 
-        
-        
+
+
         this.scene.scale()
 
         this.algae.display()

@@ -8,11 +8,8 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
-import { MyPillar } from './objects/MyPillarsSet/MyPillar.js'
 import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
-import { MyStackedPyramid } from './primitives/MyStackedPyramid.js'
-import { MyAlgae } from './objects/MyAlgaeSet/MyAlgae.js'
 import { MyAlgaeSet } from './objects/MyAlgaeSet/MyAlgaeSet.js'
  
 /**

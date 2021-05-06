@@ -74,7 +74,7 @@ export class MyRock extends CGFobject {
           this.normals.push(x, y, z);
           theta += thetaInc;
           
-          let offset = (Math.random() * 0.2 - 0.2)
+          let offset = (Math.random() * 0.1 - 0.1)
           x += offset*x;
           y += offset*y;
           z += offset*z;
@@ -99,9 +99,9 @@ export class MyRock extends CGFobject {
     }
 
   createDeformation(){
-    this.xDeform = Math.max(Math.random()*0.2, 0.1)
-    this.yDeform = 0.08
-    this.zDeform = Math.max(Math.random()*0.2, 0.1)
+    this.xDeform = Math.max(Math.random()*0.2, 0.1);
+    this.yDeform = Math.max(Math.random()*0.2, 0.1);
+    this.zDeform = Math.max(Math.random()*0.2, 0.1);
   }
 
   update(){

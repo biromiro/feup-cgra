@@ -22,7 +22,7 @@ import { MyRing } from '../../primitives/MyRing.js';
       this.z = position[1]
 
       this.maxHeight = 1
-      this.shader = new CGFshader(this.scene.gl, "./shaders/MySeaFloor.vert", "./shaders/MySeaFloor.frag")
+      this.shader = new CGFshader(this.scene.gl, "./shaders/MyRock.vert", "./shaders/MySeaFloor.frag")
       this.shader.setUniformsValues({uSampler2: 1, maxHeight: this.maxHeight})
     }
 

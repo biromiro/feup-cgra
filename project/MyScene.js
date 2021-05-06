@@ -2,7 +2,6 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/
 import { MySphere } from './primitives/MySphere.js'
 import { MyCubeMap } from './objects/MyCubeMap.js'
 import { MyCylinder } from './primitives/MyCylinder.js'
-import { MyMovingObject } from './objects/MyMovingObject.js'
 import { MyFish } from './objects/MyFish/MyFish.js'
 import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
@@ -78,11 +77,11 @@ export class MyScene extends CGFscene {
 
     this.watersurface = new MyWaterSurface(this, 50)
 
-    this.rockSet = new MyRockSet(this, 20)
+    this.rockSet = new MyRockSet(this, 100)
 
     this.pillarSet = new MyPillarSet(this, 5)
     
-    this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
+    this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
     this.algaeSet = new MyAlgaeSet(this, 20, 4, 2, 0.5, 0.2, 0.3, 0.1)
 
@@ -174,7 +173,7 @@ export class MyScene extends CGFscene {
   }
   initCameras() {
     this.camera = new CGFcamera(
-      1.0,
+      1.5,
       0.1,
       500,
       vec3.fromValues(2, 2, 2),
@@ -192,7 +191,7 @@ export class MyScene extends CGFscene {
 
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
-    this.movingObject.update(t)
+    this.movingFish.update(t)
     this.watersurface.update(t)
     this.algaeSet.update(t)
   }
@@ -209,44 +208,44 @@ export class MyScene extends CGFscene {
 
     if (this.gui.isKeyPressed('KeyW')) {
       keysPressed = true
-      this.movingObject.accelerate(1)
+      this.movingFish.accelerate(1)
     }
 
     if (this.gui.isKeyPressed('KeyS')) {
       keysPressed = true
-      this.movingObject.accelerate(-1)
+      this.movingFish.accelerate(-1)
     }
 
     if (this.gui.isKeyPressed('KeyA')) {
       keysPressed = true;
-      this.movingObject.turn(1)
+      this.movingFish.turn(1)
     }
 
     if (this.gui.isKeyPressed('KeyD')) {
       keysPressed = true;
-      this.movingObject.turn(-1)
+      this.movingFish.turn(-1)
     }
 
     if (this.gui.isKeyPressed('KeyR')) {
       keysPressed = true;
-      this.movingObject.reset()
+      this.movingFish.reset()
     }
 
     if (this.gui.isKeyPressed('KeyP')){
       keysPressed = true;
-      this.movingObject.ascend()
+      this.movingFish.ascend()
     }
 
     if (this.gui.isKeyPressed('KeyL')){
       keysPressed = true;
-      this.movingObject.descend()
+      this.movingFish.descend()
     }
 
     if (this.gui.isKeyPressed('KeyC')){
       keysPressed = true;
-      this.movingObject.collectRock()
+      this.movingFish.collectRock()
     } else {
-      this.movingObject.collectRockReleaseKey()
+      this.movingFish.collectRockReleaseKey()
     }
   }
 
@@ -276,7 +275,7 @@ export class MyScene extends CGFscene {
     this.popMatrix();
 
 
-    if (this.displayMovingObject) this.movingObject.display()
+    this.movingFish.display()
 
     if (this.displayCylinder) this.cylinder.display()
   
@@ -297,7 +296,7 @@ export class MyScene extends CGFscene {
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
-      this.movingObject.enableNormalViz()
+      this.movingFish.enableNormalViz()
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarSet.enableNormalViz()
@@ -306,7 +305,7 @@ export class MyScene extends CGFscene {
     else {
       this.cylinder.disableNormalViz();
       this.sphere.disableNormalViz();
-      this.movingObject.disableNormalViz()
+      this.movingFish.disableNormalViz()
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarSet.disableNormalViz()

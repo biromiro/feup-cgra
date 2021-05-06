@@ -20,6 +20,8 @@ export class MyMovingObject{
     this.velocity = velocity
     this.ascendVelocity = 0
     this.scaleFactor = 1
+    this.maxHeight = 5
+    this.minHeight = 0
     this.setControllabeParameters()
     this.rotationLeft = false
     this.rotationRight = false
@@ -35,8 +37,6 @@ export class MyMovingObject{
     this.maxVelocity = 1
     this.friction = 0.005
     this.ascendVelocityOffset = 0.05
-    this.maxHeight = 5
-    this.minHeight = 0
   }
 
   display(){
@@ -71,7 +71,7 @@ export class MyMovingObject{
     }
 
     if(this.caughtObject)
-      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.15, this.z]
+      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.15 + this.caughtObject.yDeform, this.z]
 
     this.ascendVelocity = 0
   }

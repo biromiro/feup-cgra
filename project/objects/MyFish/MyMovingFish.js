@@ -19,7 +19,7 @@ import { MyFish } from './MyFish.js'
       super(scene, fish, orientationAngle, velocity, position)
 
       super.setMaximumHeight(9.5)
-      super.setMinimumHeight(0.5)
+      super.setMinimumHeight(1)
       super.scaleFactor = 0.5
 
       this.fish = fish
@@ -29,7 +29,10 @@ import { MyFish } from './MyFish.js'
       this.collectedOrReleased = false
       // needed because of the jitter caused by a key press,
       // making it catch and release in a short amount of time
-      this.pileHeight = 0.1
+
+      this.numberOfPositions = 4
+      this.pileHeightBase = 0.5
+      this.createNestRockPositions()
     }
 
     update(t){
@@ -65,8 +68,38 @@ import { MyFish } from './MyFish.js'
       });
 
       if(minPair[1] <= 1.5){
+        let found = false;
+        for(let i = 0; i < this.nestRockPositions.length; i++) {
+
+          let currHeight = this.pileHeightBase
+          let size = (this.nestRockPositions[i][2]).length;
+          let arr = []
+          
+          for(let j = 0; j < size; j++) {
+
+            var obj = this.nestRockPositions[i][2][j];
+
+            if(obj == minPair[0]){
+              found = true;
+              continue;
+            }
+            
+            if(found){
+              obj.setParabolicThrow([obj.x, currHeight, obj.z]);
+            }
+
+            currHeight += obj.yDeform*2;
+            arr.push(obj);
+          }
+
+          this.nestRockPositions[i][2] = arr;
+
+          if(found) break;
+        }
         super.setCaughtObject(minPair[0])
       }
+
+     
     }
 
     reset(){
@@ -82,10 +115,47 @@ import { MyFish } from './MyFish.js'
       const dist =  this.getDistance(this, this.nest)
       if(dist > (this.nest.radius > 5 ? this.nest.radius : 5)) return
       const caughtObject = super.getCaughtObject();
-      caughtObject.setParabolicThrow([this.nest.x, this.pileHeight, this.nest.z])
-      this.pileHeight += this.caughtObject.yDeform
+      caughtObject.setParabolicThrow(this.getRandomPosition(caughtObject))
       
       super.setCaughtObject(undefined)
+    }
+
+    createNestRockPositions(){
+      this.nestRockPositions = []
+      for(let i = 0; i < this.numberOfPositions; i++){
+        let position = []
+        position.push(this.nest.x + (Math.random()*this.nest.radius - this.nest.radius/2), 
+                      this.nest.z + (Math.random()*this.nest.radius - this.nest.radius/2),
+                      []);
+        this.nestRockPositions.push(position)
+      }
+      console.log(this.nestRockPositions)
+    }
+
+    getRandomPosition(caughtObject){
+      const min = 0
+      const max = Math.floor(this.numberOfPositions - 1);
+      const randomPos = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(this.nestRockPositions[randomPos])
+      let [x, z, height] = this.nestRockPositions[randomPos];
+      console.log(x, z, height)
+      let position = [x, this.getHeight(height), z]
+      this.updatePosition(randomPos, caughtObject)
+      console.log(position)
+      console.log(this.nestRockPositions)
+      return position
+    }
+
+    updatePosition(pos, object){
+      (this.nestRockPositions[pos][2]).push(object)
+    }
+
+    getHeight(objectsList){
+        let height = this.pileHeightBase;
+        objectsList?.forEach(object => {
+          height += object.yDeform*2
+        });
+        return height
     }
 
     display(){

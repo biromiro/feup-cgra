@@ -87,10 +87,6 @@ export class MyScene extends CGFscene {
     
     this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
-    this.pyramid = new MyStackedPyramid(this, 12, 12)
-
-    //this.algae = new MyAlgae(this, 4, 2, 0.5, 0.2, 0.3, 0.1)
-
     this.algaeSet = new MyAlgaeSet(this, 20, 4, 2, 0.5, 0.2, 0.3, 0.1)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
@@ -299,10 +295,6 @@ export class MyScene extends CGFscene {
 
     this.pillarSet.display()
 
-    this.pyramid.display()
-
-    //this.algae.display()
-
     this.algaeSet.display()
 
     if (this.displayNormals) {
@@ -312,8 +304,6 @@ export class MyScene extends CGFscene {
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarSet.enableNormalViz()
-      this.pyramid.enableNormalViz()
-      //this.algae.enableNormalViz()
       this.algaeSet.enableNormalViz()
     }
     else {
@@ -323,8 +313,6 @@ export class MyScene extends CGFscene {
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarSet.disableNormalViz()
-      this.pyramid.disableNormalViz()
-      //this.algae.disableNormalViz()
       this.algaeSet.disableNormalViz()
     }
 

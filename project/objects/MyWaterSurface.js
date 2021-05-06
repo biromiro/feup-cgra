@@ -35,6 +35,10 @@ import { MyQuad } from '../primitives/MyQuad.js';
         
     }
 
+    update(t){
+        this.shader.setUniformsValues({timeFactor: t / 100 % 25600})
+    }
+
     display(){
         this.scene.pushMatrix()
         this.scene.translate(0, 10, 0)

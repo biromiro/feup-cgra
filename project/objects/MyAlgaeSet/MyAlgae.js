@@ -14,7 +14,7 @@ export class MyAlgae extends CGFobject {
         this.size = size
         this.radius = radius
         this.set = set
-        this.algae = new MyStackedPyramid(scene, 4, 4);
+        this.algae = new MyStackedPyramid(scene, 4, 32);
         this.algaeVec = []
         this.algaePos = []
         this.populateAlgae(maxNr, minNr, maxHeight, minHeight, radius)

@@ -87,7 +87,7 @@ export class MyScene extends CGFscene {
     
     this.movingObject = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
-    //this.pyramid = new MyStackedPyramid(this, 12, 12)
+    this.pyramid = new MyStackedPyramid(this, 12, 12)
 
     //this.algae = new MyAlgae(this, 4, 2, 0.5, 0.2, 0.3, 0.1)
 
@@ -200,7 +200,8 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
     this.movingObject.update(t)
-    this.watersurface.shader.setUniformsValues({timeFactor: t / 100 % 25600})
+    this.watersurface.update(t)
+    this.algaeSet.update(t)
   }
 
   updateAppliedTexture() {
@@ -298,7 +299,7 @@ export class MyScene extends CGFscene {
 
     this.pillarSet.display()
 
-    //this.pyramid.display()
+    this.pyramid.display()
 
     //this.algae.display()
 
@@ -311,7 +312,7 @@ export class MyScene extends CGFscene {
       this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarSet.enableNormalViz()
-      //this.pyramid.enableNormalViz()
+      this.pyramid.enableNormalViz()
       //this.algae.enableNormalViz()
       this.algaeSet.enableNormalViz()
     }
@@ -322,7 +323,7 @@ export class MyScene extends CGFscene {
       this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarSet.disableNormalViz()
-      //this.pyramid.disableNormalViz()
+      this.pyramid.disableNormalViz()
       //this.algae.disableNormalViz()
       this.algaeSet.disableNormalViz()
     }

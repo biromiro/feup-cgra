@@ -36,7 +36,7 @@ export class MyFish extends CGFobject {
     this.currentVel = 0
 
     this.getVelocity = typeof movingVelocity !== 'undefined' ? movingVelocity : () => {return 1;} //set default to 1 since a fish can still not be a moving fish
-    this.isRotatinRight = typeof rotationRight !== 'undefined' ? rotationRight : () => {return false;}
+    this.isRotatingRight = typeof rotationRight !== 'undefined' ? rotationRight : () => {return false;}
     this.isRotatingLeft = typeof rotationLeft !== 'undefined' ? rotationLeft : () => {return false;}
   }
 
@@ -68,7 +68,7 @@ export class MyFish extends CGFobject {
   updateFinAngle(t){
     this.previousAngleFin = this.getAngle(true, 15, 0.015, t)
     if(!this.isRotatingLeft()) this.leftFin.angle = this.previousAngleFin
-    if(!this.isRotatinRight()) this.rightFin.angle = this.previousAngleFin
+    if(!this.isRotatingRight()) this.rightFin.angle = this.previousAngleFin
   }
 
   setBody(){

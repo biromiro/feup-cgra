@@ -1,3 +1,4 @@
+import { CGFappearance } from '../../../lib/CGF.js'
 import { MyAlgae } from './MyAlgae.js';
 
 
@@ -7,48 +8,65 @@ import { MyAlgae } from './MyAlgae.js';
  * @param scene - Reference to MyScene object
  */
  export class MyAlgaeSet {
-    constructor(scene, slices) {
-      this.pillar = new MyPillar(scene, slices)
+    constructor(scene, num, maxNr, minNr, maxHeight, minHeight, radius, size) {
       this.scene = scene
+      this.algae = []
+      this.algaePos = []
+
+      this.createAlgae(num, maxNr, minNr, maxHeight, minHeight, radius, size)
+      this.createTextures()
+
+    }
+
+    createAlgae(num, maxNr, minNr, maxHeight, minHeight, radius, size){
+        for(let i = 0; i < num; i++){
+            this.algae.push(new MyAlgae(this.scene, maxNr, minNr, maxHeight, minHeight, radius, size, this))
+            this.algaePos.push([Math.floor(Math.random() * (25 - (-25) + 1) ) -25, Math.floor(Math.random() * (25 - (-25) + 1) ) -25]) // GIve pos
+        }
+    }
+
+    createTextures() {
+        this.smallAlgaeAppearance = new CGFappearance(this.scene)
+        this.smallAlgaeAppearance.setAmbient(0.14, 0.30, 0.08, 1)
+        this.smallAlgaeAppearance.setDiffuse(0.14, 0.30, 0.08, 1)
+        this.smallAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.smallAlgaeAppearance.setEmission(0, 0, 0, 1)
+
+
+        this.mediumAlgaeAppearance = new CGFappearance(this.scene)
+        this.mediumAlgaeAppearance.setAmbient(0.21, 0.50, 0.18, 1)
+        this.mediumAlgaeAppearance.setDiffuse(0.21, 0.50, 0.18, 1)
+        this.mediumAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.mediumAlgaeAppearance.setEmission(0, 0, 0, 1)
+
+        this.bigAlgaeAppearance = new CGFappearance(this.scene)
+        this.bigAlgaeAppearance.setAmbient(0.47, 0.67, 0.35, 1)
+        this.bigAlgaeAppearance.setDiffuse(0.47, 0.67, 0.35, 1)
+        this.bigAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.bigAlgaeAppearance.setEmission(0, 0, 0, 1)
+
+        this.biggerAlgaeAppearance = new CGFappearance(this.scene)
+        this.biggerAlgaeAppearance.setAmbient(0.79, 0.87, 0.54, 1)
+        this.biggerAlgaeAppearance.setDiffuse(0.79, 0.87, 0.54, 1)
+        this.biggerAlgaeAppearance.setSpecular(0.0, 0.0, 0.0, 1)
+        this.biggerAlgaeAppearance.setEmission(0, 0, 0, 1)
+
     }
 
     display(){
-        this.scene.pushMatrix()
-
-        this.scene.translate(6.8, 0, -3.2)
-
-        this.scene.scale(0.5, 1, 0.5)
-        
-        this.pillar.display()
-
-        this.scene.pushMatrix()
-
-        this.scene.translate(8.5, 0, 2)
-        this.pillar.display()
-
-        this.scene.translate(5.7, 0, -22)
-        this.pillar.display()
-
-        this.scene.translate(5.7, 0, -22)
-        this.pillar.display()
-
-        this.scene.popMatrix()
-
-        this.scene.translate(5.7, 0, -22)
-        this.pillar.display()
-
-        this.scene.translate(5.7, 0, -22)
-        this.pillar.display()
-
-        this.scene.popMatrix()
+        for(let i = 0; i < this.algae.length; i++){
+            this.scene.pushMatrix()
+            this.scene.translate(this.algaePos[i][0], 0, this.algaePos[i][1])            
+            this.algae[i].display()
+            this.scene.popMatrix();
+        }
     }
 
     enableNormalViz(){
-        this.pillar.enableNormalViz()
-        
+        this.algae.forEach(algae => algae.enableNormalViz())
     }
     
     disableNormalViz(){
-        this.pillar.disableNormalViz()
+        this.algae.forEach(algae => algae.disableNormalViz())
     }
 }

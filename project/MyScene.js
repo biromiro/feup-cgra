@@ -83,7 +83,7 @@ export class MyScene extends CGFscene {
     
     this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
-    this.algaeSet = new MyAlgaeSet(this, 20, 4, 2, 0.5, 0.2, 0.3, 0.1)
+    this.algaeSet = new MyAlgaeSet(this, 50, 4, 2, 0.5, 0.2, 0.3, 0.1)
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),

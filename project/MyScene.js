@@ -79,7 +79,7 @@ export class MyScene extends CGFscene {
 
     this.rockSet = new MyRockSet(this, 100)
 
-    this.pillarSet = new MyPillarSet(this, 5)
+    this.pillarSet = new MyPillarSet(this, 16)
     
     this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 

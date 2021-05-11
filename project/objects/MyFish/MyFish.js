@@ -41,7 +41,7 @@ export class MyFish extends CGFobject {
   }
 
   update(t){
-    this.shader.setUniformsValues({fishColor: this.fishColor, lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
+    this.shader.setUniformsValues({lightPosition: this.scene.lights[0].position, camPosition: this.scene.camera.position})
 
     this.updateTailAngle(t)
     this.updateFinAngle(t)
@@ -75,7 +75,7 @@ export class MyFish extends CGFobject {
 
     this.bodyAppearance = new CGFappearance(this.scene);
 		this.bodyAppearance.setAmbient(0,0,0,1);
-		this.bodyAppearance.setDiffuse(1,1,1,1);
+		this.bodyAppearance.setDiffuse(...this.fishColor);
 		this.bodyAppearance.setSpecular(0,0,0,0);
     this.bodyAppearance.setShininess(10)
 

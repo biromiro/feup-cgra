@@ -7,17 +7,9 @@ varying highp vec3 vEyeVec;
 varying vec2 vTextureCoord;
 varying vec3 vLightDirection;
 
-struct materialProperties {
-    vec4 ambient;                   // Default: (0, 0, 0, 1)
-    vec4 diffuse;                   // Default: (0, 0, 0, 1)
-    vec4 specular;                  // Default: (0, 0, 0, 1)
-    vec4 emission;                  // Default: (0, 0, 0, 1)
-    float shininess;                // Default: 0 (possible values [0, 128])
-};
-
-uniform materialProperties uFrontMaterial;
 uniform sampler2D uSampler;
 uniform mat4 uMVMatrix;
+
 
 void main() {
 
@@ -45,19 +37,10 @@ void main() {
 
         Is = vec4(1.0) * specular;
     }
+    
+    vec4 vLighting = Ia + Id + Is;
 
     vec4 color = texture2D(uSampler, vTextureCoord);
 
-	if(vTextureCoord.t > 0.6){
-
-        Id = Id * uFrontMaterial.diffuse;
-        Is = Is * uFrontMaterial.specular;
-
-        vec4 vLighting = Ia + Id + Is;
-		gl_FragColor = vec4(vLighting.rgb, color.a);
-	}
-    else{
-        vec4 vLighting = Ia + Id + Is;
-		gl_FragColor = vec4(color.rgb * vLighting.rgb, color.a);
-    }
+	gl_FragColor = vec4(color.rgb * vLighting.rgb, color.a);
 }

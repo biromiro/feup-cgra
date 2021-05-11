@@ -12,16 +12,9 @@ varying highp vec3 vEyeVec;
 varying highp vec3 vLightDirection;
 
 uniform vec4 lightPos;
-uniform float timeFactor;
 
 void main(void) {
-    vec4 tmp = aVertexPosition;
-
-    if(tmp.y > 0.15)
-    tmp.x = tmp.x + sin(timeFactor + tmp.y) * tmp.y ;
-    
-    // Transformed Vertex position
-    vec4 vertex = uMVMatrix * tmp;
+    vec4 vertex = uMVMatrix * aVertexPosition;
     gl_Position = uPMatrix * vertex;
     vTextureCoord = aTextureCoord;
 
@@ -31,4 +24,3 @@ void main(void) {
 
     vLightDirection = normalize(lightPos.xyz - vertex.xyz);
 }
-

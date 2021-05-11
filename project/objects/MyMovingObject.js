@@ -33,7 +33,7 @@ export class MyMovingObject{
   
   setControllabeParameters(){
     this.velocityOffset = 0.001
-    this.rotationOffset = 0.01
+    this.rotationOffset = 0.05
     this.maxVelocity = 1
     this.friction = 0.005
     this.ascendVelocityOffset = 0.05

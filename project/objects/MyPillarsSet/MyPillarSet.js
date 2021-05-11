@@ -1,4 +1,5 @@
 import { MyPillar } from './MyPillar.js';
+import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
 
 
 /**
@@ -10,9 +11,13 @@ import { MyPillar } from './MyPillar.js';
     constructor(scene, slices) {
       this.pillar = new MyPillar(scene, slices)
       this.scene = scene
+
+      this.shader = new CGFshader(this.scene.gl, "./shaders/MyPillar.vert", "./shaders/MyPillar.frag")
+
     }
 
     display(){
+        this.scene.setActiveShader(this.shader)
         this.scene.pushMatrix()
 
         this.scene.translate(6.8, 0, -3.2)
@@ -41,6 +46,8 @@ import { MyPillar } from './MyPillar.js';
         this.pillar.display()
 
         this.scene.popMatrix()
+        this.scene.setActiveShaderSimple(this.scene.defaultShader)
+
     }
 
     enableNormalViz(){

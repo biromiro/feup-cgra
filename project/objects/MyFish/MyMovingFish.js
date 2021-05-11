@@ -46,7 +46,7 @@ import { MyFish } from './MyFish.js'
     }
 
     getDistance(object1, object2){
-      return Math.sqrt(Math.pow(object1.x - object2.x, 2) + Math.pow((object1.y ? object1.y : 0) - (object2.y ? object2.y : 0), 2) + Math.pow(object1.z - object2.z, 2))
+      return Math.sqrt(Math.pow(object1.x - object2.x, 2) + Math.pow(object1.z - object2.z, 2))
     }
 
     collectRock(){
@@ -59,7 +59,7 @@ import { MyFish } from './MyFish.js'
     }
 
     catchRock(){
-      if(this.y > this.minHeight ) return
+      if(this.y < this.minHeight) return
       let minPair = [undefined, Infinity]
 
       this.rockSetToFind.rocks.forEach(rock => {
@@ -96,6 +96,8 @@ import { MyFish } from './MyFish.js'
 
           if(found) break;
         }
+        minPair[0].inParabolicThrow = false;
+        minPair[0].time = undefined;
         super.setCaughtObject(minPair[0])
       }
 
@@ -111,7 +113,7 @@ import { MyFish } from './MyFish.js'
     }
 
     releaseRock(){
-      if(this.y > this.minHeight ) return
+      //if(this.y > this.minHeight ) return
       const dist =  this.getDistance(this, this.nest)
       if(dist > (this.nest.radius > 5 ? this.nest.radius : 5)) return
       const caughtObject = super.getCaughtObject();

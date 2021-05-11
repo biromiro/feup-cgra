@@ -7,12 +7,14 @@ export class MyRock extends CGFobject {
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
-  constructor(scene, slices, stacks, pos) {
+  constructor(scene, slices, stacks, pos, minSize, maxSize) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
     [this.x, this.y, this.z] = pos
     this.initialPos = pos
+    this.minSize = minSize;
+    this.maxSize = maxSize;
 
     this.initBuffers()
 
@@ -99,9 +101,9 @@ export class MyRock extends CGFobject {
     }
 
   createDeformation(){
-    this.xDeform = Math.max(Math.random()*0.2, 0.1);
-    this.yDeform = Math.max(Math.random()*0.2, 0.1);
-    this.zDeform = Math.max(Math.random()*0.2, 0.1);
+    this.xDeform = Math.max(Math.random()*this.maxSize, this.minSize);
+    this.zDeform = Math.max(Math.random()*this.maxSize, this.minSize);
+    this.yDeform = (this.xDeform + this.zDeform) / 4;
   }
 
   update(){
@@ -122,7 +124,10 @@ export class MyRock extends CGFobject {
     this.inParabolicThrow = true;
     this.startPos = [this.x, this.y, this.z]
     this.endPos = endPos
-    this.controlPos = [(this.startPos[0] + this.endPos[0])/2, this.startPos[1] + this.endPos[1] + 1, (this.startPos[2] + this.endPos[2])/2]
+    let yControl;
+    if(this.startPos[1] - this.endPos[1] > 5) yControl = (this.startPos[1] - this.endPos[1]) / 2;
+    else yControl = (this.startPos[1] - this.endPos[1]) / 2 + 2;
+    this.controlPos = [(this.startPos[0] + this.endPos[0])/2, yControl, (this.startPos[2] + this.endPos[2])/2]
   }
 
   calculateBezierValue(p0, p1, p2, t){

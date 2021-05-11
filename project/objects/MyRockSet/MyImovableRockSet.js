@@ -8,7 +8,7 @@ import { MyRock } from './MyRock.js'
  * @param scene - Reference to MyScene object
  * @param num - The number of rocks of the set
  */
- export class MyRockSet extends CGFobject {
+ export class MyImovableRockSet extends CGFobject {
     constructor(scene, num) {
       super(scene)
       this.createRocks(num)
@@ -25,7 +25,7 @@ import { MyRock } from './MyRock.js'
 		this.appearance.setSpecular(0,0,0,0);
         this.appearance.setShininess(10)
 
-        this.texture = new CGFtexture(this.scene, "./images/rock_color.jpg")
+        this.texture = new CGFtexture(this.scene, "./images/imovable.jpg")
         this.appearance.setTexture(this.texture);
         this.appearance.setTextureWrap('MIRRORED_REPEAT', 'MIRRORED_REPEAT');
 
@@ -39,16 +39,10 @@ import { MyRock } from './MyRock.js'
             let x = Math.floor(Math.random() * (25 - (-25) + 1) ) -25;
             let z = Math.floor(Math.random() * (25 - (-25) + 1) ) -25;
 
-            let newRock = new MyRock(this.scene, 16, 16, [x, 0.05, z], 0.1, 0.3)
+            let newRock = new MyRock(this.scene, 16, 16, [x, 0.05, z], 1.5, 3)
             this.rocks.push(newRock)
         }
   
-    }
-
-    update(t){
-        this.rocks.forEach(rock => {
-            rock.update(t)
-        });
     }
 
     display(){

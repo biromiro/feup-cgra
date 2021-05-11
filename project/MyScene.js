@@ -7,6 +7,7 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
+import { MyImovableRockSet } from './objects/MyRockSet/MyImovableRockSet.js'
 import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
 import { MyAlgaeSet } from './objects/MyAlgaeSet/MyAlgaeSet.js'
@@ -78,6 +79,8 @@ export class MyScene extends CGFscene {
     this.watersurface = new MyWaterSurface(this, 50)
 
     this.rockSet = new MyRockSet(this, 100)
+    
+    this.immovableRockSet = new MyImovableRockSet(this, 10);
 
     this.pillarSet = new MyPillarSet(this, 16)
     
@@ -288,6 +291,8 @@ export class MyScene extends CGFscene {
     this.watersurface.display()
 
     this.rockSet.display()
+
+    this.immovableRockSet.display()
 
     this.pillarSet.display()
 

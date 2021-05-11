@@ -19,3 +19,18 @@
 ### 5 - MyPillar
 
 ![Screenshot 5](screenshots/proj-t4g08-5.png)
+
+### 6 - End of part 5
+
+![Screenshot 6](screenshots/proj-t4g08-6.png)
+
+### 7 - Rock pickup
+
+![Screenshot 7](screenshots/proj-t4g08-7.png)
+
+### 8 - Additional features
+
+![Screenshot 8_1](screenshots/proj-t4g08-8_1.png)
+
+![Screenshot 8_2](screenshots/proj-t4g08-8_2.png)
+

@@ -303,19 +303,21 @@ export class MyScene extends CGFscene {
       this.cylinder.enableNormalViz()
       this.sphere.enableNormalViz()
       this.movingFish.enableNormalViz()
-      this.ring.enableNormalViz()
+      //this.ring.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarSet.enableNormalViz()
       this.algaeSet.enableNormalViz()
+      this.immovableRockSet.enableNormalViz()
     }
     else {
       this.cylinder.disableNormalViz();
       this.sphere.disableNormalViz();
       this.movingFish.disableNormalViz()
-      this.ring.disableNormalViz()
+      //this.ring.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarSet.disableNormalViz()
       this.algaeSet.disableNormalViz()
+      this.immovableRockSet.disableNormalViz()
     }
 
     this.checkKeys()

@@ -7,10 +7,9 @@ import { CGFobject } from '../../lib/CGF.js';
  * @param stacks - number of divisions along the Y axis
 */
 export class MyCylinder extends CGFobject {
-    constructor(scene, appearance, slices) {
+    constructor(scene, slices) {
         super(scene);
         this.slices = slices;
-        this.appearance = appearance
 
         this.initBuffers();
     }
@@ -75,12 +74,6 @@ export class MyCylinder extends CGFobject {
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
-    }
-
-    display(){
-        this.appearance.apply()
-        super.display();
-        this.scene.defaultAppearance.apply()
     }
 }
 

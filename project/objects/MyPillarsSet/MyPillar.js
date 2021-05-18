@@ -14,7 +14,7 @@ export class MyPillar extends CGFobject {
 
         this.createTextures()
 
-        this.cylinder = new MyCylinder(scene, this.cylinderAppearance, slices);
+        this.cylinder = new MyCylinder(scene, slices);
     }
 
     createTextures() {

@@ -74,9 +74,6 @@ export class MyAlgae extends CGFobject {
             this.scene.popMatrix()
         }
 
-
-        this.scene.defaultAppearance.apply()
-
         this.scene.popMatrix()
     }
 

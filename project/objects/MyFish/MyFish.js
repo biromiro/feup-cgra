@@ -124,12 +124,6 @@ export class MyFish extends CGFobject {
 
     this.scene.scale(0.5,0.5,0.5)
 
-    this.scene.setActiveShader(this.shader)
-    
-    this.body.display()
-
-    this.scene.setActiveShaderSimple(this.scene.defaultShader)
-
     this.tailFin.display()
     this.topFin.display()
     this.rightFin.display()
@@ -137,7 +131,11 @@ export class MyFish extends CGFobject {
 
     this.rightEye.display()
     this.leftEye.display()
- 
+    
+    this.scene.setActiveShader(this.shader)
+    
+    this.body.display()
+
     this.scene.popMatrix();
   }
 

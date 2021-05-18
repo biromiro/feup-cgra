@@ -46,7 +46,6 @@ import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
         this.pillar.display()
 
         this.scene.popMatrix()
-        this.scene.setActiveShaderSimple(this.scene.defaultShader)
 
     }
 

@@ -53,9 +53,6 @@ import { MyRock } from './MyRock.js'
         this.rocks.forEach(rock => {
             rock.display()
         });
-        this.scene.defaultAppearance.apply()
-
-        this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 
     enableNormalViz(){

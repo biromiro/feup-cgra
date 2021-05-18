@@ -38,12 +38,7 @@ import { MyPlane } from '../../primitives/MyPlane.js'
         this.bumpMap.bind(1);
         this.scene.setActiveShader(this.shader)
         
-        //this.quad.setLineMode()
-
         this.appearance.apply()
         this.quad.display()
-        this.scene.defaultAppearance.apply()
-
-        this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 }

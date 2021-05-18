@@ -1,4 +1,5 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
+import { CGFscene, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
+import { CGFcamera2 } from '../lib/CFFcamera2.js'
 import { MySphere } from './primitives/MySphere.js'
 import { MyCubeMap } from './objects/MyCubeMap.js'
 import { MyCylinder } from './primitives/MyCylinder.js'
@@ -175,7 +176,7 @@ export class MyScene extends CGFscene {
     this.lights[0].update()
   }
   initCameras() {
-    this.camera = new CGFcamera(
+    this.camera = new CGFcamera2(
       1.5,
       0.1,
       500,
@@ -264,7 +265,6 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix()
 
     this.setDefaultAppearance()
-    //this.lights[0].update()
 
     // Draw axis
     if (this.displayAxis) this.axis.display()
@@ -276,7 +276,6 @@ export class MyScene extends CGFscene {
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();
     this.popMatrix();
-
 
     this.movingFish.display()
 
@@ -297,6 +296,8 @@ export class MyScene extends CGFscene {
     this.pillarSet.display()
 
     this.algaeSet.display()
+
+    this.setActiveShaderSimple(this.defaultShader);
 
     if (this.displayNormals) {
       this.cylinder.enableNormalViz()

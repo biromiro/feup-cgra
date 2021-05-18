@@ -68,8 +68,6 @@ import { MyAlgae } from './MyAlgae.js';
             this.algae[i].display()
             this.scene.popMatrix();
         }
-
-        this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 
     enableNormalViz(){

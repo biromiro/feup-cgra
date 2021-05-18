@@ -51,9 +51,7 @@ import { MyQuad } from '../primitives/MyQuad.js';
         
         this.appearance.apply()        
         this.quad.display()
-        this.scene.defaultAppearance.apply()
 
         this.scene.popMatrix();
-        this.scene.setActiveShaderSimple(this.scene.defaultShader)
     }
 }

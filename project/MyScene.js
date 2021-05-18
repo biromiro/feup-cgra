@@ -12,6 +12,7 @@ import { MyImovableRockSet } from './objects/MyRockSet/MyImovableRockSet.js'
 import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
 import { MyAlgaeSet } from './objects/MyAlgaeSet/MyAlgaeSet.js'
+import { MyRing } from './primitives/MyRing.js'
  
 /**
  * MyScene
@@ -88,6 +89,8 @@ export class MyScene extends CGFscene {
     this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
     this.algaeSet = new MyAlgaeSet(this, 50, 4, 2, 0.5, 0.2, 0.3, 0.1)
+
+    this.ring = new MyRing(this, 16, 5, 1);
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -276,6 +279,8 @@ export class MyScene extends CGFscene {
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();
     this.popMatrix();
+
+    this.ring.display();
 
     this.movingFish.display()
 

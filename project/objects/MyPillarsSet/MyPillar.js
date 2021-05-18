@@ -29,8 +29,6 @@ export class MyPillar extends CGFobject {
 
     display() {
         this.scene.pushMatrix()
-        
-        this.cylinderAppearance.apply()
 
         this.scene.translate(0, -0.5, 0)
 
@@ -42,8 +40,6 @@ export class MyPillar extends CGFobject {
         }
 
         this.cylinder.display()
-
-        this.scene.defaultAppearance.apply()
 
         this.scene.popMatrix()
     }

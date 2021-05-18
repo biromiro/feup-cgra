@@ -18,6 +18,8 @@ import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
 
     display(){
         this.scene.setActiveShader(this.shader)
+        this.pillar.cylinderAppearance.apply()
+
         this.scene.pushMatrix()
 
         this.scene.translate(6.8, 0, -3.2)

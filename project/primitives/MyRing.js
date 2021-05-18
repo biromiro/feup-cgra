@@ -42,11 +42,11 @@ export class MyRing extends CGFobject {
 
                 this.vertices.push(x, y, z);
 
-                /*
+            
                 let normal = [
-                    x - (this.radius + this.innerRadius) * Math.cos(outerAng),
-                    x - (this.radius + this.innerRadius) * Math.sin(outerAng),
-                    z 
+                    x - (this.radius) * Math.cos(ang),
+                    y - (this.radius) * Math.sin(ang),
+                    z
                 ];
                 
                 const nsize = Math.sqrt(
@@ -59,7 +59,7 @@ export class MyRing extends CGFobject {
                 normal[1] /= nsize;
                 normal[2] /= nsize;
 
-                this.normals.push(...normal);*/
+                this.normals.push(...normal);
 
                 this.texCoords.push(t);
                 this.texCoords.push(s);

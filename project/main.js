@@ -8,7 +8,8 @@ function main()
     var myScene = new MyScene();
     var myInterface = new MyInterface();
 
-    app.init();
+    app.init()
+    //.then(() => pageLoader.hide());
 
     app.setScene(myScene);
     app.setInterface(myInterface);
@@ -16,6 +17,7 @@ function main()
     myInterface.setActiveCamera(myScene.camera);
 
     app.run();
+
 }
 
 main();

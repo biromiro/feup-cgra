@@ -25,8 +25,6 @@ export class MyInterface extends CGFinterface {
     displays.add(this.scene, 'displayNormals').name("Display normals");
 
     //Objects to display
-    displays.add(this.scene, 'displayCylinder').name("Display Cylinder");
-    displays.add(this.scene, 'displaySphere').name("Display Sphere");
 
     let f0 = this.gui.addFolder('Moving Object')
 

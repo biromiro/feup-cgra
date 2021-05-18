@@ -1,4 +1,4 @@
-import {CGFobject} from '../../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 /**
 * MyPlane
 * @constructor
@@ -22,8 +22,8 @@ export class MyPlane extends CGFobject {
 		this.maxS = maxS || 1;
 		this.minT = minT || 0;
 		this.maxT = maxT || 1;
-		this.q = (this.maxS - this.minS) / nrDivs * Math.floor(nrDivs/20);
-		this.w = (this.maxT - this.minT) / nrDivs * Math.floor(nrDivs/20);
+		this.q = (this.maxS - this.minS) / nrDivs * Math.floor(nrDivs / 20);
+		this.w = (this.maxT - this.minT) / nrDivs * Math.floor(nrDivs / 20);
 		this.initBuffers();
 	}
 	initBuffers() {
@@ -40,7 +40,7 @@ export class MyPlane extends CGFobject {
 				this.texCoords.push(this.minS + i * this.q, this.minT + j * this.w);
 				xCoord += this.patchLength;
 			}
-			zCoord  -= this.patchLength;
+			zCoord -= this.patchLength;
 		}
 		// Generating indices
 		this.indices = [];
@@ -61,13 +61,12 @@ export class MyPlane extends CGFobject {
 		this.initGLBuffers();
 	}
 
-	setFillMode() { 
-		this.primitiveType=this.scene.gl.TRIANGLE_STRIP;
+	setFillMode() {
+		this.primitiveType = this.scene.gl.TRIANGLE_STRIP;
 	}
 
-	setLineMode() 
-	{ 
-		this.primitiveType=this.scene.gl.LINES;
+	setLineMode() {
+		this.primitiveType = this.scene.gl.LINES;
 	};
 
 }

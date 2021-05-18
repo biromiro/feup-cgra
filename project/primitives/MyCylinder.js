@@ -1,11 +1,5 @@
 import { CGFobject } from '../../lib/CGF.js';
-/**
-* MyPyramid
-* @constructor
- * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- * @param stacks - number of divisions along the Y axis
-*/
+
 export class MyCylinder extends CGFobject {
     constructor(scene, slices) {
         super(scene);
@@ -51,12 +45,12 @@ export class MyCylinder extends CGFobject {
             // push normal once for each vertex of this triangle
             this.normals.push(...normal);
             this.normals.push(...normal);
-             
-            this.indices.push(0 + 2*i , 1 + 2*i , 2 + 2*i)
-            this.indices.push(1 + 2*i , 3 + 2*i , 2 + 2*i)
 
-            this.texCoords.push(i/this.slices, 1)
-            this.texCoords.push(i/this.slices, 0)
+            this.indices.push(0 + 2 * i, 1 + 2 * i, 2 + 2 * i)
+            this.indices.push(1 + 2 * i, 3 + 2 * i, 2 + 2 * i)
+
+            this.texCoords.push(i / this.slices, 1)
+            this.texCoords.push(i / this.slices, 0)
 
             ang += alphaAng;
         }

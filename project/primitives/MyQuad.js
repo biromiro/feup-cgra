@@ -1,4 +1,4 @@
-import {CGFobject} from '../../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 /**
  * MyQuad
  * @constructor
@@ -12,7 +12,7 @@ export class MyQuad extends CGFobject {
 		if (coords != undefined)
 			this.updateTexCoords(coords);
 	}
-	
+
 	initBuffers() {
 		this.vertices = [
 			-0.5, -0.5, 0,	//0
@@ -34,16 +34,16 @@ export class MyQuad extends CGFobject {
 			0, 0, -1,
 			0, 0, -1
 		];
-		
+
 		/*
 		Texture coords (s,t)
 		+----------> s
-        |
-        |
+		|
+		|
 		|
 		v
-        t
-        */
+		t
+		*/
 
 		this.texCoords = [
 			1, 1,

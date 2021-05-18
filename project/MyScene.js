@@ -13,7 +13,7 @@ import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
 import { MyAlgaeSet } from './objects/MyAlgaeSet/MyAlgaeSet.js'
 import { MyRing } from './primitives/MyRing.js'
- 
+
 /**
  * MyScene
  * @constructor
@@ -58,10 +58,10 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, this.sphereAppearance, 16, 8)
     this.displaySphere = false
 
-    
+
     this.displayMovingObject = false
 
-    
+
     this.cylinderAppearance = new CGFappearance(this)
     this.cylinderAppearance.setAmbient(0, 0, 0, 1)
     this.cylinderAppearance.setDiffuse(0, 0, 0, 1)
@@ -70,7 +70,7 @@ export class MyScene extends CGFscene {
 
     let cylinderTex = new CGFtexture(this, "images/dababy.jpg")
     this.cylinderAppearance.setTexture(cylinderTex)
-    
+
     this.cylinder = new MyCylinder(this, this.cylinderAppearance, 16)
     this.displayCylinder = false
 
@@ -81,11 +81,11 @@ export class MyScene extends CGFscene {
     this.watersurface = new MyWaterSurface(this, 50)
 
     this.rockSet = new MyRockSet(this, 100)
-    
+
     this.immovableRockSet = new MyImovableRockSet(this, 10);
 
     this.pillarSet = new MyPillarSet(this, 16)
-    
+
     this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
 
     this.algaeSet = new MyAlgaeSet(this, 50, 4, 2, 0.5, 0.2, 0.3, 0.1)
@@ -205,7 +205,7 @@ export class MyScene extends CGFscene {
 
   updateAppliedTexture() {
     this.cubeMap.setTexture(...this.cubeMapTexture[this.currentCubeMapTextureID])
-    
+
   }
 
   checkKeys() {
@@ -238,17 +238,17 @@ export class MyScene extends CGFscene {
       this.movingFish.reset()
     }
 
-    if (this.gui.isKeyPressed('KeyP')){
+    if (this.gui.isKeyPressed('KeyP')) {
       keysPressed = true;
       this.movingFish.ascend()
     }
 
-    if (this.gui.isKeyPressed('KeyL')){
+    if (this.gui.isKeyPressed('KeyL')) {
       keysPressed = true;
       this.movingFish.descend()
     }
 
-    if (this.gui.isKeyPressed('KeyC')){
+    if (this.gui.isKeyPressed('KeyC')) {
       keysPressed = true;
       this.movingFish.collectRock()
     } else {
@@ -285,7 +285,7 @@ export class MyScene extends CGFscene {
     this.movingFish.display()
 
     if (this.displayCylinder) this.cylinder.display()
-  
+
     if (this.displaySphere) this.sphere.display()
 
     this.seaFloor.display()

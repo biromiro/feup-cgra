@@ -1,13 +1,6 @@
 import { CGFappearance, CGFobject, CGFshader } from '../../../lib/CGF.js'
 import { MyStackedPyramid } from '../../primitives/MyStackedPyramid.js';
 
-
-/**
- * MyAlgae
- * @constructor
- * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- */
 export class MyAlgae extends CGFobject {
     constructor(scene, maxNr, minNr, maxHeight, minHeight, radius, size, set) {
         super(scene)
@@ -43,7 +36,7 @@ export class MyAlgae extends CGFobject {
 
         this.scene.translate(-this.radius / 2, 0, -this.radius / 2)
 
-        
+
 
         for (let i = 0; i < this.algaeVec.length; i++) {
             this.scene.pushMatrix()

@@ -1,28 +1,21 @@
 import { CGFappearance, CGFobject, CGFshader, CGFtexture } from '../../../lib/CGF.js'
 import { MyRock } from './MyRock.js'
 
-
-/**
- * MySeaFloor
- * @constructor
- * @param scene - Reference to MyScene object
- * @param num - The number of rocks of the set
- */
- export class MyRockSet extends CGFobject {
+export class MyRockSet extends CGFobject {
     constructor(scene, num) {
-      super(scene)
-      this.createRocks(num)
-     
-      this.createTextures()
-      this.shader = new CGFshader(this.scene.gl, "./shaders/MyRock.vert", "./shaders/MySeaFloor.frag")
-      this.shader.setUniformsValues({uSampler2: 1})
+        super(scene)
+        this.createRocks(num)
+
+        this.createTextures()
+        this.shader = new CGFshader(this.scene.gl, "./shaders/MyRock.vert", "./shaders/MySeaFloor.frag")
+        this.shader.setUniformsValues({ uSampler2: 1 })
     }
 
-    createTextures(){
+    createTextures() {
         this.appearance = new CGFappearance(this.scene);
-		this.appearance.setAmbient(0,0,0,1);
-		this.appearance.setDiffuse(1,1,1,1);
-		this.appearance.setSpecular(0,0,0,0);
+        this.appearance.setAmbient(0, 0, 0, 1);
+        this.appearance.setDiffuse(1, 1, 1, 1);
+        this.appearance.setSpecular(0, 0, 0, 0);
         this.appearance.setShininess(10)
 
         this.texture = new CGFtexture(this.scene, "./images/rock_color.jpg")
@@ -32,43 +25,43 @@ import { MyRock } from './MyRock.js'
         this.bumpMap = new CGFtexture(this.scene, "./images/rock_height.png")
     }
 
-    createRocks(num){
+    createRocks(num) {
         this.rocks = []
-        for(let i=0; i < num; i++){
+        for (let i = 0; i < num; i++) {
 
-            let x = Math.floor(Math.random() * (25 - (-25) + 1) ) -25;
-            let z = Math.floor(Math.random() * (25 - (-25) + 1) ) -25;
+            let x = Math.floor(Math.random() * (25 - (-25) + 1)) - 25;
+            let z = Math.floor(Math.random() * (25 - (-25) + 1)) - 25;
 
             let newRock = new MyRock(this.scene, 16, 16, [x, 0.05, z], 0.1, 0.3)
             this.rocks.push(newRock)
         }
-  
+
     }
 
-    update(t){
+    update(t) {
         this.rocks.forEach(rock => {
             rock.update(t)
         });
     }
 
-    display(){
+    display() {
         this.bumpMap.bind(1);
         this.scene.setActiveShader(this.shader)
-    
+
         this.appearance.apply()
         this.rocks.forEach(rock => {
             rock.display()
         });
     }
 
-    enableNormalViz(){
+    enableNormalViz() {
         this.rocks.forEach(rock => {
             rock.enableNormalViz()
         });
-        
+
     }
-    
-    disableNormalViz(){
+
+    disableNormalViz() {
         this.rocks.forEach(rock => {
             rock.disableNormalViz()
         });

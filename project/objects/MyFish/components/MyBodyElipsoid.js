@@ -8,12 +8,14 @@ export class MyBodyElipsoid extends CGFobject {
    */
   constructor(scene, appearence) {
     super(scene);
-    this.body = new MySphere(scene, appearence, 24, 16)
+    this.body = new MySphere(scene, 24, 16)
     this.appearence = appearence
   }
     
   display(){    
     this.scene.pushMatrix()
+    
+    this.appearence.apply()
 
     this.scene.rotate(-Math.PI/2, 1, 0, 0)
 

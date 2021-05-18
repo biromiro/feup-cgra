@@ -1,4 +1,4 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject} from '../../lib/CGF.js';
 
 export class MySphere extends CGFobject {
   /**
@@ -7,11 +7,10 @@ export class MySphere extends CGFobject {
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
-  constructor(scene, appearance, slices, stacks) {
+  constructor(scene, slices, stacks) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
-    this.appearance = appearance
 
     this.initBuffers();
   }
@@ -79,11 +78,5 @@ export class MySphere extends CGFobject {
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
-  }
-
-  display(){
-    this.appearance.apply()
-    super.display()
-    this.scene.defaultAppearance.apply()
   }
 }

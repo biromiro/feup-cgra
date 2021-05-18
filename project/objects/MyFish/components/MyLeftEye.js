@@ -8,7 +8,7 @@ export class MyLeftEye extends CGFobject {
    */
   constructor(scene, appearance) {
     super(scene);
-    this.eye = new MySphere(scene, appearance, 16, 8)
+    this.eye = new MySphere(scene, 16, 8)
     this.appearance = appearance
   }
 
@@ -29,7 +29,6 @@ export class MyLeftEye extends CGFobject {
 
     this.scene.popMatrix()
 
-    this.scene.defaultAppearance.apply()
   }
 
   enableNormalViz(){

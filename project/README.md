@@ -32,6 +32,8 @@
 
 ![Screenshot 7](screenshots/proj-t4g08-7.png)
 
+![Screenshot 7](screenshots/proj-t4g08-7_1.png)
+
 ### 8 - Additional features
 
 ![Screenshot 8_1](screenshots/proj-t4g08-8_1.png)

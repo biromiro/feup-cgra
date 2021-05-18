@@ -12,6 +12,10 @@
 
 ![Screenshot 2](screenshots/proj-t4g08-2.png)
 
+### 4 - MyRock
+
+![Screenshot4](screenshots/proj-t4g08-4.png)
+
 ### 3 - WaterSurface
 
 ![Screenshot 3](screenshots/proj-t4g08-3.png)
@@ -19,3 +23,7 @@
 ### 5 - MyPillar
 
 ![Screenshot 5](screenshots/proj-t4g08-5.png)
+
+### 6 - End of part 5
+
+![Screenshot 6](screenshots/proj-t4g08-6.png)

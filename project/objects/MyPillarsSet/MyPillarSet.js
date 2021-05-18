@@ -1,22 +1,16 @@
 import { MyPillar } from './MyPillar.js';
 import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
 
-
-/**
- * MySeaFloor
- * @constructor
- * @param scene - Reference to MyScene object
- */
- export class MyPillarSet {
+export class MyPillarSet {
     constructor(scene, slices) {
-      this.pillar = new MyPillar(scene, slices)
-      this.scene = scene
+        this.pillar = new MyPillar(scene, slices)
+        this.scene = scene
 
-      this.shader = new CGFshader(this.scene.gl, "./shaders/MyPillar.vert", "./shaders/MyPillar.frag")
+        this.shader = new CGFshader(this.scene.gl, "./shaders/MyPillar.vert", "./shaders/MyPillar.frag")
 
     }
 
-    display(){
+    display() {
         this.scene.setActiveShader(this.shader)
         this.pillar.cylinderAppearance.apply()
 
@@ -25,7 +19,7 @@ import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
         this.scene.translate(6.8, 0, -3.2)
 
         this.scene.scale(0.5, 1, 0.5)
-        
+
         this.pillar.display()
 
         this.scene.pushMatrix()
@@ -51,12 +45,12 @@ import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
 
     }
 
-    enableNormalViz(){
+    enableNormalViz() {
         this.pillar.enableNormalViz()
-        
+
     }
-    
-    disableNormalViz(){
+
+    disableNormalViz() {
         this.pillar.disableNormalViz()
     }
 }

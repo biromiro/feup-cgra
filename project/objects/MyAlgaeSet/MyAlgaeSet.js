@@ -1,28 +1,22 @@
 import { CGFappearance, CGFshader } from '../../../lib/CGF.js'
 import { MyAlgae } from './MyAlgae.js';
 
-
-/**
- * MySeaFloor
- * @constructor
- * @param scene - Reference to MyScene object
- */
- export class MyAlgaeSet {
+export class MyAlgaeSet {
     constructor(scene, num, maxNr, minNr, maxHeight, minHeight, radius, size) {
-      this.scene = scene
-      this.algae = []
-      this.algaePos = []
+        this.scene = scene
+        this.algae = []
+        this.algaePos = []
 
-      this.createAlgae(num, maxNr, minNr, maxHeight, minHeight, radius, size)
-      this.createTextures()
+        this.createAlgae(num, maxNr, minNr, maxHeight, minHeight, radius, size)
+        this.createTextures()
 
-      this.shader = new CGFshader(this.scene.gl, "./shaders/MyAlgaeSet.vert", "./shaders/MyAlgaeSet.frag")
+        this.shader = new CGFshader(this.scene.gl, "./shaders/MyAlgaeSet.vert", "./shaders/MyAlgaeSet.frag")
     }
 
-    createAlgae(num, maxNr, minNr, maxHeight, minHeight, radius, size){
-        for(let i = 0; i < num; i++){
+    createAlgae(num, maxNr, minNr, maxHeight, minHeight, radius, size) {
+        for (let i = 0; i < num; i++) {
             this.algae.push(new MyAlgae(this.scene, maxNr, minNr, maxHeight, minHeight, radius, size, this))
-            this.algaePos.push([Math.floor(Math.random() * (25 - (-25) + 1) ) -25, Math.floor(Math.random() * (25 - (-25) + 1) ) -25])
+            this.algaePos.push([Math.floor(Math.random() * (25 - (-25) + 1)) - 25, Math.floor(Math.random() * (25 - (-25) + 1)) - 25])
         }
     }
 
@@ -54,27 +48,27 @@ import { MyAlgae } from './MyAlgae.js';
 
     }
 
-    update(t){
-        this.shader.setUniformsValues({timeFactor: (t % 10000000) * (2 * Math.PI) / 10000, lightPosition: this.scene.lights[0].position})
+    update(t) {
+        this.shader.setUniformsValues({ timeFactor: (t % 10000000) * (2 * Math.PI) / 10000, lightPosition: this.scene.lights[0].position })
     }
 
-    display(){
+    display() {
 
         this.scene.setActiveShader(this.shader)
-        
-        for(let i = 0; i < this.algae.length; i++){
+
+        for (let i = 0; i < this.algae.length; i++) {
             this.scene.pushMatrix()
-            this.scene.translate(this.algaePos[i][0], 0, this.algaePos[i][1])            
+            this.scene.translate(this.algaePos[i][0], 0, this.algaePos[i][1])
             this.algae[i].display()
             this.scene.popMatrix();
         }
     }
 
-    enableNormalViz(){
+    enableNormalViz() {
         this.algae.forEach(algae => algae.enableNormalViz())
     }
-    
-    disableNormalViz(){
+
+    disableNormalViz() {
         this.algae.forEach(algae => algae.disableNormalViz())
     }
 }

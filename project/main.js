@@ -1,9 +1,8 @@
-import {CGFapplication} from '../lib/CGF.js';
+import { CGFapplication } from '../lib/CGF.js';
 import { MyScene } from './MyScene.js';
 import { MyInterface } from './MyInterface.js';
 
-function main()
-{
+function main() {
     var app = new CGFapplication(document.body);
     var myScene = new MyScene();
     var myInterface = new MyInterface();

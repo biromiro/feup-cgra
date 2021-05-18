@@ -1,17 +1,11 @@
 import { CGFobject, CGFappearance } from '../../lib/CGF.js'
 import { MyQuad } from '../primitives/MyQuad.js'
 
-/**
- * MyUnitQuadCube
- * @constructor
- * @param scene - Reference to MyScene object
- */
-
 export class MyCubeMap extends CGFobject {
   constructor(scene) {
     super(scene)
     this.quad = new MyQuad(scene)
-  
+
     //------Cube Material
     this.cubeMaterial = new CGFappearance(scene)
     this.cubeMaterial.setAmbient(0.0, 0.0, 0.0, 1)
@@ -21,7 +15,7 @@ export class MyCubeMap extends CGFobject {
     //------
   }
 
-  setTexture(top,front,right,back,left,bottom) {
+  setTexture(top, front, right, back, left, bottom) {
     this.topTexture = top
     this.frontTexture = front
     this.rightTexture = right

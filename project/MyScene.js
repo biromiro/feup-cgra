@@ -50,7 +50,7 @@ export class MyScene extends CGFscene {
     this.watersurface = new MyWaterSurface(this, 50)
 
     this.rockSet = new MyRockSet(this, 100)
-    
+
     this.immovableRockSet = new MyImovableRockSet(this, 10);
 
     this.pillarSet = new MyPillarSet(this, 16)
@@ -174,7 +174,7 @@ export class MyScene extends CGFscene {
 
   updateAppliedTexture() {
     this.cubeMap.setTexture(...this.cubeMapTexture[this.currentCubeMapTextureID])
-    
+
   }
 
   checkKeys() {
@@ -207,17 +207,17 @@ export class MyScene extends CGFscene {
       this.movingFish.reset()
     }
 
-    if (this.gui.isKeyPressed('KeyP')){
+    if (this.gui.isKeyPressed('KeyP')) {
       keysPressed = true;
       this.movingFish.ascend()
     }
 
-    if (this.gui.isKeyPressed('KeyL')){
+    if (this.gui.isKeyPressed('KeyL')) {
       keysPressed = true;
       this.movingFish.descend()
     }
 
-    if (this.gui.isKeyPressed('KeyC')){
+    if (this.gui.isKeyPressed('KeyC')) {
       keysPressed = true;
       this.movingFish.collectRock()
     } else {

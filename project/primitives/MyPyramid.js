@@ -5,7 +5,7 @@ import { CGFobject } from '../../lib/CGF.js'
  * @param scene - Reference to MyScene object
  * @param slices - number of divisions around the Y axis
  */
-export class MyPyramid extends CGFobject{
+export class MyPyramid extends CGFobject {
   constructor(scene, slices) {
     super(scene)
     this.slices = slices
@@ -55,8 +55,8 @@ export class MyPyramid extends CGFobject{
           // normalization
           let nsize = Math.sqrt(
             normal[0] * normal[0] +
-              normal[1] * normal[1] +
-              normal[2] * normal[2]
+            normal[1] * normal[1] +
+            normal[2] * normal[2]
           )
           normal[0] /= nsize
           normal[1] /= nsize
@@ -92,7 +92,7 @@ export class MyPyramid extends CGFobject{
     this.initNormalVizBuffers()
   }
 
-  display(){
+  display() {
     this.scene.pushMatrix()
 
     this.scene.rotate(Math.PI / 2, 1, 0, 0)

@@ -1,4 +1,4 @@
-import { CGFobject, CGFtexture, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 
 export class MySphere extends CGFobject {
   /**
@@ -7,11 +7,10 @@ export class MySphere extends CGFobject {
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
-  constructor(scene, appearance, slices, stacks) {
+  constructor(scene, slices, stacks) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
-    this.appearance = appearance
 
     this.initBuffers();
   }
@@ -54,9 +53,9 @@ export class MySphere extends CGFobject {
           // pushing two triangles using indices from this round (current, current+1)
           // and the ones directly south (next, next+1)
           // (i.e. one full round of slices ahead)
-          
-          this.indices.push( current + 1, current, next);
-          this.indices.push( current + 1, next, next +1);
+
+          this.indices.push(current + 1, current, next);
+          this.indices.push(current + 1, next, next + 1);
         }
 
         //--- Normals
@@ -71,7 +70,7 @@ export class MySphere extends CGFobject {
         // To be done... 
         // May need some additional code also in the beginning of the function.
 
-        this.texCoords.push(longitude/this.longDivs, latitude/this.latDivs)        
+        this.texCoords.push(longitude / this.longDivs, latitude / this.latDivs)
       }
       phi += phiInc;
     }
@@ -79,11 +78,5 @@ export class MySphere extends CGFobject {
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
-  }
-
-  display(){
-    this.appearance.apply()
-    super.display()
-    this.scene.defaultAppearance.apply()
   }
 }

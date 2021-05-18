@@ -1,11 +1,4 @@
 import { CGFobject } from '../../lib/CGF.js'
-/**
- * MyPyramid
- * @constructor
- * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- * @param stacks - number of divisions along the XOZ plane
- */
 export class MyStackedPyramid extends CGFobject {
   constructor(scene, slices, stacks) {
     super(scene)
@@ -49,8 +42,8 @@ export class MyStackedPyramid extends CGFobject {
 
       for (let height = 0; height <= this.stacks; height++) {
         this.vertices.push(cos * ((height * heightVar) / 2), this.getHeight(height), sin * ((height * heightVar) / 2))
-        this.vertices.push(cos * (((height + 1) * heightVar) / 2),  this.getHeight(height + 1), sin * (((height + 1) * heightVar) / 2))
-        this.vertices.push(ncos * (((height + 1) * heightVar) / 2),  this.getHeight(height + 1), nsin * (((height + 1) * heightVar) / 2))
+        this.vertices.push(cos * (((height + 1) * heightVar) / 2), this.getHeight(height + 1), sin * (((height + 1) * heightVar) / 2))
+        this.vertices.push(ncos * (((height + 1) * heightVar) / 2), this.getHeight(height + 1), nsin * (((height + 1) * heightVar) / 2))
 
         let vertexNr = this.vertices.length / 3
 

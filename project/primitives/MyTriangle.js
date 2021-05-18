@@ -5,9 +5,8 @@ import { CGFobject } from '../../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MyTriangle extends CGFobject {
-	constructor(scene, appearance) {
+	constructor(scene) {
 		super(scene);
-		this.appearance = appearance
 		this.initBuffers();
 	}
 
@@ -45,11 +44,5 @@ export class MyTriangle extends CGFobject {
 		this.initGLBuffers();
 		this.initNormalVizBuffers();
 
-	}
-
-	display() {
-		this.appearance.apply()
-		super.display()
-		this.scene.defaultAppearance.apply()
 	}
 }

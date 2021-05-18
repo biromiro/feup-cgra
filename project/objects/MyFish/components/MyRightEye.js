@@ -2,13 +2,9 @@ import { CGFobject } from '../../../../lib/CGF.js';
 import { MySphere } from '../../../primitives/MySphere.js'
 
 export class MyRightEye extends CGFobject {
-  /**
-   * @method constructor
-   * @param  {CGFscene} scene - MyScene object
-   */
   constructor(scene, appearance) {
     super(scene);
-    this.eye = new MySphere(scene, appearance, 16, 8)
+    this.eye = new MySphere(scene, 16, 8)
     this.appearance = appearance
   }
 
@@ -32,11 +28,11 @@ export class MyRightEye extends CGFobject {
     this.scene.defaultAppearance.apply()
   }
 
-  enableNormalViz(){
+  enableNormalViz() {
     this.eye.enableNormalViz()
   }
 
-  disableNormalViz(){
+  disableNormalViz() {
     this.eye.disableNormalViz()
   }
 }

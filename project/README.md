@@ -38,7 +38,7 @@
 
 ![Screenshot 8_1](screenshots/proj-t4g08-8_1.png)
 
-![Screenshot 8_parab](screenshots/proj-t4g08-8_parab.png)
+![Screenshot 8_parab](screenshots/proj-t4g08-parab.png)
 
 ![Screenshot 8_2](screenshots/proj-t4g08-8_2.png)
 

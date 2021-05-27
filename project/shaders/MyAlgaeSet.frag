@@ -19,6 +19,7 @@ uniform materialProperties uFrontMaterial;
 uniform sampler2D uSampler;
 uniform mat4 uMVMatrix;
 
+
 void main() {
 
     // Normalize light to calculate lambertTerm
@@ -37,27 +38,16 @@ void main() {
     vec4 Is = vec4(0.0, 0.0, 0.0, 1.0);
 
     if (lambertTerm > 0.0) {
-        Id = vec4(1.0) * lambertTerm;
+        Id = vec4(1.0) * uFrontMaterial.diffuse * lambertTerm;
 
         vec3 E = normalize(vEyeVec);
         vec3 R = reflect(L, N);
         float specular = pow( max( dot(R, E), 0.0 ), 10.0);
 
-        Is = vec4(1.0) * specular;
+        Is = vec4(1.0) * uFrontMaterial.specular * specular;
     }
 
-    vec4 color = texture2D(uSampler, vTextureCoord);
+	vec4 vLighting = Ia + Id + Is;
 
-	if(vTextureCoord.t > 0.6){
-
-        Id = Id * uFrontMaterial.diffuse;
-        Is = Is * uFrontMaterial.specular;
-
-        vec4 vLighting = Ia + Id + Is;
-		gl_FragColor = vec4(vLighting.rgb, color.a);
-	}
-    else{
-        vec4 vLighting = Ia + Id + Is;
-		gl_FragColor = vec4(color.rgb * vLighting.rgb, color.a);
-    }
+	gl_FragColor = vLighting;
 }

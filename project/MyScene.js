@@ -1,4 +1,5 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
+import { CGFscene, CGFaxis, CGFappearance, CGFtexture } from '../lib/CGF.js'
+import { CGFcamera2 } from '../lib/CFFcamera2.js'
 import { MySphere } from './primitives/MySphere.js'
 import { MyCubeMap } from './objects/MyCubeMap.js'
 import { MyCylinder } from './primitives/MyCylinder.js'
@@ -7,10 +8,11 @@ import { MySeaFloor } from './objects/MySeaFloor/MySeaFloor.js'
 import { MyNest } from './objects/MySeaFloor/MyNest.js'
 import { MyWaterSurface } from './objects/MyWaterSurface.js'
 import { MyRockSet } from './objects/MyRockSet/MyRockSet.js'
-import { MyPillar } from './objects/MyPillarsSet/MyPillar.js'
+import { MyImovableRockSet } from './objects/MyRockSet/MyImovableRockSet.js'
 import { MyPillarSet } from './objects/MyPillarsSet/MyPillarSet.js'
 import { MyMovingFish } from './objects/MyFish/MyMovingFish.js'
-
+import { MyAlgaeSet } from './objects/MyAlgaeSet/MyAlgaeSet.js'
+ 
 /**
  * MyScene
  * @constructor
@@ -35,53 +37,44 @@ export class MyScene extends CGFscene {
     this.setUpdatePeriod(20)
 
     this.enableTextures(true)
-
+    
     //Initialize scene objects
+
+    this.speedFactor = 0.5
+
     this.axis = new CGFaxis(this)
-
-
-    this.sphereAppearance = new CGFappearance(this)
-    this.sphereAppearance.setAmbient(0, 0, 0, 1)
-    this.sphereAppearance.setDiffuse(0, 0, 0, 1)
-    this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.sphereAppearance.setEmission(1, 1, 1, 1)
-
-
-    let earthTex = new CGFtexture(this, "images/earth.jpg")
-
-    this.sphereAppearance.setTexture(earthTex)
-
-
-    this.sphere = new MySphere(this, this.sphereAppearance, 16, 8)
-    this.displaySphere = false
-
-    
-    this.displayMovingObject = false
-
-    
-    this.cylinderAppearance = new CGFappearance(this)
-    this.cylinderAppearance.setAmbient(0, 0, 0, 1)
-    this.cylinderAppearance.setDiffuse(0, 0, 0, 1)
-    this.cylinderAppearance.setSpecular(0.0, 0.0, 0.0, 1)
-    this.cylinderAppearance.setEmission(1, 1, 1, 1)
-
-    let cylinderTex = new CGFtexture(this, "images/dababy.jpg")
-    this.cylinderAppearance.setTexture(cylinderTex)
-    
-    this.cylinder = new MyCylinder(this, this.cylinderAppearance, 16)
-    this.displayCylinder = false
 
     this.seaFloor = new MySeaFloor(this, 100, 50, 1)
 
-    this.ring = new MyNest(this, 32, 3, 1, [-5, -5])
+    this.displaySeaFlor = true
+
+    this.nest = new MyNest(this, 256, 3, 1, [-5, -5])
+
+    this.displayNest = true
 
     this.watersurface = new MyWaterSurface(this, 50)
 
-    this.rockSet = new MyRockSet(this, 20)
-
-    this.pillarSet = new MyPillarSet(this, 5)
+    this.displayWaterSurface = true
     
-    this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.ring)
+    this.rockSet = new MyRockSet(this, 100)
+
+    this.displayRockSet = true
+
+    this.immovableRockSet = new MyImovableRockSet(this, 10);
+
+    this.displayImmovableRockSet = true
+    
+    this.pillarSet = new MyPillarSet(this, 16)
+    
+    this.displayPillarSet = true
+    
+    this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.nest)
+
+    this.displayMovingFish = true
+    
+    this.algaeSet = new MyAlgaeSet(this, 50, 4, 2, 0.5, 0.2, 0.3, 0.1)
+
+    this.displayAlgaeSet = true
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -125,7 +118,7 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/underwater_cubemap_2/left.png"),
     new CGFtexture(this, "images/underwater_cubemap_2/back.png"),
     new CGFtexture(this, "images/underwater_cubemap_2/right.png"),
-    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png")]
+    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png", () => { pageLoader.hide()})]
 
     this.currentCubeMapTextureID = 5
 
@@ -159,8 +152,10 @@ export class MyScene extends CGFscene {
 
 
     //Objects connected to MyInterface
-    this.displayAxis = true
-    this.displayNormals = false;
+    this.displayAxis = false
+    this.displayNormals = false
+
+    
   }
   initLights() {
     this.lights[0].setPosition(5, 1, 3, 1)
@@ -170,7 +165,7 @@ export class MyScene extends CGFscene {
     this.lights[0].update()
   }
   initCameras() {
-    this.camera = new CGFcamera(
+    this.camera = new CGFcamera2(
       1.5,
       0.1,
       500,
@@ -190,12 +185,13 @@ export class MyScene extends CGFscene {
   // called periodically (as per setUpdatePeriod() in init())
   update(t) {
     this.movingFish.update(t)
-    this.watersurface.shader.setUniformsValues({timeFactor: t / 100 % 25600})
+    this.watersurface.update(t)
+    this.algaeSet.update(t)
   }
 
   updateAppliedTexture() {
     this.cubeMap.setTexture(...this.cubeMapTexture[this.currentCubeMapTextureID])
-    
+
   }
 
   checkKeys() {
@@ -228,17 +224,17 @@ export class MyScene extends CGFscene {
       this.movingFish.reset()
     }
 
-    if (this.gui.isKeyPressed('KeyP')){
+    if (this.gui.isKeyPressed('KeyP')) {
       keysPressed = true;
       this.movingFish.ascend()
     }
 
-    if (this.gui.isKeyPressed('KeyL')){
+    if (this.gui.isKeyPressed('KeyL')) {
       keysPressed = true;
       this.movingFish.descend()
     }
 
-    if (this.gui.isKeyPressed('KeyC')){
+    if (this.gui.isKeyPressed('KeyC')) {
       keysPressed = true;
       this.movingFish.collectRock()
     } else {
@@ -258,7 +254,6 @@ export class MyScene extends CGFscene {
     this.applyViewMatrix()
 
     this.setDefaultAppearance()
-    //this.lights[0].update()
 
     // Draw axis
     if (this.displayAxis) this.axis.display()
@@ -270,39 +265,40 @@ export class MyScene extends CGFscene {
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();
     this.popMatrix();
+    
+    if(this.displayMovingFish) this.movingFish.display()
 
+    if(this.displaySeaFlor) this.seaFloor.display()
 
-    this.movingFish.display()
+    if(this.displayNest) this.nest.display()
 
-    if (this.displayCylinder) this.cylinder.display()
-  
-    if (this.displaySphere) this.sphere.display()
+    if(this.displayWaterSurface) this.watersurface.display()
 
-    this.seaFloor.display()
+    if(this.displayRockSet) this.rockSet.display()
 
-    this.ring.display()
+    if(this.displayImmovableRockSet) this.immovableRockSet.display()
 
-    this.watersurface.display();
+    if(this.displayPillarSet) this.pillarSet.display()
 
-    this.rockSet.display()
+    if(this.displayAlgaeSet) this.algaeSet.display()
 
-    this.pillarSet.display()
+    this.setActiveShaderSimple(this.defaultShader);
 
     if (this.displayNormals) {
-      this.cylinder.enableNormalViz()
-      this.sphere.enableNormalViz()
       this.movingFish.enableNormalViz()
-      this.ring.enableNormalViz()
+      this.nest.enableNormalViz()
       this.rockSet.enableNormalViz()
       this.pillarSet.enableNormalViz()
+      this.algaeSet.enableNormalViz()
+      this.immovableRockSet.enableNormalViz()
     }
     else {
-      this.cylinder.disableNormalViz();
-      this.sphere.disableNormalViz();
       this.movingFish.disableNormalViz()
-      this.ring.disableNormalViz()
+      this.nest.disableNormalViz()
       this.rockSet.disableNormalViz()
       this.pillarSet.disableNormalViz()
+      this.algaeSet.disableNormalViz()
+      this.immovableRockSet.disableNormalViz()
     }
 
     this.checkKeys()

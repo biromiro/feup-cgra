@@ -1,20 +1,13 @@
-import { CGFappearance, CGFobject, CGFshader, CGFtexture } from '../../../lib/CGF.js'
+import { CGFappearance, CGFobject, CGFtexture } from '../../../lib/CGF.js'
 import { MyCylinder } from '../../primitives/MyCylinder.js';
 
-
-/**
- * MyPillar
- * @constructor
- * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- */
 export class MyPillar extends CGFobject {
     constructor(scene, slices) {
         super(scene)
 
         this.createTextures()
 
-        this.cylinder = new MyCylinder(scene, this.cylinderAppearance, slices);
+        this.cylinder = new MyCylinder(scene, slices);
     }
 
     createTextures() {
@@ -29,21 +22,17 @@ export class MyPillar extends CGFobject {
 
     display() {
         this.scene.pushMatrix()
-        
-        this.cylinderAppearance.apply()
 
         this.scene.translate(0, -0.5, 0)
 
         this.cylinder.display()
 
-        for(let i = 0; i < 10; i++){
+        for (let i = 0; i < 10; i++) {
             this.scene.translate(0, 1, 0)
             this.cylinder.display()
         }
 
         this.cylinder.display()
-
-        this.scene.defaultAppearance.apply()
 
         this.scene.popMatrix()
     }

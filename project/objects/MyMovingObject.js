@@ -1,12 +1,5 @@
-/**
- * MyMovingObject
- * @constructor
- * @param scene - Reference to MyScene object
- * @orientationAngle - Object facing torwards angle
- * @velocity - Initial velocity
- * @position - Current object position
- */
-export class MyMovingObject{
+
+export class MyMovingObject {
   constructor(scene, object, orientationAngle, velocity, position) {
     this.orientationAngle = orientationAngle
     this.previousOrientationAngle = 0
@@ -20,6 +13,8 @@ export class MyMovingObject{
     this.velocity = velocity
     this.ascendVelocity = 0
     this.scaleFactor = 1
+    this.maxHeight = 5
+    this.minHeight = 0
     this.setControllabeParameters()
     this.rotationLeft = false
     this.rotationRight = false
@@ -28,21 +23,18 @@ export class MyMovingObject{
     this.object = object
     this.caughtObject = undefined
   }
-  
-  setControllabeParameters(){
-    this.velocityOffset = 0.001
-    this.rotationOffset = 0.01
+
+  setControllabeParameters() {
+    this.rotationOffset = 0.05
     this.maxVelocity = 1
     this.friction = 0.005
     this.ascendVelocityOffset = 0.05
-    this.maxHeight = 5
-    this.minHeight = 0
   }
 
-  display(){
-    
+  display() {
+
     this.scene.pushMatrix()
-    
+
     this.scene.translate(this.x, this.y, this.z)
     this.scene.rotate(this.orientationAngle, 0, 1, 0)
 
@@ -54,24 +46,25 @@ export class MyMovingObject{
   }
 
   update(t) {
-    this.velocity -= this.velocity*this.friction
+    this.velocity -= this.velocity * this.friction
     this.x += this.velocity * Math.sin(this.orientationAngle)
     this.y += this.ascendVelocity
     this.y = (this.y > this.maxHeight) ? this.maxHeight : (this.y < this.minHeight ? this.minHeight : this.y)
     this.z += this.velocity * Math.cos(this.orientationAngle)
 
-    if(this.previousOrientationAngle == this.orientationAngle){
+    if (this.previousOrientationAngle == this.orientationAngle) {
       this.rotationLeft = false
       this.rotationRight = false
     }
 
     this.previousOrientationAngle = this.orientationAngle
-    if(this.object.update != undefined){
+    if (this.object.update != undefined) {
       this.object.update(t)
     }
 
-    if(this.caughtObject)
-      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.15 + this.caughtObject.yDeform, this.z]
+    if (this.caughtObject)
+      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = 
+      [this.x, this.y + this.scaleFactor*(0.35) + this.caughtObject.yDeform, this.z]
 
     this.ascendVelocity = 0
   }
@@ -83,9 +76,9 @@ export class MyMovingObject{
   }
 
   accelerate(val) {
-    val *= this.velocityOffset
+    val *= (this.scene.speedFactor / 600)
     let newVelocity = this.velocity + val
-    if(newVelocity < this.maxVelocity) this.velocity += val
+    if (newVelocity < this.maxVelocity) this.velocity += val
     else this.velocity = maxVelocity
   }
 
@@ -105,27 +98,27 @@ export class MyMovingObject{
     this.setControllabeParameters()
   }
 
-  enableNormalViz(){
+  enableNormalViz() {
     this.object.enableNormalViz()
   }
 
-  disableNormalViz(){
+  disableNormalViz() {
     this.object.disableNormalViz()
   }
 
-  setMaximumHeight(height){
+  setMaximumHeight(height) {
     this.maxHeight = height
   }
 
-  setMinimumHeight(height){
+  setMinimumHeight(height) {
     this.minHeight = height
   }
 
-  setCaughtObject(object){
+  setCaughtObject(object) {
     this.caughtObject = object
   }
 
-  getCaughtObject(){
+  getCaughtObject() {
     return this.caughtObject
   }
 

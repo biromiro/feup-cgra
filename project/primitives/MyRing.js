@@ -1,11 +1,5 @@
 import { CGFobject } from '../../lib/CGF.js';
-/**
-* MyPyramid
-* @constructor
- * @param scene - Reference to MyScene object
- * @param slices - number of divisions around the Y axis
- * @param stacks - number of divisions along the Y axis
-*/
+
 export class MyRing extends CGFobject {
     constructor(scene, slices, radius, innerRadius) {
         super(scene);
@@ -42,14 +36,33 @@ export class MyRing extends CGFobject {
 
                 this.vertices.push(x, y, z);
 
+            
+                let normal = [
+                    x - (this.radius) * Math.cos(ang),
+                    y - (this.radius) * Math.sin(ang),
+                    z
+                ];
+                
+                const nsize = Math.sqrt(
+                    normal[0] * normal[0] +
+                    normal[1] * normal[1] +
+                    normal[2] * normal[2]
+                );
+
+                normal[0] /= nsize;
+                normal[1] /= nsize;
+                normal[2] /= nsize;
+
+                this.normals.push(...normal);
+
                 this.texCoords.push(t);
                 this.texCoords.push(s);
 
-                if(slice != this.slices && innerSlice != this.slices){
+                if (slice != this.slices && innerSlice != this.slices) {
                     this.indices.push(slice * (this.slices + 1) + innerSlice);
                     this.indices.push(slice * (this.slices + 1) + innerSlice + 1);
                     this.indices.push(((slice + 1) * (this.slices + 1) + innerSlice));
-    
+
                     this.indices.push(((slice + 1) * (this.slices + 1) + innerSlice));
                     this.indices.push(slice * (this.slices + 1) + innerSlice + 1);
                     this.indices.push((slice + 1) * (this.slices + 1) + innerSlice + 1);

@@ -15,7 +15,7 @@ void main() {
 
   vTextureCoord = aTextureCoord;
 
-  vec3 pos = aVertexPosition + vec3(0.0, texture2D(uSampler2, vTextureCoord).g * 3.0 - 1.0, 0.0);
+  vec3 pos = aVertexPosition + vec3(0.0, texture2D(uSampler2, vTextureCoord).g * 3.0 - 1.5, 0.0);
   
   pos.y = min(pos.y, maxHeight);
   pos.y = max(pos.y, -maxHeight);

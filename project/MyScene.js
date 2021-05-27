@@ -115,7 +115,7 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/underwater_cubemap_2/left.png"),
     new CGFtexture(this, "images/underwater_cubemap_2/back.png"),
     new CGFtexture(this, "images/underwater_cubemap_2/right.png"),
-    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png")]
+    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png", () => { pageLoader.hide()})]
 
     this.currentCubeMapTextureID = 5
 
@@ -262,7 +262,7 @@ export class MyScene extends CGFscene {
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();
     this.popMatrix();
-
+    
     if(this.displayMovingFish) this.movingFish.display()
 
     if(this.displaySeaFlor) this.seaFloor.display()

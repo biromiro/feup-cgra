@@ -22,7 +22,7 @@ void main() {
     // Lambert's cosine law
 	float lambertTerm = dot(N, L);
 
-    vec4 Ia = vec4(0.1, 0.1, 0.1, 1.0);
+    vec4 Ia = vec4(0.2, 0.2, 0.2, 1.0);
 
     vec4 Id = vec4(0.0, 0.0, 0.0, 1.0);
 

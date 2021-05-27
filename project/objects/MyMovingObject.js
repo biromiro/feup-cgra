@@ -64,7 +64,8 @@ export class MyMovingObject {
     }
 
     if (this.caughtObject)
-      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.15 + this.caughtObject.yDeform, this.z]
+      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = 
+      [this.x, this.y + this.scaleFactor*(0.35) + this.caughtObject.yDeform, this.z]
 
     this.ascendVelocity = 0
   }

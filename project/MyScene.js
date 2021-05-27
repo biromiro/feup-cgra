@@ -41,23 +41,37 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this)
 
-    this.displayMovingObject = false
-
     this.seaFloor = new MySeaFloor(this, 100, 50, 1)
+
+    this.displaySeaFlor = true
 
     this.nest = new MyNest(this, 256, 3, 1, [-5, -5])
 
+    this.displayNest = true
+
     this.watersurface = new MyWaterSurface(this, 50)
 
+    this.displayWaterSurface = true
+    
     this.rockSet = new MyRockSet(this, 100)
+
+    this.displayRockSet = true
 
     this.immovableRockSet = new MyImovableRockSet(this, 10);
 
+    this.displayImmovableRockSet = true
+    
     this.pillarSet = new MyPillarSet(this, 16)
+    
+    this.displayPillarSet = true
     
     this.movingFish = new MyMovingFish(this, 0, 0, [0, 3, 0], this.rockSet, this.nest)
 
+    this.displayMovingFish = true
+    
     this.algaeSet = new MyAlgaeSet(this, 50, 4, 2, 0.5, 0.2, 0.3, 0.1)
+
+    this.displayAlgaeSet = true
 
     let demo_cubemap = [new CGFtexture(this, "images/demo_cubemap/top.png"),
     new CGFtexture(this, "images/demo_cubemap/front.png"),
@@ -101,7 +115,7 @@ export class MyScene extends CGFscene {
     new CGFtexture(this, "images/underwater_cubemap_2/left.png"),
     new CGFtexture(this, "images/underwater_cubemap_2/back.png"),
     new CGFtexture(this, "images/underwater_cubemap_2/right.png"),
-    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png")]
+    new CGFtexture(this, "images/underwater_cubemap_2/bottom.png", () => { pageLoader.hide()})]
 
     this.currentCubeMapTextureID = 5
 
@@ -135,8 +149,8 @@ export class MyScene extends CGFscene {
 
 
     //Objects connected to MyInterface
-    this.displayAxis = true
-    this.displayNormals = false;
+    this.displayAxis = false
+    this.displayNormals = false
 
     
   }
@@ -248,22 +262,22 @@ export class MyScene extends CGFscene {
     this.translate(this.camera.position[0], this.camera.position[1], this.camera.position[2]);
     this.cubeMap.display();
     this.popMatrix();
+    
+    if(this.displayMovingFish) this.movingFish.display()
 
-    this.movingFish.display()
+    if(this.displaySeaFlor) this.seaFloor.display()
 
-    this.seaFloor.display()
+    if(this.displayNest) this.nest.display()
 
-    this.nest.display()
+    if(this.displayWaterSurface) this.watersurface.display()
 
-    this.watersurface.display()
+    if(this.displayRockSet) this.rockSet.display()
 
-    this.rockSet.display()
+    if(this.displayImmovableRockSet) this.immovableRockSet.display()
 
-    this.immovableRockSet.display()
+    if(this.displayPillarSet) this.pillarSet.display()
 
-    this.pillarSet.display()
-
-    this.algaeSet.display()
+    if(this.displayAlgaeSet) this.algaeSet.display()
 
     this.setActiveShaderSimple(this.defaultShader);
 

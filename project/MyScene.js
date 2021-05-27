@@ -37,8 +37,11 @@ export class MyScene extends CGFscene {
     this.setUpdatePeriod(20)
 
     this.enableTextures(true)
-
+    
     //Initialize scene objects
+
+    this.speedFactor = 0.5
+
     this.axis = new CGFaxis(this)
 
     this.seaFloor = new MySeaFloor(this, 100, 50, 1)

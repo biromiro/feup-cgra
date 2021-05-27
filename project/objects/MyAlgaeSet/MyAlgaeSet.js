@@ -49,7 +49,7 @@ export class MyAlgaeSet {
     }
 
     update(t) {
-        this.shader.setUniformsValues({ timeFactor: (t % 10000000) * (2 * Math.PI) / 10000, lightPosition: this.scene.lights[0].position })
+        this.shader.setUniformsValues({ timeFactor: (t % 10000000) * (this.scene.speedFactor * 2) * (2 * Math.PI) / 10000, lightPosition: this.scene.lights[0].position })
     }
 
     display() {

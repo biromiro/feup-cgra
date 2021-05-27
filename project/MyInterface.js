@@ -41,10 +41,11 @@ export class MyInterface extends CGFinterface {
     let f1 = this.gui.addFolder('Fish Controls')
 
     f1.add(this.scene.movingFish, 'scaleFactor', 0.5, 3).name("Scale Factor")
-    f1.add(this.scene.movingFish, 'velocityOffset', 0, 0.01).name('Velocity Offset')
     f1.add(this.scene.movingFish, 'rotationOffset', 0, 0.03).name('Rotation Offset')
     f1.add(this.scene.movingFish, 'maxVelocity', 0, 1.5).name('Max Velocity')
     f1.add(this.scene.movingFish, 'friction', 0, 0.02).name('Friction')
+
+    this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor')
 
     this.gui.add(this.scene, 'currentCubeMapTextureID', this.scene.cubeMapTextureIDs)
       .name('Background')

@@ -1,6 +1,6 @@
 # feup-cgra
 
-[**Click here to play**](https://biromiro.github.io/feup-cgra-proj/src/)
+[**Click here to play**](https://biromiro.github.io/feup-cgra/project/)
 
 Proposed project solution for the Computer Graphics course @ FEUP 
 

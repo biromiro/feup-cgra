@@ -24,7 +24,7 @@ export class MyMovingFish extends MyMovingObject {
     // making it catch and release in a short amount of time
 
     this.numberOfPositions = 4
-    this.pileHeightBase = 0.5
+    this.pileHeightBase = 0
     this.createNestRockPositions()
   }
 

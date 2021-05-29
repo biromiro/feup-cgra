@@ -61,6 +61,3 @@ The screenshots used in the respective git tags represent the look achieved at t
 ![Screenshot 8_parab](screenshots/proj-t4g08-8_1.png)
 
 ![Screenshot 8_2](screenshots/proj-t4g08-8_2.png)
-
-
-

@@ -7,7 +7,7 @@ export class MyImovableRockSet extends CGFobject {
       this.createRocks(num)
      
       this.createTextures()
-      this.shader = new CGFshader(this.scene.gl, "./shaders/MyPillar.vert", "./shaders/MyPillar.frag")
+      this.shader = new CGFshader(this.scene.gl, "./shaders/MyRock.vert", "./shaders/MyRock.frag")
       this.shader.setUniformsValues({uSampler2: 1})
     }
 

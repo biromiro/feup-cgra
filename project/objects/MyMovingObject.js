@@ -25,7 +25,6 @@ export class MyMovingObject {
   }
 
   setControllabeParameters() {
-    this.velocityOffset = 0.001
     this.rotationOffset = 0.05
     this.maxVelocity = 1
     this.friction = 0.005
@@ -64,7 +63,8 @@ export class MyMovingObject {
     }
 
     if (this.caughtObject)
-      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = [this.x, this.y + 0.15 + this.caughtObject.yDeform, this.z]
+      [this.caughtObject.x, this.caughtObject.y, this.caughtObject.z] = 
+      [this.x, this.y + this.scaleFactor*(0.35) + this.caughtObject.yDeform, this.z]
 
     this.ascendVelocity = 0
   }
@@ -76,7 +76,7 @@ export class MyMovingObject {
   }
 
   accelerate(val) {
-    val *= this.velocityOffset
+    val *= (this.scene.speedFactor / 600)
     let newVelocity = this.velocity + val
     if (newVelocity < this.maxVelocity) this.velocity += val
     else this.velocity = maxVelocity

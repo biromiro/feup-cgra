@@ -22,17 +22,30 @@ export class MyInterface extends CGFinterface {
 
     //Checkbox element in GUI
     displays.add(this.scene, 'displayAxis').name('Display Axis')
-    displays.add(this.scene, 'displayNormals').name("Display normals");
+    displays.add(this.scene, 'displayNormals').name("Display normals")
 
     //Objects to display
 
-    let f0 = this.gui.addFolder('Moving Object')
+    let f0 = this.gui.addFolder('Visible Elements')
 
-    f0.add(this.scene.movingFish, 'scaleFactor', 0.5, 3).name("Scale Factor")
-    f0.add(this.scene.movingFish, 'velocityOffset', 0, 0.01).name('Velocity Offset')
-    f0.add(this.scene.movingFish, 'rotationOffset', 0, 0.03).name('Rotation Offset')
-    f0.add(this.scene.movingFish, 'maxVelocity', 0, 1.5).name('Max Velocity')
-    f0.add(this.scene.movingFish, 'friction', 0, 0.02).name('Friction')
+    f0.add(this.scene, 'displayMovingFish').name('Moving Fish')
+    f0.add(this.scene, 'displaySeaFlor').name('Sea Floor');
+    f0.add(this.scene, 'displayNest').name('Nest');
+    f0.add(this.scene, 'displayWaterSurface').name('Water Surface');
+    f0.add(this.scene, 'displayRockSet').name('Rock Set');
+    f0.add(this.scene, 'displayImmovableRockSet').name('Immovable Rock Set');
+    f0.add(this.scene, 'displayPillarSet').name('Pillar Set');
+    f0.add(this.scene, 'displayAlgaeSet').name('Algae Set');
+
+
+    let f1 = this.gui.addFolder('Fish Controls')
+
+    f1.add(this.scene.movingFish, 'scaleFactor', 0.5, 3).name("Scale Factor")
+    f1.add(this.scene.movingFish, 'rotationOffset', 0, 0.03).name('Rotation Offset')
+    f1.add(this.scene.movingFish, 'maxVelocity', 0, 1.5).name('Max Velocity')
+    f1.add(this.scene.movingFish, 'friction', 0, 0.02).name('Friction')
+
+    this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor')
 
     this.gui.add(this.scene, 'currentCubeMapTextureID', this.scene.cubeMapTextureIDs)
       .name('Background')

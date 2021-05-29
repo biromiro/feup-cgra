@@ -70,12 +70,10 @@ export class MyRock extends CGFobject {
         this.normals.push(x, y, z);
         theta += thetaInc;
 
-        let offset = (Math.random() * 0.1 - 0.1)
-        x += offset * x;
-        y += offset * y;
-        z += offset * z;
-        this.vertices.push(x, y, z)
-        if (longitude == 0) this.firstVertex = [x, y, z]
+        let offset = (Math.random() * 0.5 + 0.9)
+        
+        this.vertices.push(x*offset, y*offset, z*offset)
+        if (longitude == 0) this.firstVertex = [x*offset, y*offset, z*offset]
 
         //--- Texture Coordinates
         // To be done... 

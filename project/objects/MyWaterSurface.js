@@ -29,7 +29,7 @@ export class MyWaterSurface extends CGFobject {
     }
 
     update(t) {
-        this.shader.setUniformsValues({ timeFactor: t / 100 % 25600 })
+        this.shader.setUniformsValues({ timeFactor: (t / 100 % 25600) * this.scene.speedFactor })
     }
 
     display() {

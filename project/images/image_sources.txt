@@ -1,0 +1,5 @@
+underwater_cube_map_2 - https://commons.wikimedia.org/wiki/File:Heron_Bommie_SVII.jpg
+fish_tex_4.jpg -https://www.publicdomainpictures.net/en/view-image.php?image=283610&picture=fish-scales-pattern-background
+imovable.jpg - https://pixabay.com/pt/photos/pedra-textura-parede-%C3%A1spero-padr%C3%A3o-5333858/
+pillar.jpg - https://all-free-download.com/free-photos/download/wooden-fence_200096.html 
+rock-texture.jpg/rock-texture-bump.jpg - https://pixabay.com/cs/photos/sk%C3%A1la-textura-k%C3%A1men-textura-1692328/
